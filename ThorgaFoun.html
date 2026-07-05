@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ne" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>थोर्गा काठमाडौं सम्पर्क तथा विकास मञ्च</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'Mukta', 'sans-serif'],
+                        nepali: ['Mukta', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0B192C',
+                            blue: '#1A365D',
+                            gold: '#C58940',
+                            sand: '#F8F5F1',
+                            gray: '#F1F5F9'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Outfit', 'Mukta', sans-serif;
+            background-color: #FAFAFA;
+        }
+
+        .font-nepali {
+            font-family: 'Mukta', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .hero-pattern {
+            background-image:
+                linear-gradient(90deg, rgba(11, 25, 44, 0.95) 0%, rgba(11, 25, 44, 0.7) 50%, rgba(11, 25, 44, 0.2) 100%),
+                url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2074&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bg-pattern-dot {
+            background-image: radial-gradient(#C58940 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.1;
+        }
+
+        .elegant-hover {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .elegant-hover:hover {
+            transform: translateY(-4px);
+        }
+
+        .link-underline {
+            position: relative;
+        }
+
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #C58940;
+            transition: width 0.3s ease;
+        }
+
+        .link-underline:hover::after,
+        .group:hover .link-underline::after {
+            width: 100%;
+        }
+
+        .dropdown-menu,
+        .nested-dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nested-dropdown:hover .nested-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .dropdown-menu {
+            transform: translateY(8px);
+        }
+
+        .nested-dropdown-menu {
+            left: 100%;
+            top: -8px;
+            transform: translateX(8px);
+        }
+    </style>
+</head>
+
+<body class="text-slate-700 antialiased selection:bg-brand-gold selection:text-white">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 glass-nav py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand -->
+                <div class="flex-shrink-0 flex items-center gap-4 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <div
+                        class="w-10 h-10 border-2 border-brand-navy rounded-full flex items-center justify-center group-hover:bg-brand-navy group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-mountain-sun text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-brand-navy tracking-tight font-nepali leading-none">थोर्गा
+                            काठमाडौं</h1>
+                        <p class="text-[11px] text-slate-500 font-medium tracking-widest uppercase mt-1 font-nepali">
+                            सम्पर्क तथा विकास मञ्च</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu (Exactly matching schema) -->
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-600">
+
+                    <!-- 1. संस्था परिचय -->
+                    <div class="relative dropdown py-4">
+                        <button class="flex items-center gap-1.5 hover:text-brand-navy transition font-nepali">
+                            संस्था परिचय <i class="fa-solid fa-chevron-down text-[10px] opacity-70"></i>
+                        </button>
+                        <div
+                            class="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 py-3 dropdown-menu z-50 font-nepali">
+                            <a href="#about"
+                                class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">थोर्गाको
+                                परिचय</a>
+                            <a href="#objectives"
+                                class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">उद्देश्य</a>
+                            <a href="#about"
+                                class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">विधान</a>
+
+                            <!-- पदाधिकारी -->
+                            <div
+                                class="relative nested-dropdown px-5 py-2 hover:bg-slate-50 transition cursor-pointer flex justify-between items-center group/nested">
+                                <span class="group-hover/nested:text-brand-gold">पदाधिकारी</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+                                <div
+                                    class="absolute nested-dropdown-menu w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-3">
+                                    <a href="#team"
+                                        class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">वर्तमान
+                                        समिति</a>
+                                    <a href="#team"
+                                        class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">पूर्व
+                                        समिति</a>
+                                </div>
+                            </div>
+
+                            <!-- सल्लाहकार -->
+                            <div
+                                class="relative nested-dropdown px-5 py-2 hover:bg-slate-50 transition cursor-pointer flex justify-between items-center group/nested">
+                                <span class="group-hover/nested:text-brand-gold">सल्लाहकार</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+                                <div
+                                    class="absolute nested-dropdown-menu w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-3">
+                                    <a href="#advisors"
+                                        class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">वर्तमान
+                                        सल्लाहकारहरु</a>
+                                    <a href="#advisors"
+                                        class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">पुर्व
+                                        सल्लाहकारहरु</a>
+                                </div>
+                            </div>
+
+                            <div class="my-2 border-t border-slate-100"></div>
+                            <a href="#membership"
+                                class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition text-brand-blue">आजीवन
+                                सदस्य</a>
+                        </div>
+                    </div>
+
+                    <!-- 2. गतिविधि -->
+                    <a href="#activities" class="hover:text-brand-navy transition font-nepali py-4">गतिविधि</a>
+
+                    <!-- 3. प्रकाशन -->
+                    <a href="#publications" class="hover:text-brand-navy transition font-nepali py-4">प्रकाशन</a>
+
+                    <!-- 4. अन्य -->
+                    <div class="relative dropdown py-4">
+                        <button class="flex items-center gap-1.5 hover:text-brand-navy transition font-nepali">
+                            अन्य <i class="fa-solid fa-chevron-down text-[10px] opacity-70"></i>
+                        </button>
+                        <div
+                            class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-3 dropdown-menu z-50 font-nepali">
+                            <a href="#organizations"
+                                class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">थोर्गेली
+                                संस्थाहरु</a>
+                            <a href="#organizations"
+                                class="block px-5 py-2 hover:bg-slate-50 hover:text-brand-gold transition">अन्य
+                                संस्थाहरु</a>
+                        </div>
+                    </div>
+
+                    <!-- 5. फोटो ग्यालरी -->
+                    <a href="#gallery" class="hover:text-brand-navy transition font-nepali py-4">फोटो ग्यालरी</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden lg:flex items-center">
+                    <a href="#membership"
+                        class="bg-brand-navy hover:bg-brand-blue text-white px-7 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 font-nepali hover:shadow-lg hover:shadow-brand-navy/20">
+                        सदस्य बन्नुहोस्
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-navy focus:outline-none p-2">
+                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Matches schema) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 absolute w-full shadow-2xl transition-all font-nepali">
+            <div class="px-6 py-8 space-y-4 max-h-[80vh] overflow-y-auto">
+                <div class="space-y-3 pb-4 border-b border-slate-100">
+                    <p class="text-[11px] font-bold text-slate-400 tracking-wider uppercase mb-2">संस्था परिचय</p>
+                    <a href="#about" class="block text-slate-600 pl-2">थोर्गाको परिचय</a>
+                    <a href="#objectives" class="block text-slate-600 pl-2">उद्देश्य</a>
+                    <a href="#about" class="block text-slate-600 pl-2">विधान</a>
+                    <a href="#team" class="block text-slate-600 pl-2">पदाधिकारी</a>
+                    <a href="#advisors" class="block text-slate-600 pl-2">सल्लाहकार</a>
+                    <a href="#membership" class="block text-brand-gold font-medium pl-2">आजीवन सदस्य</a>
+                </div>
+                <a href="#activities"
+                    class="block text-lg font-medium text-brand-navy border-b border-slate-100 pb-2">गतिविधि</a>
+                <a href="#publications"
+                    class="block text-lg font-medium text-brand-navy border-b border-slate-100 pb-2">प्रकाशन</a>
+                <a href="#organizations"
+                    class="block text-lg font-medium text-brand-navy border-b border-slate-100 pb-2">अन्य (सम्बद्ध
+                    संस्थाहरु)</a>
+                <a href="#gallery" class="block text-lg font-medium text-brand-navy border-b border-slate-100 pb-2">फोटो
+                    ग्यालरी</a>
+
+                <div class="pt-6">
+                    <a href="#membership"
+                        class="flex justify-center w-full bg-brand-navy text-white px-6 py-4 rounded-xl font-medium">
+                        सदस्य बन्नुहोस्
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-pattern min-h-[90vh] flex items-center relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pt-20">
+            <div class="max-w-3xl">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md mb-8">
+                    <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+                    <span class="text-white/80 text-xs font-medium tracking-widest uppercase font-nepali">स्थापना
+                        २०६०</span>
+                </div>
+
+                <h1
+                    class="text-5xl md:text-7xl lg:text-[5.5rem] font-light text-white mb-6 leading-[1.1] tracking-tight">
+                    Connecting <span class="font-bold">Thorga</span>,<br>
+                    Empowering <span class="text-brand-gold italic font-medium">Communities.</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl font-light leading-relaxed font-nepali">
+                    थोर्गा र काठमाडौं बीचको बलियो सेतु। हाम्रो मौलिक संस्कृति, शिक्षा र दिगो विकासका लागि एकताबद्ध
+                    प्रयास।
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#about"
+                        class="inline-flex items-center justify-center bg-brand-gold hover:bg-[#b07a38] text-white px-8 py-4 rounded-full font-medium transition-colors font-nepali">
+                        हाम्रो बारेमा <i class="fa-solid fa-arrow-right-long ml-3 text-sm"></i>
+                    </a>
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center bg-transparent border border-white/30 hover:border-white text-white px-8 py-4 rounded-full font-medium transition-colors font-nepali">
+                        सम्पर्क गर्नुहोस्
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="objectives" class="py-24 bg-white relative">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-brand-gold font-medium tracking-[0.2em] uppercase text-xs mb-3 font-nepali">हाम्रा
+                        लक्ष्यहरु (Objectives)</h2>
+                    <h3 class="text-3xl md:text-5xl font-light text-brand-navy tracking-tight">Key <span
+                            class="font-bold">Objectives</span></h3>
+                </div>
+                <p class="text-slate-500 max-w-md text-sm leading-relaxed font-nepali md:text-right">
+                    समाज रुपान्तरण र विकासको लागि हामीले तय गरेका प्रमुख कार्यदिशाहरु।
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-slate-100">
+                <div
+                    class="p-10 border-b border-r border-slate-100 group elegant-hover hover:bg-brand-sand transition-colors duration-500">
+                    <div
+                        class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center mb-8 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors">
+                        <i
+                            class="fa-solid fa-om text-lg text-slate-400 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-medium text-brand-navy mb-4">Cultural Preservation</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed font-nepali">
+                        हाम्रो मौलिक संस्कृति, परम्परा, र सम्पदाको संरक्षण तथा प्रवर्द्धन गर्दै भावी पुस्तामा हस्तान्तरण
+                        गर्ने महत्वपूर्ण दायित्व।
+                    </p>
+                </div>
+
+                <div
+                    class="p-10 border-b border-r border-slate-100 group elegant-hover hover:bg-brand-sand transition-colors duration-500">
+                    <div
+                        class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center mb-8 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors">
+                        <i
+                            class="fa-solid fa-hands-holding-circle text-lg text-slate-400 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-medium text-brand-navy mb-4">Community Development</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed font-nepali">
+                        थोर्गा र काठमाडौंमा रहेका सदस्यहरु बीच समन्वय गरी पूर्वाधार, क्षमता अभिवृद्धि र समग्र सामाजिक
+                        विकासमा योगदान।
+                    </p>
+                </div>
+
+                <div
+                    class="p-10 border-b border-r border-slate-100 group elegant-hover hover:bg-brand-sand transition-colors duration-500">
+                    <div
+                        class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center mb-8 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors">
+                        <i
+                            class="fa-solid fa-book-medical text-lg text-slate-400 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-medium text-brand-navy mb-4">Education & Health</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed font-nepali">
+                        शिक्षा र स्वास्थ्य क्षेत्रमा सहज पहुँच बढाउन विभिन्न छात्रवृत्ति, नि:शुल्क स्वास्थ्य शिविर, तथा
+                        सचेतना कार्यक्रम।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-brand-sand relative overflow-hidden">
+        <div class="absolute inset-0 w-full h-full bg-pattern-dot"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+                <div class="lg:w-1/2 relative w-full">
+                    <div
+                        class="relative w-full aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1629731454530-58c0c00ceee7?q=80&w=2070&auto=format&fit=crop"
+                            alt="Nepal Village" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-brand-navy/10 mix-blend-multiply"></div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 pt-10 lg:pt-0">
+                    <h2 class="text-brand-gold font-medium tracking-[0.2em] uppercase text-xs mb-4 font-nepali">संस्था
+                        परिचय (About Organization)</h2>
+                    <h3 class="text-4xl md:text-5xl font-light text-brand-navy mb-8 leading-[1.1] tracking-tight">
+                        Our Story & <span class="font-bold italic">Mission</span>
+                    </h3>
+
+                    <div class="space-y-6 text-slate-600 font-nepali text-lg leading-relaxed font-light mb-8">
+                        <p>
+                            <strong class="font-medium text-brand-navy">थोर्गा काठमाडौं सम्पर्क तथा विकास मञ्च</strong>
+                            थोर्गाबाट काठमाडौं आई विभिन्न पेशा, व्यवसाय, र अध्ययनमा संलग्न महानुभावहरुलाई एकताबद्ध गर्ने
+                            विशुद्ध गैर-नाफामूलक सामाजिक संस्था हो।
+                        </p>
+                        <p class="text-base text-slate-500">
+                            यस मञ्चले स्थापनाकालदेखि नै थोर्गाको भौतिक, शैक्षिक, र सामाजिक विकासमा टेवा पुर्‍याउँदै आएको
+                            छ।
+                        </p>
+                    </div>
+
+                    <!-- Explicit Link to Statute (विधान) -->
+                    <div
+                        class="p-6 bg-white border border-slate-100 rounded-xl mb-8 flex items-center justify-between group cursor-pointer hover:border-brand-gold/50 transition">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-brand-gold">
+                                <i class="fa-solid fa-scroll"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-nepali font-medium text-brand-navy">संस्थाको विधान</h4>
+                                <p class="text-xs text-slate-500 font-nepali">नियम तथा विनियमावली पढ्नुहोस्</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-download text-slate-400 group-hover:text-brand-navy transition"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex justify-between items-end mb-16 border-b border-slate-100 pb-8">
+                <div>
+                    <h2 class="text-brand-gold font-medium tracking-[0.2em] uppercase text-xs mb-3 font-nepali">गतिविधि
+                        (Activities)</h2>
+                    <h3 class="text-3xl md:text-4xl font-light text-brand-navy tracking-tight">Recent <span
+                            class="font-bold">Activities</span></h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
+                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2074&auto=format&fit=crop"
+                            alt="Activity"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-brand-navy/0 group-hover:bg-brand-navy/10 transition-colors duration-500">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-[10px] font-bold tracking-widest text-brand-gold uppercase font-nepali">बैशाख
+                            १५, २०८१</span>
+                        <div class="h-px bg-slate-200 flex-grow"></div>
+                    </div>
+                    <h4
+                        class="text-xl font-medium text-brand-navy mb-3 group-hover:text-brand-gold transition-colors font-nepali leading-snug">
+                        नयाँ वर्ष शुभकामना आदानप्रदान तथा वनभोज</h4>
+                    <p class="text-slate-500 text-sm font-light font-nepali line-clamp-2">काठमाडौंमा रहेका सम्पूर्ण
+                        थोर्गेलीहरुको उपस्थितिमा शुभकामना आदानप्रदान तथा वृहत वनभोज कार्यक्रम।</p>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
+                        <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=2070&auto=format&fit=crop"
+                            alt="Activity"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="text-[10px] font-bold tracking-widest text-brand-gold uppercase font-nepali">फाल्गुन
+                            १०, २०८०</span>
+                        <div class="h-px bg-slate-200 flex-grow"></div>
+                    </div>
+                    <h4
+                        class="text-xl font-medium text-brand-navy mb-3 group-hover:text-brand-gold transition-colors font-nepali leading-snug">
+                        नि:शुल्क स्वास्थ्य शिविर सञ्चालन</h4>
+                    <p class="text-slate-500 text-sm font-light font-nepali line-clamp-2">थोर्गा गाउँमा विशेषज्ञ
+                        चिकित्सकहरुको टोली सहितको दुई दिने नि:शुल्क स्वास्थ्य शिविर सफलतापूर्वक सम्पन्न।</p>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070&auto=format&fit=crop"
+                            alt="Activity"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-[10px] font-bold tracking-widest text-brand-gold uppercase font-nepali">पुष
+                            २५, २०८०</span>
+                        <div class="h-px bg-slate-200 flex-grow"></div>
+                    </div>
+                    <h4
+                        class="text-xl font-medium text-brand-navy mb-3 group-hover:text-brand-gold transition-colors font-nepali leading-snug">
+                        शैक्षिक सामग्री तथा छात्रवृत्ति वितरण</h4>
+                    <p class="text-slate-500 text-sm font-light font-nepali line-clamp-2">स्थानीय विद्यालयका जेहेन्दार
+                        तथा गरिब विद्यार्थीहरुलाई शैक्षिक सामग्री तथा छात्रवृत्ति वितरण कार्यक्रम।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="py-24 bg-brand-gray relative">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex justify-between items-end mb-16 border-b border-slate-200 pb-8">
+                <div>
+                    <h2 class="text-brand-gold font-medium tracking-[0.2em] uppercase text-xs mb-3 font-nepali">प्रकाशन
+                        (Publications)</h2>
+                    <h3 class="text-3xl md:text-4xl font-light text-brand-navy tracking-tight">Our <span
+                            class="font-bold">Publications</span></h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Publication Item -->
+                <div
+                    class="bg-white p-6 rounded-2xl flex gap-6 items-center shadow-sm elegant-hover border border-slate-100">
+                    <div
+                        class="w-24 h-32 bg-slate-100 rounded-lg flex-shrink-0 flex items-center justify-center border border-slate-200 overflow-hidden relative group">
+                        <div class="absolute inset-0 bg-brand-navy/5"></div>
+                        <i class="fa-solid fa-book-open text-3xl text-brand-gold"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="text-[10px] font-bold tracking-widest text-slate-400 uppercase font-nepali mb-2 block">वार्षिक
+                            मुखपत्र</span>
+                        <h4 class="text-lg font-medium text-brand-navy font-nepali mb-2">थोर्गा दर्पण - अंक ५</h4>
+                        <p class="text-sm text-slate-500 font-nepali font-light mb-4">संस्थाको वार्षिक गतिविधि र
+                            लेख-रचनाहरु समेटिएको मुखपत्र।</p>
+                        <a href="#"
+                            class="text-sm text-brand-gold hover:text-brand-navy transition font-medium font-nepali flex items-center gap-2">
+                            पढ्नुहोस् <i class="fa-solid fa-arrow-right-long text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Publication Item -->
+                <div
+                    class="bg-white p-6 rounded-2xl flex gap-6 items-center shadow-sm elegant-hover border border-slate-100">
+                    <div
+                        class="w-24 h-32 bg-slate-100 rounded-lg flex-shrink-0 flex items-center justify-center border border-slate-200 overflow-hidden relative group">
+                        <div class="absolute inset-0 bg-brand-navy/5"></div>
+                        <i class="fa-solid fa-file-lines text-3xl text-brand-gold"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="text-[10px] font-bold tracking-widest text-slate-400 uppercase font-nepali mb-2 block">स्मारिका</span>
+                        <h4 class="text-lg font-medium text-brand-navy font-nepali mb-2">रजत जयन्ती स्मारिका</h4>
+                        <p class="text-sm text-slate-500 font-nepali font-light mb-4">संस्था स्थापनाको २५ वर्ष प्रवेशको
+                            अवसरमा प्रकाशित विशेष स्मारिका।</p>
+                        <a href="#"
+                            class="text-sm text-brand-gold hover:text-brand-navy transition font-medium font-nepali flex items-center gap-2">
+                            पढ्नुहोस् <i class="fa-solid fa-arrow-right-long text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-24 bg-white relative">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-20">
+                <h2 class="text-brand-gold font-medium tracking-[0.2em] uppercase text-xs mb-3 font-nepali">पदाधिकारी
+                    (Office Bearers)</h2>
+                <h3 class="text-3xl md:text-5xl font-light text-brand-navy tracking-tight mb-6">Executive <span
+                        class="font-bold">Committee</span></h3>
+                <p class="text-slate-500 text-sm font-nepali font-light">वर्तमान कार्यसमितिका पदाधिकारीहरु (Current
+                    Committee)</p>
+            </div>
+
+            <!-- President -->
+            <div class="flex justify-center mb-16">
+                <div class="text-center group">
+                    <div class="relative w-40 h-40 mx-auto mb-6">
+                        <div
+                            class="absolute inset-0 rounded-full border border-brand-gold/30 group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
+                            alt="President"
+                            class="w-full h-full rounded-full object-cover relative z-10 border-4 border-white shadow-sm">
+                    </div>
+                    <h4 class="text-2xl font-medium text-brand-navy font-nepali">नाम थर</h4>
+                    <p class="text-brand-gold font-medium text-sm mt-1 font-nepali tracking-wider">अध्यक्ष</p>
+                </div>
+            </div>
+
+            <!-- Members -->
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-6 max-w-5xl mx-auto border-b border-slate-100 pb-20">
+                <div class="text-center group">
+                    <div
+                        class="w-28 h-28 mx-auto mb-4 overflow-hidden rounded-full border border-slate-200 group-hover:border-brand-gold/50 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h4 class="text-lg font-medium text-brand-navy font-nepali">नाम थर</h4>
+                    <p class="text-slate-500 text-xs mt-1 font-nepali">उपाध्यक्ष</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="w-28 h-28 mx-auto mb-4 overflow-hidden rounded-full border border-slate-200 group-hover:border-brand-gold/50 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h4 class="text-lg font-medium text-brand-navy font-nepali">नाम थर</h4>
+                    <p class="text-slate-500 text-xs mt-1 font-nepali">महासचिव</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="w-28 h-28 mx-auto mb-4 overflow-hidden rounded-full border border-slate-200 group-hover:border-brand-gold/50 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h4 class="text-lg font-medium text-brand-navy font-nepali">नाम थर</h4>
+                    <p class="text-slate-500 text-xs mt-1 font-nepali">कोषाध्यक्ष</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="w-28 h-28 mx-auto mb-4 overflow-hidden rounded-full border border-slate-200 group-hover:border-brand-gold/50 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h4 class="text-lg font-medium text-brand-navy font-nepali">नाम थर</h4>
+                    <p class="text-slate-500 text-xs mt-1 font-nepali">सदस्य</p>
+                </div>
+            </div>
+
+            <div id="advisors" class="pt-20">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h3 class="text-2xl md:text-3xl font-light text-brand-navy tracking-tight mb-2">Our <span
+                            class="font-bold">Advisors</span></h3>
+                    <p class="text-slate-500 text-sm font-nepali font-light">वर्तमान सल्लाहकारहरु (Current Advisors)</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+                    <div
+                        class="flex items-center gap-4 bg-brand-gray/50 px-6 py-4 rounded-full border border-slate-100 elegant-hover">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-brand-navy text-sm font-nepali">वरिष्ठ नाम थर</h4>
+                            <p class="text-xs text-slate-500 font-nepali">प्रमुख सल्लाहकार</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-center gap-4 bg-brand-gray/50 px-6 py-4 rounded-full border border-slate-100 elegant-hover">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-brand-navy text-sm font-nepali">वरिष्ठ नाम थर</h4>
+                            <p class="text-xs text-slate-500 font-nepali">सल्लाहकार</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <a href="#"
+                        class="text-xs text-slate-400 hover:text-brand-navy transition font-nepali underline decoration-slate-300 underline-offset-4">
+                        पूर्व समिति तथा पुर्व सल्लाहकारहरु हेर्नुहोस्
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-brand-navy relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-brand-gold font-medium tracking-[0.2em] uppercase text-xs mb-3 font-nepali">फोटो ग्यालरी
+                    (Photo Gallery)</h2>
+                <h3 class="text-3xl md:text-5xl font-light text-white tracking-tight">Memories & <span
+                        class="font-bold">Moments</span></h3>
+            </div>
+
+            <!-- Simple Elegant Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div
+                    class="aspect-square rounded-xl overflow-hidden group cursor-pointer col-span-2 md:col-span-2 row-span-2">
+                    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2074&auto=format&fit=crop"
+                        alt="Gallery 1"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=2070&auto=format&fit=crop"
+                        alt="Gallery 2"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070&auto=format&fit=crop"
+                        alt="Gallery 3"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100">
+                </div>
+                <div
+                    class="aspect-[2/1] md:aspect-square rounded-xl overflow-hidden group cursor-pointer col-span-2 md:col-span-1">
+                    <img src="https://images.unsplash.com/photo-1629731454530-58c0c00ceee7?q=80&w=2070&auto=format&fit=crop"
+                        alt="Gallery 4"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden group cursor-pointer hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop"
+                        alt="Gallery 5"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100">
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#"
+                    class="inline-block border border-white/30 text-white hover:bg-white hover:text-brand-navy px-8 py-3 rounded-full text-sm font-medium transition-colors font-nepali">
+                    सबै तस्बिर हेर्नुहोस्
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="organizations" class="py-20 bg-white border-b border-slate-100">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-brand-gold font-medium tracking-[0.2em] uppercase text-xs mb-3 font-nepali">अन्य
+                    (Others)</h2>
+                <h3 class="text-2xl md:text-3xl font-light text-brand-navy tracking-tight">सम्बद्ध संस्थाहरु <span
+                        class="font-bold text-lg text-slate-400 font-sans">(Affiliated Organizations)</span></h3>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-12 justify-center items-center max-w-4xl mx-auto">
+                <!-- Thorga Orgs -->
+                <div class="text-center w-full md:w-1/2">
+                    <h4
+                        class="text-sm font-medium text-slate-500 font-nepali mb-6 border-b border-slate-100 pb-2 inline-block">
+                        थोर्गेली संस्थाहरु</h4>
+                    <div class="flex justify-center gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-brand-sand flex items-center justify-center border border-slate-100 group hover:border-brand-gold transition cursor-pointer"
+                            title="संस्था १">
+                            <i class="fa-solid fa-building-ngo text-2xl text-slate-300 group-hover:text-brand-gold"></i>
+                        </div>
+                        <div class="w-16 h-16 rounded-2xl bg-brand-sand flex items-center justify-center border border-slate-100 group hover:border-brand-gold transition cursor-pointer"
+                            title="संस्था २">
+                            <i
+                                class="fa-solid fa-hands-holding-child text-2xl text-slate-300 group-hover:text-brand-gold"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Orgs -->
+                <div class="text-center w-full md:w-1/2">
+                    <h4
+                        class="text-sm font-medium text-slate-500 font-nepali mb-6 border-b border-slate-100 pb-2 inline-block">
+                        अन्य संस्थाहरु</h4>
+                    <div class="flex justify-center gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-brand-sand flex items-center justify-center border border-slate-100 group hover:border-brand-gold transition cursor-pointer"
+                            title="संस्था ३">
+                            <i
+                                class="fa-solid fa-handshake-angle text-2xl text-slate-300 group-hover:text-brand-gold"></i>
+                        </div>
+                        <div class="w-16 h-16 rounded-2xl bg-brand-sand flex items-center justify-center border border-slate-100 group hover:border-brand-gold transition cursor-pointer"
+                            title="संस्था ४">
+                            <i class="fa-solid fa-globe text-2xl text-slate-300 group-hover:text-brand-gold"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="membership" class="py-24 relative bg-brand-navy overflow-hidden">
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-blue/30 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 text-center max-w-3xl">
+            <h2 class="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">Become a <span
+                    class="font-bold italic text-brand-gold">Life Member</span></h2>
+            <p class="text-slate-300 font-light mb-12 text-lg font-nepali leading-relaxed">
+                हाम्रो यस मञ्चको "आजीवन सदस्य" (Life Member) बनेर समाज विकासमा प्रत्यक्ष योगदान पुर्‍याउनुहोस्। तपाईको
+                सानो साथले समाजमा ठूलो परिवर्तन ल्याउन सक्छ।
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+                <a href="#"
+                    class="bg-brand-gold hover:bg-[#b07a38] text-white px-8 py-4 rounded-full font-medium transition-colors font-nepali">
+                    सदस्यता फारम भर्नुहोस्
+                </a>
+                <a href="#"
+                    class="bg-transparent border border-white/20 hover:border-white/50 text-white px-8 py-4 rounded-full font-medium transition-colors font-nepali">
+                    सदस्यता सूची हेर्नुहोस्
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-[#07101C] text-slate-400 pt-20 pb-8 font-nepali">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+
+                <div class="lg:pr-8">
+                    <div class="flex items-center gap-3 mb-6 opacity-90">
+                        <div
+                            class="w-8 h-8 border border-slate-600 rounded-full flex items-center justify-center text-white">
+                            <i class="fa-solid fa-mountain-sun text-xs"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-base font-bold text-white tracking-wide">थोर्गा काठमाडौं</h2>
+                        </div>
+                    </div>
+                    <p class="text-sm font-light leading-relaxed mb-8 text-slate-500">
+                        काठमाडौंमा रहेका थोर्गेलीहरुलाई एकताबद्ध गर्दै सामाजिक विकास र संस्कृतिको संरक्षणमा समर्पित
+                        संस्था।
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-600 hover:text-brand-gold transition"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-slate-600 hover:text-brand-gold transition"><i
+                                class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="text-slate-600 hover:text-brand-gold transition"><i
+                                class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-medium text-sm tracking-wider uppercase mb-6">संस्था परिचय</h3>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#about" class="hover:text-brand-gold transition text-slate-500">थोर्गाको परिचय</a>
+                        </li>
+                        <li><a href="#objectives" class="hover:text-brand-gold transition text-slate-500">उद्देश्य</a>
+                        </li>
+                        <li><a href="#about" class="hover:text-brand-gold transition text-slate-500">विधान</a></li>
+                        <li><a href="#team" class="hover:text-brand-gold transition text-slate-500">पदाधिकारी तथा
+                                सल्लाहकार</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-medium text-sm tracking-wider uppercase mb-6">जानकारी</h3>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#activities" class="hover:text-brand-gold transition text-slate-500">गतिविधिहरु</a>
+                        </li>
+                        <li><a href="#publications" class="hover:text-brand-gold transition text-slate-500">प्रकाशन</a>
+                        </li>
+                        <li><a href="#gallery" class="hover:text-brand-gold transition text-slate-500">फोटो ग्यालरी</a>
+                        </li>
+                        <li><a href="#organizations" class="hover:text-brand-gold transition text-slate-500">सम्बद्ध
+                                संस्थाहरु</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-medium text-sm tracking-wider uppercase mb-6">सम्पर्क</h3>
+                    <ul class="space-y-5 text-sm font-light text-slate-500">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-slate-600"></i>
+                            <span>काठमाडौं महानगरपालिका,<br>बागमती प्रदेश, नेपाल</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-slate-600"></i>
+                            <span>+977 9841-XXXXXX</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-slate-600"></i>
+                            <a href="mailto:info@thorgakathmandu.org"
+                                class="hover:text-brand-gold transition">info@thorgakathmandu.org</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs font-light text-slate-600">
+                    &copy; <span id="year"></span> थोर्गा काठमाडौं सम्पर्क तथा विकास मञ्च. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95', 'shadow-sm');
+                navbar.classList.remove('py-2', 'border-transparent');
+            } else {
+                navbar.classList.remove('bg-white/95', 'shadow-sm');
+                navbar.classList.add('py-2', 'border-transparent');
+            }
+        });
+
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars-staggered');
+            } else {
+                icon.classList.remove('fa-bars-staggered');
+                icon.classList.add('fa-xmark');
+            }
+        });
+
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                btn.querySelector('i').classList.remove('fa-xmark');
+                btn.querySelector('i').classList.add('fa-bars-staggered');
+            });
+        });
+    </script>
+</body>
+
+</html>
