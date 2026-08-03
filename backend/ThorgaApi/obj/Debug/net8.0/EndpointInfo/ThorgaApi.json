@@ -304,6 +304,35 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Roles"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavePermissionsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavePermissionsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavePermissionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Roles/permissions/{roleName}": {
@@ -984,6 +1013,30 @@
           },
           "isActive": {
             "nullable": true
+          },
+          "nameEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "positionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "positionNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionNe": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1023,6 +1076,30 @@
           },
           "isActive": {
             "nullable": true
+          },
+          "titleEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titleNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodyEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodyNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "summaryEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "summaryNe": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1051,6 +1128,22 @@
             "format": "int32"
           },
           "isActive": {
+            "nullable": true
+          },
+          "titleEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titleNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionNe": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -1149,6 +1242,30 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "nameEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "positionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "positionNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionNe": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1225,6 +1342,30 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "titleEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titleNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodyEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodyNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "summaryEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "summaryNe": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1266,6 +1407,22 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "titleEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titleNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionNe": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1304,6 +1461,30 @@
           },
           "isActive": {
             "nullable": true
+          },
+          "nameEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "positionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "positionNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionNe": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1334,6 +1515,30 @@
           },
           "isActive": {
             "nullable": true
+          },
+          "titleEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titleNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodyEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodyNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "summaryEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "summaryNe": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1363,6 +1568,22 @@
             "nullable": true
           },
           "isActive": {
+            "nullable": true
+          },
+          "titleEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titleNe": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "descriptionNe": {
+            "type": "string",
             "nullable": true
           }
         },

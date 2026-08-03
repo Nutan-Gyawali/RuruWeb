@@ -35,7 +35,7 @@ public class SiteContentController : ControllerBase
             .Where(x => x.IsActive)
             .OrderBy(x => x.SortOrder)
             .ThenBy(x => x.Title)
-            .Select(x => new SiteContentDto(x.Id, x.Category, x.Title, x.Body, x.Summary, x.SortOrder, x.IsActive, x.CreatedAt, x.UpdatedAt))
+            .Select(x => new SiteContentDto(x.Id, x.Category, x.Title, x.Body, x.Summary, x.SortOrder, x.IsActive, x.CreatedAt, x.UpdatedAt, x.TitleEn, x.TitleNe, x.BodyEn, x.BodyNe, x.SummaryEn, x.SummaryNe))
             .ToListAsync();
 
         return Ok(items);
@@ -48,7 +48,7 @@ public class SiteContentController : ControllerBase
         var item = await _dbContext.SiteContents.FindAsync(id);
         if (item == null) return NotFound();
 
-        return Ok(new SiteContentDto(item.Id, item.Category, item.Title, item.Body, item.Summary, item.SortOrder, item.IsActive, item.CreatedAt, item.UpdatedAt));
+        return Ok(new SiteContentDto(item.Id, item.Category, item.Title, item.Body, item.Summary, item.SortOrder, item.IsActive, item.CreatedAt, item.UpdatedAt, item.TitleEn, item.TitleNe, item.BodyEn, item.BodyNe, item.SummaryEn, item.SummaryNe));
     }
 
     [HttpPost("content")]
@@ -66,6 +66,12 @@ public class SiteContentController : ControllerBase
             Title = dto.Title.Trim(),
             Body = dto.Body.Trim(),
             Summary = dto.Summary?.Trim(),
+            TitleEn = dto.TitleEn?.Trim(),
+            TitleNe = dto.TitleNe?.Trim(),
+            BodyEn = dto.BodyEn?.Trim(),
+            BodyNe = dto.BodyNe?.Trim(),
+            SummaryEn = dto.SummaryEn?.Trim(),
+            SummaryNe = dto.SummaryNe?.Trim(),
             SortOrder = dto.SortOrder,
             IsActive = ParseBoolean(dto.IsActive),
             CreatedAt = DateTime.UtcNow,
@@ -75,7 +81,7 @@ public class SiteContentController : ControllerBase
         _dbContext.SiteContents.Add(entity);
         await _dbContext.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetContentById), new { id = entity.Id }, new SiteContentDto(entity.Id, entity.Category, entity.Title, entity.Body, entity.Summary, entity.SortOrder, entity.IsActive, entity.CreatedAt, entity.UpdatedAt));
+        return CreatedAtAction(nameof(GetContentById), new { id = entity.Id }, new SiteContentDto(entity.Id, entity.Category, entity.Title, entity.Body, entity.Summary, entity.SortOrder, entity.IsActive, entity.CreatedAt, entity.UpdatedAt, entity.TitleEn, entity.TitleNe, entity.BodyEn, entity.BodyNe, entity.SummaryEn, entity.SummaryNe));
     }
 
     [HttpPut("content/{id}")]
@@ -94,6 +100,12 @@ public class SiteContentController : ControllerBase
         if (dto.Title is not null) entity.Title = dto.Title.Trim();
         if (dto.Body is not null) entity.Body = dto.Body.Trim();
         if (dto.Summary is not null) entity.Summary = dto.Summary.Trim();
+        if (dto.TitleEn is not null) entity.TitleEn = dto.TitleEn.Trim();
+        if (dto.TitleNe is not null) entity.TitleNe = dto.TitleNe.Trim();
+        if (dto.BodyEn is not null) entity.BodyEn = dto.BodyEn.Trim();
+        if (dto.BodyNe is not null) entity.BodyNe = dto.BodyNe.Trim();
+        if (dto.SummaryEn is not null) entity.SummaryEn = dto.SummaryEn.Trim();
+        if (dto.SummaryNe is not null) entity.SummaryNe = dto.SummaryNe.Trim();
         if (dto.SortOrder is not null) entity.SortOrder = dto.SortOrder.Value;
         if (dto.IsActive is not null) entity.IsActive = ParseBoolean(dto.IsActive);
         entity.UpdatedAt = DateTime.UtcNow;
@@ -134,7 +146,7 @@ public class SiteContentController : ControllerBase
             .Where(x => x.IsActive)
             .OrderBy(x => x.SortOrder)
             .ThenBy(x => x.Name)
-            .Select(x => new PersonProfileDto(x.Id, x.Category, x.Name, x.Position, x.Description, x.ImageUrl, x.ExternalLink, x.SortOrder, x.IsActive, x.CreatedAt, x.UpdatedAt))
+            .Select(x => new PersonProfileDto(x.Id, x.Category, x.Name, x.Position, x.Description, x.ImageUrl, x.ExternalLink, x.SortOrder, x.IsActive, x.CreatedAt, x.UpdatedAt, x.NameEn, x.NameNe, x.PositionEn, x.PositionNe, x.DescriptionEn, x.DescriptionNe))
             .ToListAsync();
 
         return Ok(items);
@@ -147,7 +159,7 @@ public class SiteContentController : ControllerBase
         var item = await _dbContext.PersonProfiles.FindAsync(id);
         if (item == null) return NotFound();
 
-        return Ok(new PersonProfileDto(item.Id, item.Category, item.Name, item.Position, item.Description, item.ImageUrl, item.ExternalLink, item.SortOrder, item.IsActive, item.CreatedAt, item.UpdatedAt));
+        return Ok(new PersonProfileDto(item.Id, item.Category, item.Name, item.Position, item.Description, item.ImageUrl, item.ExternalLink, item.SortOrder, item.IsActive, item.CreatedAt, item.UpdatedAt, item.NameEn, item.NameNe, item.PositionEn, item.PositionNe, item.DescriptionEn, item.DescriptionNe));
     }
 
     [HttpPost("people")]
@@ -167,6 +179,12 @@ public class SiteContentController : ControllerBase
             Description = dto.Description?.Trim(),
             ImageUrl = dto.ImageUrl?.Trim(),
             ExternalLink = dto.ExternalLink?.Trim(),
+            NameEn = dto.NameEn?.Trim(),
+            NameNe = dto.NameNe?.Trim(),
+            PositionEn = dto.PositionEn?.Trim(),
+            PositionNe = dto.PositionNe?.Trim(),
+            DescriptionEn = dto.DescriptionEn?.Trim(),
+            DescriptionNe = dto.DescriptionNe?.Trim(),
             SortOrder = dto.SortOrder,
             IsActive = ParseBoolean(dto.IsActive),
             CreatedAt = DateTime.UtcNow,
@@ -176,7 +194,7 @@ public class SiteContentController : ControllerBase
         _dbContext.PersonProfiles.Add(entity);
         await _dbContext.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetPersonById), new { id = entity.Id }, new PersonProfileDto(entity.Id, entity.Category, entity.Name, entity.Position, entity.Description, entity.ImageUrl, entity.ExternalLink, entity.SortOrder, entity.IsActive, entity.CreatedAt, entity.UpdatedAt));
+        return CreatedAtAction(nameof(GetPersonById), new { id = entity.Id }, new PersonProfileDto(entity.Id, entity.Category, entity.Name, entity.Position, entity.Description, entity.ImageUrl, entity.ExternalLink, entity.SortOrder, entity.IsActive, entity.CreatedAt, entity.UpdatedAt, entity.NameEn, entity.NameNe, entity.PositionEn, entity.PositionNe, entity.DescriptionEn, entity.DescriptionNe));
     }
 
     [HttpPut("people/{id}")]
@@ -197,6 +215,12 @@ public class SiteContentController : ControllerBase
         if (dto.Description is not null) entity.Description = dto.Description.Trim();
         if (dto.ImageUrl is not null) entity.ImageUrl = dto.ImageUrl.Trim();
         if (dto.ExternalLink is not null) entity.ExternalLink = dto.ExternalLink.Trim();
+        if (dto.NameEn is not null) entity.NameEn = dto.NameEn.Trim();
+        if (dto.NameNe is not null) entity.NameNe = dto.NameNe.Trim();
+        if (dto.PositionEn is not null) entity.PositionEn = dto.PositionEn.Trim();
+        if (dto.PositionNe is not null) entity.PositionNe = dto.PositionNe.Trim();
+        if (dto.DescriptionEn is not null) entity.DescriptionEn = dto.DescriptionEn.Trim();
+        if (dto.DescriptionNe is not null) entity.DescriptionNe = dto.DescriptionNe.Trim();
         if (dto.SortOrder is not null) entity.SortOrder = dto.SortOrder.Value;
         if (dto.IsActive is not null) entity.IsActive = ParseBoolean(dto.IsActive);
         entity.UpdatedAt = DateTime.UtcNow;
@@ -237,7 +261,7 @@ public class SiteContentController : ControllerBase
             .Where(x => x.IsActive)
             .OrderBy(x => x.SortOrder)
             .ThenBy(x => x.Title)
-            .Select(x => new SiteImageDto(x.Id, x.Category, x.Title, x.Description, x.ImageUrl, x.SortOrder, x.IsActive, x.CreatedAt, x.UpdatedAt))
+            .Select(x => new SiteImageDto(x.Id, x.Category, x.Title, x.Description, x.ImageUrl, x.SortOrder, x.IsActive, x.CreatedAt, x.UpdatedAt, x.TitleEn, x.TitleNe, x.DescriptionEn, x.DescriptionNe))
             .ToListAsync();
 
         return Ok(items);
@@ -250,7 +274,7 @@ public class SiteContentController : ControllerBase
         var item = await _dbContext.SiteImages.FindAsync(id);
         if (item == null) return NotFound();
 
-        return Ok(new SiteImageDto(item.Id, item.Category, item.Title, item.Description, item.ImageUrl, item.SortOrder, item.IsActive, item.CreatedAt, item.UpdatedAt));
+        return Ok(new SiteImageDto(item.Id, item.Category, item.Title, item.Description, item.ImageUrl, item.SortOrder, item.IsActive, item.CreatedAt, item.UpdatedAt, item.TitleEn, item.TitleNe, item.DescriptionEn, item.DescriptionNe));
     }
 
     [HttpPost("images")]
@@ -268,6 +292,10 @@ public class SiteContentController : ControllerBase
             Title = dto.Title.Trim(),
             Description = dto.Description?.Trim(),
             ImageUrl = dto.ImageUrl.Trim(),
+            TitleEn = dto.TitleEn?.Trim(),
+            TitleNe = dto.TitleNe?.Trim(),
+            DescriptionEn = dto.DescriptionEn?.Trim(),
+            DescriptionNe = dto.DescriptionNe?.Trim(),
             SortOrder = dto.SortOrder,
             IsActive = ParseBoolean(dto.IsActive),
             CreatedAt = DateTime.UtcNow,
@@ -277,7 +305,7 @@ public class SiteContentController : ControllerBase
         _dbContext.SiteImages.Add(entity);
         await _dbContext.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetImageById), new { id = entity.Id }, new SiteImageDto(entity.Id, entity.Category, entity.Title, entity.Description, entity.ImageUrl, entity.SortOrder, entity.IsActive, entity.CreatedAt, entity.UpdatedAt));
+        return CreatedAtAction(nameof(GetImageById), new { id = entity.Id }, new SiteImageDto(entity.Id, entity.Category, entity.Title, entity.Description, entity.ImageUrl, entity.SortOrder, entity.IsActive, entity.CreatedAt, entity.UpdatedAt, entity.TitleEn, entity.TitleNe, entity.DescriptionEn, entity.DescriptionNe));
     }
 
     [HttpPut("images/{id}")]
@@ -296,6 +324,10 @@ public class SiteContentController : ControllerBase
         if (dto.Title is not null) entity.Title = dto.Title.Trim();
         if (dto.Description is not null) entity.Description = dto.Description.Trim();
         if (dto.ImageUrl is not null) entity.ImageUrl = dto.ImageUrl.Trim();
+        if (dto.TitleEn is not null) entity.TitleEn = dto.TitleEn.Trim();
+        if (dto.TitleNe is not null) entity.TitleNe = dto.TitleNe.Trim();
+        if (dto.DescriptionEn is not null) entity.DescriptionEn = dto.DescriptionEn.Trim();
+        if (dto.DescriptionNe is not null) entity.DescriptionNe = dto.DescriptionNe.Trim();
         if (dto.SortOrder is not null) entity.SortOrder = dto.SortOrder.Value;
         if (dto.IsActive is not null) entity.IsActive = ParseBoolean(dto.IsActive);
         entity.UpdatedAt = DateTime.UtcNow;

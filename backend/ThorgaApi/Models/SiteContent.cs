@@ -7,6 +7,12 @@ public class SiteContent
     public string Title { get; set; } = string.Empty;
     public string Body { get; set; } = string.Empty;
     public string? Summary { get; set; }
+    public string? TitleEn { get; set; }
+    public string? TitleNe { get; set; }
+    public string? BodyEn { get; set; }
+    public string? BodyNe { get; set; }
+    public string? SummaryEn { get; set; }
+    public string? SummaryNe { get; set; }
     public int SortOrder { get; set; }
     public bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThorgaApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aea0e6c3006b797ef9a135b8e113943f59926a23")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThorgaApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThorgaApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

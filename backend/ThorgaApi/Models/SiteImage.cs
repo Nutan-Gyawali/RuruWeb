@@ -7,6 +7,10 @@ public class SiteImage
     public string Title { get; set; } = string.Empty;
     public string? Description { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
+    public string? TitleEn { get; set; }
+    public string? TitleNe { get; set; }
+    public string? DescriptionEn { get; set; }
+    public string? DescriptionNe { get; set; }
     public int SortOrder { get; set; }
     public bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

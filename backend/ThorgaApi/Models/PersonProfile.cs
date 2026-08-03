@@ -9,6 +9,12 @@ public class PersonProfile
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
     public string? ExternalLink { get; set; }
+    public string? NameEn { get; set; }
+    public string? NameNe { get; set; }
+    public string? PositionEn { get; set; }
+    public string? PositionNe { get; set; }
+    public string? DescriptionEn { get; set; }
+    public string? DescriptionNe { get; set; }
     public int SortOrder { get; set; }
     public bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ThorgaApi.Models;
 
 namespace ThorgaApi.Data;
@@ -15,6 +17,47 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<PersonProfile> PersonProfiles => Set<PersonProfile>();
     public DbSet<SiteImage> SiteImages => Set<SiteImage>();
     public DbSet<SiteRolePermission> SiteRolePermissions => Set<SiteRolePermission>();
+
+    public async Task InitializeDatabaseAsync(IServiceProvider serviceProvider, IConfiguration configuration)
+    {
+        await Database.MigrateAsync();
+
+        using var scope = serviceProvider.CreateScope();
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+        foreach (var roleName in new[] { "admin", "superadmin", "executive members", "general members" })
+        {
+            if (!await roleManager.RoleExistsAsync(roleName))
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+        }
+
+        var adminEmail = configuration["Admin:Email"] ?? "admin@thorga.com";
+        var adminPassword = configuration["Admin:Password"] ?? "Admin@123456";
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser is null)
+        {
+            adminUser = new ApplicationUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                FullName = "System Administrator",
+                CreatedAt = DateTime.UtcNow
+            };
+
+            var created = await userManager.CreateAsync(adminUser, adminPassword);
+            if (created.Succeeded)
+            {
+                await userManager.AddToRoleAsync(adminUser, "admin");
+            }
+        }
+        else if (!await userManager.IsInRoleAsync(adminUser, "admin"))
+        {
+            await userManager.AddToRoleAsync(adminUser, "admin");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

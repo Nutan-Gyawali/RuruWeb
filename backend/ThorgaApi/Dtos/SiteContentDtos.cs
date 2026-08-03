@@ -11,7 +11,13 @@ public record SiteContentDto(
     int SortOrder,
     bool IsActive,
     DateTime CreatedAt,
-    DateTime UpdatedAt);
+    DateTime UpdatedAt,
+    string? TitleEn,
+    string? TitleNe,
+    string? BodyEn,
+    string? BodyNe,
+    string? SummaryEn,
+    string? SummaryNe);
 
 public record CreateSiteContentDto(
     string Category,
@@ -19,7 +25,13 @@ public record CreateSiteContentDto(
     string Body,
     string? Summary,
     int SortOrder,
-    JsonElement? IsActive);
+    JsonElement? IsActive,
+    string? TitleEn,
+    string? TitleNe,
+    string? BodyEn,
+    string? BodyNe,
+    string? SummaryEn,
+    string? SummaryNe);
 
 public record UpdateSiteContentDto(
     string? Category,
@@ -27,7 +39,13 @@ public record UpdateSiteContentDto(
     string? Body,
     string? Summary,
     int? SortOrder,
-    JsonElement? IsActive);
+    JsonElement? IsActive,
+    string? TitleEn,
+    string? TitleNe,
+    string? BodyEn,
+    string? BodyNe,
+    string? SummaryEn,
+    string? SummaryNe);
 
 public record PersonProfileDto(
     int Id,
@@ -40,7 +58,13 @@ public record PersonProfileDto(
     int SortOrder,
     bool IsActive,
     DateTime CreatedAt,
-    DateTime UpdatedAt);
+    DateTime UpdatedAt,
+    string? NameEn,
+    string? NameNe,
+    string? PositionEn,
+    string? PositionNe,
+    string? DescriptionEn,
+    string? DescriptionNe);
 
 public record CreatePersonProfileDto(
     string Category,
@@ -50,7 +74,13 @@ public record CreatePersonProfileDto(
     string? ImageUrl,
     string? ExternalLink,
     int SortOrder,
-    JsonElement? IsActive);
+    JsonElement? IsActive,
+    string? NameEn,
+    string? NameNe,
+    string? PositionEn,
+    string? PositionNe,
+    string? DescriptionEn,
+    string? DescriptionNe);
 
 public record UpdatePersonProfileDto(
     string? Category,
@@ -60,7 +90,13 @@ public record UpdatePersonProfileDto(
     string? ImageUrl,
     string? ExternalLink,
     int? SortOrder,
-    JsonElement? IsActive);
+    JsonElement? IsActive,
+    string? NameEn,
+    string? NameNe,
+    string? PositionEn,
+    string? PositionNe,
+    string? DescriptionEn,
+    string? DescriptionNe);
 
 public record SiteImageDto(
     int Id,
@@ -71,7 +107,11 @@ public record SiteImageDto(
     int SortOrder,
     bool IsActive,
     DateTime CreatedAt,
-    DateTime UpdatedAt);
+    DateTime UpdatedAt,
+    string? TitleEn,
+    string? TitleNe,
+    string? DescriptionEn,
+    string? DescriptionNe);
 
 public record CreateSiteImageDto(
     string Category,
@@ -79,7 +119,11 @@ public record CreateSiteImageDto(
     string? Description,
     string ImageUrl,
     int SortOrder,
-    JsonElement? IsActive);
+    JsonElement? IsActive,
+    string? TitleEn,
+    string? TitleNe,
+    string? DescriptionEn,
+    string? DescriptionNe);
 
 public record UpdateSiteImageDto(
     string? Category,
@@ -87,4 +131,8 @@ public record UpdateSiteImageDto(
     string? Description,
     string? ImageUrl,
     int? SortOrder,
-    JsonElement? IsActive);
+    JsonElement? IsActive,
+    string? TitleEn,
+    string? TitleNe,
+    string? DescriptionEn,
+    string? DescriptionNe);

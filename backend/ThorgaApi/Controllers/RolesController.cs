@@ -109,6 +109,29 @@ public class RolesController : ControllerBase
         return Ok(new { message = "Permissions updated." });
     }
 
+    [HttpPut("permissions")]
+    public async Task<IActionResult> UpdatePermissions([FromBody] SavePermissionsRequest request)
+    {
+        if (!PermissionHelper.UserHasPermission(User, "roles.write"))
+        {
+            return Forbid();
+        }
+
+        var roleName = request.RoleName.Trim();
+        var permissions = request.Permissions ?? new List<string>();
+
+        var existing = await _dbContext.SiteRolePermissions.Where(x => x.RoleName == roleName).ToListAsync();
+        _dbContext.SiteRolePermissions.RemoveRange(existing);
+        _dbContext.SiteRolePermissions.AddRange(permissions.Select(permission => new SiteRolePermission
+        {
+            RoleName = roleName,
+            Permission = permission.Trim()
+        }));
+
+        await _dbContext.SaveChangesAsync();
+        return Ok(new { message = "Permissions updated." });
+    }
+
     [HttpGet("permissions/{roleName}")]
     public async Task<IActionResult> GetPermissions(string roleName)
     {

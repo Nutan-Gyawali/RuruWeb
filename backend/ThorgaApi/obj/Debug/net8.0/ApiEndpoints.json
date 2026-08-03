@@ -173,6 +173,22 @@
   },
   {
     "ContainingType": "ThorgaApi.Controllers.RolesController",
+    "Method": "UpdatePermissions",
+    "RelativePath": "api/Roles/permissions",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ThorgaApi.Controllers.SavePermissionsRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThorgaApi.Controllers.RolesController",
     "Method": "GetPermissions",
     "RelativePath": "api/Roles/permissions/{roleName}",
     "HttpMethod": "GET",
