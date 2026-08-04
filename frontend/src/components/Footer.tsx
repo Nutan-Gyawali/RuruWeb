@@ -7,7 +7,7 @@ export const Footer = ({ language }: { language: Language }) => {
             <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10 sm:grid-cols-4">
                 <div>
                     <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-brand-on-ink">{language === 'ne' ? 'पुराना सामग्री' : 'Archives'}</h3>
-                    <p className="text-sm leading-relaxed">{language === 'ne' ? 'समुदायको पुरानी अभिलेख तथा heritage records।' : 'Archive and heritage records for the community.'}</p>
+                    <p className="text-sm leading-relaxed text-paper/70">{language === 'ne' ? 'समुदायको पुरानी अभिलेख तथा heritage records।' : 'Archive and heritage records for the community.'}</p>
                 </div>
                 <div>
                     <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-brand-on-ink">{language === 'ne' ? 'सम्पर्क' : 'Contact'}</h3>
@@ -26,7 +26,7 @@ export const Footer = ({ language }: { language: Language }) => {
                 </div>
                 <div>
                     <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-brand-on-ink">{language === 'ne' ? 'प्रकाशन' : 'Publications'}</h3>
-                    <p className="text-sm leading-relaxed">{language === 'ne' ? 'बुलेटिन, डायरी, क्यालेन्डर र स्मृतिहरू।' : 'Bulletin, diary, calendar, and memories.'}</p>
+                    <p className="text-sm leading-relaxed text-paper/70">{language === 'ne' ? 'बुलेटिन, डायरी, क्यालेन्डर र स्मृतिहरू।' : 'Bulletin, diary, calendar, and memories.'}</p>
                 </div>
             </div>
             <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 py-5 text-center text-xs">

@@ -144,6 +144,7 @@ function App() {
                     content={content}
                     people={people}
                     images={images}
+                    openSimplePage={openSimplePage}
                 />
             )}
 

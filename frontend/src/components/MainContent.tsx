@@ -2,6 +2,10 @@ import { ArrowUpRight, ImageOff, Megaphone, MapPin, User } from 'lucide-react'
 import type { Language, MainPage, IntroductionPage, PublicationPage, SiteContent, PersonProfile, SiteImage } from '../types'
 import { getLocalizedContent, getLocalizedPerson, getLocalizedImage } from '../utils'
 import { HeroSection } from './HeroSection'
+import { StatsStrip } from './StatsStrip'
+import { ValuePropsSection } from './ValuePropsSection'
+import { ActivityPreview } from './ActivityPreview'
+import { CtaBanner } from './CtaBanner'
 
 type MainContentProps = {
     language: Language
@@ -11,6 +15,7 @@ type MainContentProps = {
     content: Record<string, SiteContent[]>
     people: Record<string, PersonProfile[]>
     images: SiteImage[]
+    openSimplePage: (page: MainPage) => void
 }
 
 const introMenuItems = [
@@ -69,7 +74,9 @@ const ListArticle = ({ title, body }: { title: string; body: string }) => (
 )
 
 export const MainContent = (props: MainContentProps) => {
-    const { language, selectedMainPage, selectedIntroPage, selectedPublicationPage, content, people, images } = props
+    const { language, selectedMainPage, selectedIntroPage, selectedPublicationPage, content, people, images, openSimplePage } = props
+
+    const isHomepage = selectedMainPage === 'introduction' && selectedIntroPage === 'company-intro'
 
     const introduction = content.introduction?.[0]
     const hometown = content.hometownIntroduction?.[0]
@@ -92,6 +99,13 @@ export const MainContent = (props: MainContentProps) => {
     const pubActiveItem = publicationMenuItems.find((item) => item.id === selectedPublicationPage)
     const pubActiveLabel = pubActiveItem ? (language === 'ne' ? pubActiveItem.labelNe : pubActiveItem.labelEn) : ''
 
+    const homepageStats = [
+        { value: currentMembers.length, labelEn: 'Members', labelNe: 'सदस्यहरू' },
+        { value: currentAdvisors.length, labelEn: 'Advisors', labelNe: 'सल्लाहकारहरू' },
+        { value: (content.worksDone ?? []).length, labelEn: 'Activities', labelNe: 'गतिविधिहरू' },
+        { value: images.length, labelEn: 'Gallery Photos', labelNe: 'ग्यालेरी तस्बिरहरू' },
+    ]
+
     const noItemsMsg = language === 'ne' ? 'हाल कुनै सामग्री उपलब्ध छैन।' : 'No items available yet.'
     const emptyMemberMsg = language === 'ne' ? 'कुनै सदस्य फेला परेन।' : 'No members found.'
     const emptyAdvisorMsg = language === 'ne' ? 'कुनै सल्लाहकार फेला परेन।' : 'No advisors found.'
@@ -107,6 +121,7 @@ export const MainContent = (props: MainContentProps) => {
                     body={introText.body || 'A community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
                 />
             )}
+            {isHomepage && <StatsStrip language={language} stats={homepageStats} />}
             <main id="content-start" className="mx-auto w-full max-w-7xl flex-1 scroll-mt-20 px-6 py-10">
                 <div className="grid gap-12 lg:grid-cols-[1fr_296px]">
                     {/* Main content */}
@@ -275,6 +290,19 @@ export const MainContent = (props: MainContentProps) => {
                     </aside>
                 </div>
             </main>
+            {isHomepage && (
+                <>
+                    <ValuePropsSection language={language} />
+                    <ActivityPreview
+                        language={language}
+                        activities={content.worksDone ?? []}
+                        images={images}
+                        onViewActivities={() => openSimplePage('activities')}
+                        onViewGallery={() => openSimplePage('gallery')}
+                    />
+                    <CtaBanner language={language} />
+                </>
+            )}
         </>
     )
 }
