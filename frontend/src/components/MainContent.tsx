@@ -6,6 +6,8 @@ import { StatsStrip } from './StatsStrip'
 import { ValuePropsSection } from './ValuePropsSection'
 import { ActivityPreview } from './ActivityPreview'
 import { CtaBanner } from './CtaBanner'
+import { LeadershipPreview } from './LeadershipPreview'
+import { PublicationsPreview } from './PublicationsPreview'
 
 type MainContentProps = {
     language: Language
@@ -295,6 +297,8 @@ export const MainContent = (props: MainContentProps) => {
             </main>
             {isHomepage && (
                 <>
+                    <LeadershipPreview language={language} members={currentMembers} onViewAll={() => openSimplePage('introduction')} />
+                    <PublicationsPreview language={language} publications={content.publication ?? []} onViewAll={() => openSimplePage('publications')} />
                     <ActivityPreview
                         language={language}
                         activities={content.worksDone ?? []}
