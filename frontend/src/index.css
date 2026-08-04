@@ -1,99 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap');
+@import "@astryxdesign/core/reset.css";
+@import "@astryxdesign/core/astryx.css";
 @import "tailwindcss";
 
 @theme {
-    --color-brand-navy: #0B192C;
-    --color-brand-blue: #1A365D;
-    --color-brand-gold: #C58940;
-    --color-brand-sand: #F8F5F1;
-    --color-brand-gray: #F1F5F9;
-
-    --font-sans: 'Outfit', 'Mukta', sans-serif;
-    --font-nepali: 'Mukta', sans-serif;
-}
-
-body {
-    font-family: 'Outfit', 'Mukta', sans-serif;
-    background-color: #FAFAFA;
+    --font-sans: 'Figtree', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-nepali: 'Noto Sans Devanagari', sans-serif;
 }
 
 .font-nepali {
-    font-family: 'Mukta', sans-serif;
-}
-
-.glass-nav {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-}
-
-.hero-pattern {
-    background-image:
-        linear-gradient(90deg, rgba(11, 25, 44, 0.95) 0%, rgba(11, 25, 44, 0.7) 50%, rgba(11, 25, 44, 0.2) 100%),
-        url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2074&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-}
-
-.bg-pattern-dot {
-    background-image: radial-gradient(#C58940 1px, transparent 1px);
-    background-size: 24px 24px;
-    opacity: 0.1;
-}
-
-.elegant-hover {
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.elegant-hover:hover {
-    transform: translateY(-4px);
-}
-
-.link-underline {
-    position: relative;
-}
-
-.link-underline::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: #C58940;
-    transition: width 0.3s ease;
-}
-
-.link-underline:hover::after,
-.group:hover .link-underline::after {
-    width: 100%;
-}
-
-.dropdown-menu,
-.nested-dropdown-menu {
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease-in-out;
-}
-
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.nested-dropdown:hover .nested-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
-
-.dropdown-menu {
-    transform: translateY(8px);
-}
-
-.nested-dropdown-menu {
-    left: 100%;
-    top: -8px;
-    transform: translateX(8px);
+    font-family: var(--font-nepali);
 }
