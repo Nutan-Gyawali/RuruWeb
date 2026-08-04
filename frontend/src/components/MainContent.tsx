@@ -123,7 +123,7 @@ export const MainContent = (props: MainContentProps) => {
             )}
             {isHomepage && <StatsStrip language={language} stats={homepageStats} />}
             <main id="content-start" className="mx-auto w-full max-w-7xl flex-1 scroll-mt-20 px-6 py-10">
-                <div className="grid gap-12 lg:grid-cols-[1fr_296px]">
+                <div className="grid items-start gap-12 lg:grid-cols-[1fr_296px]">
                     {/* Main content */}
                     <div className="min-w-0">
                         {selectedMainPage === 'introduction' && (
@@ -145,6 +145,9 @@ export const MainContent = (props: MainContentProps) => {
                                                 <dd className="text-sm leading-relaxed text-ink-muted">{hometownText.body || 'A shared village and community connection that supports people from Thorga in Kathmandu.'}</dd>
                                             </div>
                                         </dl>
+                                        <div className="mt-10">
+                                            <ValuePropsSection language={language} embedded />
+                                        </div>
                                     </>
                                 )}
 
@@ -292,7 +295,6 @@ export const MainContent = (props: MainContentProps) => {
             </main>
             {isHomepage && (
                 <>
-                    <ValuePropsSection language={language} />
                     <ActivityPreview
                         language={language}
                         activities={content.worksDone ?? []}

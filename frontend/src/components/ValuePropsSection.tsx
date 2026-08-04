@@ -32,16 +32,21 @@ const VALUE_PROPS = [
     },
 ]
 
-export const ValuePropsSection = ({ language }: { language: Language }) => {
-    return (
-        <section className="mx-auto w-full max-w-7xl px-6 py-14">
+type ValuePropsSectionProps = {
+    language: Language
+    embedded?: boolean
+}
+
+export const ValuePropsSection = ({ language, embedded = false }: ValuePropsSectionProps) => {
+    const content = (
+        <>
             <div className="mb-6 border-b border-line pb-4">
                 <div className="mb-2 h-[3px] w-9 bg-brand" />
                 <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
                     {language === 'ne' ? 'हाम्रा कार्यहरू' : 'What We Do'}
                 </h2>
             </div>
-            <div className="grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
                 {VALUE_PROPS.map((prop, idx) => {
                     const Icon = prop.icon
                     return (
@@ -59,6 +64,10 @@ export const ValuePropsSection = ({ language }: { language: Language }) => {
                     )
                 })}
             </div>
-        </section>
+        </>
     )
+
+    if (embedded) return content
+
+    return <section className="mx-auto w-full max-w-7xl px-6 py-14">{content}</section>
 }
