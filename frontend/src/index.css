@@ -45,3 +45,22 @@
     background-image: radial-gradient(color-mix(in oklab, var(--color-ink) 14%, transparent) 1px, transparent 1px);
     background-size: 22px 22px;
 }
+
+/*
+ * text-brand at full saturation reads at ~2.6:1 against bg-ink (dark
+ * surfaces like the header bar, footer, sidebar notice card) — well under
+ * WCAG AA. This is the theme's own dark-mode accent value (matchaTheme.ts),
+ * reused here for any brand-colored text/icon placed on a dark surface.
+ */
+.text-brand-on-ink {
+    color: #34d399;
+}
+.border-brand-on-ink {
+    border-color: #34d399;
+}
+.hover\:text-brand-on-ink:hover {
+    color: #34d399;
+}
+.hover\:border-brand-on-ink:hover {
+    border-color: #34d399;
+}

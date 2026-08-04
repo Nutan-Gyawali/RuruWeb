@@ -52,11 +52,15 @@ export const Navigation = (props: NavigationProps) => {
                 <div className="hidden md:flex md:flex-wrap md:items-center">
                     {/* Introduction dropdown */}
                     <div className="group relative">
-                        <button className={`${navBtnBase} ${selectedMainPage === 'introduction' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('introduction')}>
+                        <button
+                            className={`${navBtnBase} ${selectedMainPage === 'introduction' ? navBtnActive : navBtnInactive}`}
+                            onClick={() => openSimplePage('introduction')}
+                            aria-haspopup="true"
+                        >
                             {language === 'ne' ? 'परिचय' : 'Introduction'}
                             <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                         </button>
-                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100">
+                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
                             {introMenuItems.map((item) => (
                                 <button
                                     key={item.id}
@@ -79,11 +83,15 @@ export const Navigation = (props: NavigationProps) => {
 
                     {/* Publications dropdown */}
                     <div className="group relative">
-                        <button className={`${navBtnBase} ${selectedMainPage === 'publications' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('publications')}>
+                        <button
+                            className={`${navBtnBase} ${selectedMainPage === 'publications' ? navBtnActive : navBtnInactive}`}
+                            onClick={() => openSimplePage('publications')}
+                            aria-haspopup="true"
+                        >
                             {language === 'ne' ? 'प्रकाशन' : 'Publications'}
                             <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                         </button>
-                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100">
+                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
                             {publicationMenuItems.map((item) => (
                                 <button
                                     key={item.id}

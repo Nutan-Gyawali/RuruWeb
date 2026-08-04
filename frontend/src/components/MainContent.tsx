@@ -225,7 +225,7 @@ export const MainContent = (props: MainContentProps) => {
                         {/* Notice card */}
                         <div className="border border-ink bg-ink p-5 text-paper shadow-[6px_6px_0_0_var(--color-brand)]">
                             <div className="mb-3 flex items-center gap-2">
-                                <Megaphone className="h-4 w-4 text-brand" />
+                                <Megaphone className="h-4 w-4 text-brand-on-ink" />
                                 <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-paper">{language === 'ne' ? 'सूचना' : 'Notice'}</h3>
                             </div>
                             <p className="mb-4 text-sm leading-relaxed text-paper/80">
@@ -233,7 +233,7 @@ export const MainContent = (props: MainContentProps) => {
                                     ? 'वार्षिक साधारण सभा र नयाँ सदस्यता खुल्ला गरिएको छ।'
                                     : 'Annual General Meeting and new membership are now open.'}
                             </p>
-                            <button className="flex items-center gap-1.5 text-sm font-semibold text-brand transition-opacity hover:opacity-80">
+                            <button className="flex items-center gap-1.5 text-sm font-semibold text-brand-on-ink transition-opacity hover:opacity-80">
                                 {language === 'ne' ? 'थप पढ्नुहोस्' : 'Learn More'}
                                 <ArrowUpRight className="h-3.5 w-3.5" />
                             </button>

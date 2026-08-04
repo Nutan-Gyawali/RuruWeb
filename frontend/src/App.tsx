@@ -102,7 +102,7 @@ function App() {
 
     return (
         <div className={`flex min-h-screen flex-col bg-paper text-ink font-sans antialiased ${language === 'ne' ? 'font-nepali' : ''}`}>
-            <Header language={language} setLanguage={setLanguage} />
+            <Header language={language} setLanguage={setLanguage} onLogoClick={() => openIntroductionPage('company-intro')} />
 
             <Navigation
                 language={language}

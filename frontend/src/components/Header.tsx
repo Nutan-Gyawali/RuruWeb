@@ -1,10 +1,17 @@
 import { Mail, Phone, Globe } from 'lucide-react'
 import type { Language } from '../types'
 
-export const Header = ({ language, setLanguage }: { language: Language; setLanguage: (l: Language) => void }) => {
+type HeaderProps = {
+    language: Language
+    setLanguage: (l: Language) => void
+    onLogoClick: () => void
+}
+
+export const Header = ({ language, setLanguage, onLogoClick }: HeaderProps) => {
     const brandTitle = language === 'ne' ? 'थोर्गा काठमाण्डौं' : 'Thorga Kathmandu'
     const brandAltTitle = language === 'ne' ? 'Thorga Kathmandu' : 'थोर्गा काठमाण्डौं'
     const brandTag = language === 'ne' ? 'थोर्गा समुदाय' : 'Thorga Community'
+    const homeLabel = language === 'ne' ? 'गृहपृष्ठमा जानुहोस्' : 'Go to homepage'
 
     return (
         <header>
@@ -21,7 +28,7 @@ export const Header = ({ language, setLanguage }: { language: Language; setLangu
                     </div>
                     <button
                         onClick={() => setLanguage(language === 'en' ? 'ne' : 'en')}
-                        className="flex items-center gap-1.5 border border-white/20 px-3 py-1 text-xs font-medium transition-colors hover:border-brand hover:text-brand"
+                        className="flex items-center gap-1.5 border border-white/20 px-3 py-1 text-xs font-medium transition-colors hover:border-brand-on-ink hover:text-brand-on-ink"
                     >
                         <Globe className="h-3.5 w-3.5" />
                         {language === 'en' ? 'नेपाली' : 'English'}
@@ -31,17 +38,23 @@ export const Header = ({ language, setLanguage }: { language: Language; setLangu
 
             {/* Main header */}
             <div className="border-b border-line bg-paper">
-                <div className="mx-auto flex max-w-7xl items-center gap-4 px-6 py-6">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center bg-brand text-2xl font-semibold text-on-brand">
-                        थो
-                    </div>
-                    <div className="min-w-0">
-                        <h1 className="truncate font-display text-[1.7rem] font-semibold tracking-tight text-ink">{brandTitle}</h1>
-                        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
-                            <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">{brandTag}</span>
-                            <span className="text-xs text-ink-faint">{brandAltTitle}</span>
+                <div className="mx-auto max-w-7xl px-6 py-6">
+                    <button
+                        onClick={onLogoClick}
+                        aria-label={homeLabel}
+                        className="group flex w-full items-center gap-4 text-left"
+                    >
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center bg-brand text-2xl font-semibold text-on-brand transition-transform group-hover:scale-105">
+                            थो
                         </div>
-                    </div>
+                        <div className="min-w-0">
+                            <h1 className="truncate font-display text-[1.7rem] font-semibold tracking-tight text-ink">{brandTitle}</h1>
+                            <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                                <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">{brandTag}</span>
+                                <span className="text-xs text-ink-faint">{brandAltTitle}</span>
+                            </div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </header>
