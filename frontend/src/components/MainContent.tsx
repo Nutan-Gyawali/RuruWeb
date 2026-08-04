@@ -267,7 +267,7 @@ export const MainContent = (props: MainContentProps) => {
                             </div>
                             <iframe
                                 title="Thorga map"
-                                src="https://www.google.com/maps?q=Kathmandu&z=12&output=embed"
+                                src="https://www.google.com/maps?q=Thorga,Gulmi,Nepal&z=13&output=embed"
                                 loading="lazy"
                                 className="h-44 w-full border border-line grayscale-[0.3]"
                             />
