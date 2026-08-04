@@ -1,6 +1,7 @@
 import { ArrowUpRight, ImageOff, Megaphone, MapPin, User } from 'lucide-react'
 import type { Language, MainPage, IntroductionPage, PublicationPage, SiteContent, PersonProfile, SiteImage } from '../types'
 import { getLocalizedContent, getLocalizedPerson, getLocalizedImage } from '../utils'
+import { HeroSection } from './HeroSection'
 
 type MainContentProps = {
     language: Language
@@ -96,191 +97,184 @@ export const MainContent = (props: MainContentProps) => {
     const emptyAdvisorMsg = language === 'ne' ? 'कुनै सल्लाहकार फेला परेन।' : 'No advisors found.'
 
     return (
-        <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-10">
-            <div className="grid gap-12 lg:grid-cols-[1fr_296px]">
-                {/* Main content */}
-                <div className="min-w-0">
-                    {selectedMainPage === 'introduction' && (
-                        <div>
-                            {selectedIntroPage === 'company-intro' && (
-                                <div className="bg-grain mb-12 border-b border-line pb-10">
-                                    <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-                                        <div className="max-w-2xl">
-                                            <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.2em] text-brand">
-                                                {language === 'ne' ? 'स्थापित समुदाय, काठमाण्डौं' : 'Est. Community, Kathmandu'}
-                                            </span>
-                                            <h2 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
-                                                {language === 'ne' ? 'थोर्गा काठमाण्डौंमा स्वागत छ' : 'Welcome to Thorga Kathmandu'}
-                                            </h2>
-                                        </div>
-                                        <p className="max-w-xs text-sm leading-relaxed text-ink-muted lg:pb-1.5">
-                                            {introText.body || 'A community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
+        <>
+            {selectedMainPage === 'introduction' && selectedIntroPage === 'company-intro' && (
+                <HeroSection
+                    language={language}
+                    heroImage={images[0]}
+                    eyebrow={language === 'ne' ? 'स्थापित समुदाय, काठमाण्डौं' : 'Est. Community, Kathmandu'}
+                    headline={language === 'ne' ? 'थोर्गा काठमाण्डौंमा स्वागत छ' : 'Welcome to Thorga Kathmandu'}
+                    body={introText.body || 'A community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
+                />
+            )}
+            <main id="content-start" className="mx-auto w-full max-w-7xl flex-1 scroll-mt-20 px-6 py-10">
+                <div className="grid gap-12 lg:grid-cols-[1fr_296px]">
+                    {/* Main content */}
+                    <div className="min-w-0">
+                        {selectedMainPage === 'introduction' && (
+                            <div>
+                                <SectionHeading label={introActiveLabel} />
+
+                                {selectedIntroPage === 'company-intro' && (
+                                    <>
+                                        <p className="mb-8 max-w-2xl text-base leading-relaxed text-ink-muted">
+                                            {introText.body || 'Thorga is a community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
                                         </p>
+                                        <dl className="grid gap-8 border-t border-line pt-8 sm:grid-cols-2">
+                                            <div>
+                                                <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'उद्देश्य' : 'Mission'}</dt>
+                                                <dd className="text-sm leading-relaxed text-ink-muted">{aimsText.body || 'Promote social development, cultural preservation, and public coordination.'}</dd>
+                                            </div>
+                                            <div>
+                                                <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'समुदाय' : 'Community'}</dt>
+                                                <dd className="text-sm leading-relaxed text-ink-muted">{hometownText.body || 'A shared village and community connection that supports people from Thorga in Kathmandu.'}</dd>
+                                            </div>
+                                        </dl>
+                                    </>
+                                )}
+
+                                {selectedIntroPage === 'thorga-intro' && (
+                                    <div className="max-w-2xl space-y-4">
+                                        <p className="leading-relaxed text-ink-muted">{hometownText.body || 'Thorga is a place-based identity connecting families and traditions through shared belonging.'}</p>
+                                        <p className="leading-relaxed text-ink-muted">{rulesText.body || 'The association strengthens ties among members through mutual support and good governance.'}</p>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
-                            <SectionHeading label={introActiveLabel} />
+                                {selectedIntroPage === 'current-members' && <PersonGrid people={currentMembers} language={language} emptyMsg={emptyMemberMsg} />}
+                                {selectedIntroPage === 'current-advisors' && <PersonGrid people={currentAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
+                                {selectedIntroPage === 'past-members' && <PersonGrid people={pastMembers} language={language} emptyMsg={emptyMemberMsg} />}
+                                {selectedIntroPage === 'past-advisors' && <PersonGrid people={pastAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
+                            </div>
+                        )}
 
-                            {selectedIntroPage === 'company-intro' && (
-                                <>
-                                    <p className="mb-8 max-w-2xl text-base leading-relaxed text-ink-muted">
-                                        {introText.body || 'Thorga is a community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
-                                    </p>
-                                    <dl className="grid gap-8 border-t border-line pt-8 sm:grid-cols-2">
-                                        <div>
-                                            <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'उद्देश्य' : 'Mission'}</dt>
-                                            <dd className="text-sm leading-relaxed text-ink-muted">{aimsText.body || 'Promote social development, cultural preservation, and public coordination.'}</dd>
-                                        </div>
-                                        <div>
-                                            <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'समुदाय' : 'Community'}</dt>
-                                            <dd className="text-sm leading-relaxed text-ink-muted">{hometownText.body || 'A shared village and community connection that supports people from Thorga in Kathmandu.'}</dd>
-                                        </div>
-                                    </dl>
-                                </>
-                            )}
+                        {selectedMainPage === 'activities' && (
+                            <div>
+                                <SectionHeading label={language === 'ne' ? 'हालका गतिविधिहरू' : 'Recent Activities'} />
+                                {(content.worksDone ?? []).length > 0 ? (
+                                    <div className="divide-y divide-line border-t border-line">
+                                        {(content.worksDone ?? []).map((item) => {
+                                            const localized = getLocalizedContent(language, item)
+                                            return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
+                                        })}
+                                    </div>
+                                ) : <EmptyState message={noItemsMsg} />}
+                            </div>
+                        )}
 
-                            {selectedIntroPage === 'thorga-intro' && (
-                                <div className="max-w-2xl space-y-4">
-                                    <p className="leading-relaxed text-ink-muted">{hometownText.body || 'Thorga is a place-based identity connecting families and traditions through shared belonging.'}</p>
-                                    <p className="leading-relaxed text-ink-muted">{rulesText.body || 'The association strengthens ties among members through mutual support and good governance.'}</p>
-                                </div>
-                            )}
+                        {selectedMainPage === 'publications' && (
+                            <div>
+                                <SectionHeading label={pubActiveLabel} />
+                                {(content.publication ?? []).length > 0 ? (
+                                    <div className="divide-y divide-line border-t border-line">
+                                        {(content.publication ?? []).map((item) => {
+                                            const localized = getLocalizedContent(language, item)
+                                            return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
+                                        })}
+                                    </div>
+                                ) : <EmptyState message={noItemsMsg} />}
+                            </div>
+                        )}
 
-                            {selectedIntroPage === 'current-members' && <PersonGrid people={currentMembers} language={language} emptyMsg={emptyMemberMsg} />}
-                            {selectedIntroPage === 'current-advisors' && <PersonGrid people={currentAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
-                            {selectedIntroPage === 'past-members' && <PersonGrid people={pastMembers} language={language} emptyMsg={emptyMemberMsg} />}
-                            {selectedIntroPage === 'past-advisors' && <PersonGrid people={pastAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
+                        {selectedMainPage === 'notices' && (
+                            <div>
+                                <SectionHeading label={language === 'ne' ? 'सूचना' : 'Notices'} />
+                                {(content.others ?? []).length > 0 ? (
+                                    <div className="divide-y divide-line border-t border-line">
+                                        {(content.others ?? []).map((item) => {
+                                            const localized = getLocalizedContent(language, item)
+                                            return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
+                                        })}
+                                    </div>
+                                ) : <EmptyState message={noItemsMsg} />}
+                            </div>
+                        )}
+
+                        {selectedMainPage === 'gallery' && (
+                            <div>
+                                <SectionHeading label={language === 'ne' ? 'फोटो ग्यालेरी' : 'Gallery'} />
+                                {images.length > 0 ? (
+                                    <div className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3">
+                                        {images.map((image) => {
+                                            const localized = getLocalizedImage(language, image)
+                                            return (
+                                                <figure key={image.id} className="group bg-paper">
+                                                    <div className="overflow-hidden">
+                                                        <img
+                                                            src={image.imageUrl}
+                                                            alt={localized.title}
+                                                            className="h-44 w-full object-cover grayscale transition-all duration-500 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
+                                                        />
+                                                    </div>
+                                                    <figcaption className="border-t border-line px-3 py-2 text-xs font-medium text-ink-muted">{localized.title}</figcaption>
+                                                </figure>
+                                            )
+                                        })}
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col items-center gap-2 border border-dashed border-line py-14 text-ink-faint">
+                                        <ImageOff className="h-6 w-6" />
+                                        <p className="text-sm">{noItemsMsg}</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Sidebar */}
+                    <aside className="flex flex-col gap-10">
+                        {/* Notice card */}
+                        <div className="border border-ink bg-ink p-5 text-paper shadow-[6px_6px_0_0_var(--color-brand)]">
+                            <div className="mb-3 flex items-center gap-2">
+                                <Megaphone className="h-4 w-4 text-brand" />
+                                <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-paper">{language === 'ne' ? 'सूचना' : 'Notice'}</h3>
+                            </div>
+                            <p className="mb-4 text-sm leading-relaxed text-paper/80">
+                                {language === 'ne'
+                                    ? 'वार्षिक साधारण सभा र नयाँ सदस्यता खुल्ला गरिएको छ।'
+                                    : 'Annual General Meeting and new membership are now open.'}
+                            </p>
+                            <button className="flex items-center gap-1.5 text-sm font-semibold text-brand transition-opacity hover:opacity-80">
+                                {language === 'ne' ? 'थप पढ्नुहोस्' : 'Learn More'}
+                                <ArrowUpRight className="h-3.5 w-3.5" />
+                            </button>
                         </div>
-                    )}
 
-                    {selectedMainPage === 'activities' && (
+                        {/* Quick links */}
                         <div>
-                            <SectionHeading label={language === 'ne' ? 'हालका गतिविधिहरू' : 'Recent Activities'} />
-                            {(content.worksDone ?? []).length > 0 ? (
-                                <div className="divide-y divide-line border-t border-line">
-                                    {(content.worksDone ?? []).map((item) => {
-                                        const localized = getLocalizedContent(language, item)
-                                        return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
-                                    })}
-                                </div>
-                            ) : <EmptyState message={noItemsMsg} />}
+                            <h3 className="mb-3 border-b border-line pb-3 text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'द्रुत लिङ्क' : 'Quick Links'}</h3>
+                            <ul className="divide-y divide-line">
+                                {[
+                                    language === 'ne' ? 'सदस्यता फारम' : 'Membership Form',
+                                    language === 'ne' ? 'संस्थाको विधान' : 'Organization Rules',
+                                    language === 'ne' ? 'आर्थिक प्रतिवेदन' : 'Financial Report',
+                                    language === 'ne' ? 'हाम्रो बारेमा' : 'About Us',
+                                ].map((label) => (
+                                    <li key={label}>
+                                        <button className="group flex w-full items-center justify-between py-2.5 text-left text-sm text-ink-muted transition-colors hover:text-brand">
+                                            {label}
+                                            <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" />
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    )}
 
-                    {selectedMainPage === 'publications' && (
+                        {/* Map */}
                         <div>
-                            <SectionHeading label={pubActiveLabel} />
-                            {(content.publication ?? []).length > 0 ? (
-                                <div className="divide-y divide-line border-t border-line">
-                                    {(content.publication ?? []).map((item) => {
-                                        const localized = getLocalizedContent(language, item)
-                                        return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
-                                    })}
-                                </div>
-                            ) : <EmptyState message={noItemsMsg} />}
+                            <div className="mb-3 flex items-center gap-2 border-b border-line pb-3">
+                                <MapPin className="h-4 w-4 text-brand" />
+                                <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'स्थान' : 'Location'}</h3>
+                            </div>
+                            <iframe
+                                title="Thorga map"
+                                src="https://www.google.com/maps?q=Kathmandu&z=12&output=embed"
+                                loading="lazy"
+                                className="h-44 w-full border border-line grayscale-[0.3]"
+                            />
                         </div>
-                    )}
-
-                    {selectedMainPage === 'notices' && (
-                        <div>
-                            <SectionHeading label={language === 'ne' ? 'सूचना' : 'Notices'} />
-                            {(content.others ?? []).length > 0 ? (
-                                <div className="divide-y divide-line border-t border-line">
-                                    {(content.others ?? []).map((item) => {
-                                        const localized = getLocalizedContent(language, item)
-                                        return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
-                                    })}
-                                </div>
-                            ) : <EmptyState message={noItemsMsg} />}
-                        </div>
-                    )}
-
-                    {selectedMainPage === 'gallery' && (
-                        <div>
-                            <SectionHeading label={language === 'ne' ? 'फोटो ग्यालेरी' : 'Gallery'} />
-                            {images.length > 0 ? (
-                                <div className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3">
-                                    {images.map((image) => {
-                                        const localized = getLocalizedImage(language, image)
-                                        return (
-                                            <figure key={image.id} className="group bg-paper">
-                                                <div className="overflow-hidden">
-                                                    <img
-                                                        src={image.imageUrl}
-                                                        alt={localized.title}
-                                                        className="h-44 w-full object-cover grayscale transition-all duration-500 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
-                                                    />
-                                                </div>
-                                                <figcaption className="border-t border-line px-3 py-2 text-xs font-medium text-ink-muted">{localized.title}</figcaption>
-                                            </figure>
-                                        )
-                                    })}
-                                </div>
-                            ) : (
-                                <div className="flex flex-col items-center gap-2 border border-dashed border-line py-14 text-ink-faint">
-                                    <ImageOff className="h-6 w-6" />
-                                    <p className="text-sm">{noItemsMsg}</p>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                    </aside>
                 </div>
-
-                {/* Sidebar */}
-                <aside className="flex flex-col gap-10">
-                    {/* Notice card */}
-                    <div className="border border-ink bg-ink p-5 text-paper shadow-[6px_6px_0_0_var(--color-brand)]">
-                        <div className="mb-3 flex items-center gap-2">
-                            <Megaphone className="h-4 w-4 text-brand" />
-                            <h3 className="text-xs font-semibold uppercase tracking-[0.15em]">{language === 'ne' ? 'सूचना' : 'Notice'}</h3>
-                        </div>
-                        <p className="mb-4 text-sm leading-relaxed text-paper/80">
-                            {language === 'ne'
-                                ? 'वार्षिक साधारण सभा र नयाँ सदस्यता खुल्ला गरिएको छ।'
-                                : 'Annual General Meeting and new membership are now open.'}
-                        </p>
-                        <button className="flex items-center gap-1.5 text-sm font-semibold text-brand transition-opacity hover:opacity-80">
-                            {language === 'ne' ? 'थप पढ्नुहोस्' : 'Learn More'}
-                            <ArrowUpRight className="h-3.5 w-3.5" />
-                        </button>
-                    </div>
-
-                    {/* Quick links */}
-                    <div>
-                        <h3 className="mb-3 border-b border-line pb-3 text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'द्रुत लिङ्क' : 'Quick Links'}</h3>
-                        <ul className="divide-y divide-line">
-                            {[
-                                language === 'ne' ? 'सदस्यता फारम' : 'Membership Form',
-                                language === 'ne' ? 'संस्थाको विधान' : 'Organization Rules',
-                                language === 'ne' ? 'आर्थिक प्रतिवेदन' : 'Financial Report',
-                                language === 'ne' ? 'हाम्रो बारेमा' : 'About Us',
-                            ].map((label) => (
-                                <li key={label}>
-                                    <button className="group flex w-full items-center justify-between py-2.5 text-left text-sm text-ink-muted transition-colors hover:text-brand">
-                                        {label}
-                                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" />
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Map */}
-                    <div>
-                        <div className="mb-3 flex items-center gap-2 border-b border-line pb-3">
-                            <MapPin className="h-4 w-4 text-brand" />
-                            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'स्थान' : 'Location'}</h3>
-                        </div>
-                        <iframe
-                            title="Thorga map"
-                            src="https://www.google.com/maps?q=Kathmandu&z=12&output=embed"
-                            loading="lazy"
-                            className="h-44 w-full border border-line grayscale-[0.3]"
-                        />
-                    </div>
-                </aside>
-            </div>
-        </main>
+            </main>
+        </>
     )
 }
