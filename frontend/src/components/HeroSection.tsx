@@ -28,15 +28,14 @@ export const HeroSection = ({ language, heroImage, eyebrow, headline, body }: He
                 alt={localizedImage?.title || (language === 'ne' ? 'गुल्मी जिल्ला, नेपाल' : 'Gulmi District, Nepal')}
                 className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
 
             <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 pt-32 sm:pb-20">
-                <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.22em] text-brand">{eyebrow}</span>
-                <h2 className="max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-paper drop-shadow-sm sm:text-6xl">{headline}</h2>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-paper/90 drop-shadow-sm">{body}</p>
+                <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.22em] text-brand drop-shadow-md">{eyebrow}</span>
+                <h2 className="max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-paper drop-shadow-2xl sm:text-6xl" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>{headline}</h2>
+                <p className="mt-5 max-w-md text-base leading-relaxed text-paper/90 drop-shadow-xl" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>{body}</p>
                 <button
                     onClick={scrollToContent}
-                    className="mt-9 flex items-center gap-2 border border-paper/40 bg-ink/20 px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-paper backdrop-blur-sm transition-colors hover:border-brand hover:text-brand"
+                    className="mt-9 flex items-center gap-2 border border-paper/40 bg-ink/20 px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-paper backdrop-blur-sm transition-colors hover:border-brand hover:text-brand shadow-lg"
                 >
                     {language === 'ne' ? 'अन्वेषण गर्नुहोस्' : 'Explore'}
                     <ArrowDown className="h-3.5 w-3.5" />
