@@ -18,7 +18,7 @@
 
     --color-ink: var(--color-text-primary);
     --color-ink-muted: var(--color-text-secondary);
-    --color-ink-faint: var(--color-text-disabled);
+    --color-ink-faint: var(--color-text-secondary);
     --color-paper: var(--color-background-surface);
     --color-paper-muted: var(--color-background-muted);
     --color-card: var(--color-background-card);
