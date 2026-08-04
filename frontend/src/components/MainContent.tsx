@@ -1,3 +1,4 @@
+import { ArrowUpRight, ImageOff, Megaphone, MapPin, User } from 'lucide-react'
 import type { Language, MainPage, IntroductionPage, PublicationPage, SiteContent, PersonProfile, SiteImage } from '../types'
 import { getLocalizedContent, getLocalizedPerson, getLocalizedImage } from '../utils'
 
@@ -28,21 +29,42 @@ const publicationMenuItems = [
     { id: 'others', labelEn: 'Others', labelNe: 'अन्य' },
 ]
 
+const SectionHeading = ({ label }: { label: string }) => (
+    <div className="mb-6 border-b border-line pb-4">
+        <div className="mb-2 h-[3px] w-9 bg-brand" />
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">{label}</h2>
+    </div>
+)
+
+const EmptyState = ({ message }: { message: string }) => (
+    <p className="border border-dashed border-line py-10 text-center text-sm text-ink-faint">{message}</p>
+)
+
 const PersonGrid = ({ people: personList, language, emptyMsg }: { people: PersonProfile[]; language: Language; emptyMsg: string }) => (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
         {personList.length > 0 ? personList.map((person) => {
             const localized = getLocalizedPerson(language, person)
             return (
-                <div key={person.id} className="group flex flex-col items-center rounded-md border border-sky-200 bg-white p-5 text-center transition-all hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md">
-                    <div className="mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-sky-100 text-2xl shadow-sm text-black">
-                        {person.imageUrl ? <img src={person.imageUrl} alt={localized.name} className="h-full w-full object-cover" /> : <span>👤</span>}
+                <div key={person.id} className="group flex flex-col items-center bg-paper p-6 text-center transition-colors hover:bg-paper-muted">
+                    <div className="mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-paper-muted text-ink-faint ring-1 ring-line">
+                        {person.imageUrl ? <img src={person.imageUrl} alt={localized.name} className="h-full w-full object-cover" /> : <User className="h-7 w-7" />}
                     </div>
-                    <strong className="text-sm font-semibold text-black">{localized.name}</strong>
-                    <span className="mt-0.5 text-xs text-black">{localized.position}</span>
+                    <strong className="text-sm font-semibold text-ink">{localized.name}</strong>
+                    <span className="mt-0.5 text-xs text-ink-muted">{localized.position}</span>
                 </div>
             )
-        }) : <p className="col-span-full text-sm text-black">{emptyMsg}</p>}
+        }) : <div className="col-span-full bg-paper"><EmptyState message={emptyMsg} /></div>}
     </div>
+)
+
+const ListArticle = ({ title, body }: { title: string; body: string }) => (
+    <article className="group py-5">
+        <h3 className="mb-1.5 flex items-baseline gap-2 text-sm font-semibold text-ink">
+            <span className="text-brand transition-transform group-hover:translate-x-0.5">—</span>
+            {title}
+        </h3>
+        <p className="pl-4 text-sm leading-relaxed text-ink-muted">{body}</p>
+    </article>
 )
 
 export const MainContent = (props: MainContentProps) => {
@@ -69,174 +91,175 @@ export const MainContent = (props: MainContentProps) => {
     const pubActiveItem = publicationMenuItems.find((item) => item.id === selectedPublicationPage)
     const pubActiveLabel = pubActiveItem ? (language === 'ne' ? pubActiveItem.labelNe : pubActiveItem.labelEn) : ''
 
+    const noItemsMsg = language === 'ne' ? 'हाल कुनै सामग्री उपलब्ध छैन।' : 'No items available yet.'
+    const emptyMemberMsg = language === 'ne' ? 'कुनै सदस्य फेला परेन।' : 'No members found.'
+    const emptyAdvisorMsg = language === 'ne' ? 'कुनै सल्लाहकार फेला परेन।' : 'No advisors found.'
+
     return (
-        <main className="mx-auto max-w-7xl px-6 py-8">
-            <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
+        <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-10">
+            <div className="grid gap-12 lg:grid-cols-[1fr_296px]">
                 {/* Main content */}
                 <div className="min-w-0">
                     {selectedMainPage === 'introduction' && (
                         <div>
                             {selectedIntroPage === 'company-intro' && (
-                                <div className="mb-8 flex min-h-80 items-center justify-center rounded-lg bg-gradient-to-br from-sky-200 via-sky-100 to-white p-10 text-center border border-sky-200">
-                                    <div className="max-w-xl">
-                                        <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-black">{language === 'ne' ? 'थोर्गा काठमाण्डौंमा स्वागत छ' : 'Welcome to Thorga Kathmandu'}</h2>
-                                        <p className="text-lg leading-relaxed text-black">{introText.body || 'A community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}</p>
+                                <div className="bg-grain mb-12 border-b border-line pb-10">
+                                    <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+                                        <div className="max-w-2xl">
+                                            <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+                                                {language === 'ne' ? 'स्थापित समुदाय, काठमाण्डौं' : 'Est. Community, Kathmandu'}
+                                            </span>
+                                            <h2 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
+                                                {language === 'ne' ? 'थोर्गा काठमाण्डौंमा स्वागत छ' : 'Welcome to Thorga Kathmandu'}
+                                            </h2>
+                                        </div>
+                                        <p className="max-w-xs text-sm leading-relaxed text-ink-muted lg:pb-1.5">
+                                            {introText.body || 'A community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
+                                        </p>
                                     </div>
                                 </div>
                             )}
 
-                            <div className="rounded-lg border border-sky-200 bg-white p-6 shadow-sm">
-                                <div className="mb-5 flex items-center gap-3 border-b border-sky-100 pb-4">
-                                    <div className="h-6 w-1 rounded-full bg-sky-400" />
-                                    <h2 className="text-xl font-bold text-black">{introActiveLabel}</h2>
-                                </div>
+                            <SectionHeading label={introActiveLabel} />
 
-                                {selectedIntroPage === 'company-intro' && (
-                                    <>
-                                        <p className="mb-6 text-base leading-relaxed text-black">
-                                            {introText.body || 'Thorga is a community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
-                                        </p>
-                                        <div className="grid gap-4 sm:grid-cols-2">
-                                            <div className="rounded-md border border-sky-200 bg-white p-5 shadow-sm transition-all hover:border-sky-300">
-                                                <h3 className="mb-2 text-sm font-semibold text-black">{language === 'ne' ? 'उद्देश्य' : 'Mission'}</h3>
-                                                <p className="text-sm leading-relaxed text-black">{aimsText.body || 'Promote social development, cultural preservation, and public coordination.'}</p>
-                                            </div>
-                                            <div className="rounded-md border border-sky-200 bg-white p-5 shadow-sm transition-all hover:border-sky-300">
-                                                <h3 className="mb-2 text-sm font-semibold text-black">{language === 'ne' ? 'समुदाय' : 'Community'}</h3>
-                                                <p className="text-sm leading-relaxed text-black">{hometownText.body || 'A shared village and community connection that supports people from Thorga in Kathmandu.'}</p>
-                                            </div>
+                            {selectedIntroPage === 'company-intro' && (
+                                <>
+                                    <p className="mb-8 max-w-2xl text-base leading-relaxed text-ink-muted">
+                                        {introText.body || 'Thorga is a community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
+                                    </p>
+                                    <dl className="grid gap-8 border-t border-line pt-8 sm:grid-cols-2">
+                                        <div>
+                                            <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'उद्देश्य' : 'Mission'}</dt>
+                                            <dd className="text-sm leading-relaxed text-ink-muted">{aimsText.body || 'Promote social development, cultural preservation, and public coordination.'}</dd>
                                         </div>
-                                    </>
-                                )}
+                                        <div>
+                                            <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'समुदाय' : 'Community'}</dt>
+                                            <dd className="text-sm leading-relaxed text-ink-muted">{hometownText.body || 'A shared village and community connection that supports people from Thorga in Kathmandu.'}</dd>
+                                        </div>
+                                    </dl>
+                                </>
+                            )}
 
-                                {selectedIntroPage === 'thorga-intro' && (
-                                    <>
-                                        <p className="mb-4 leading-relaxed text-black">{hometownText.body || 'Thorga is a place-based identity connecting families and traditions through shared belonging.'}</p>
-                                        <p className="leading-relaxed text-black">{rulesText.body || 'The association strengthens ties among members through mutual support and good governance.'}</p>
-                                    </>
-                                )}
+                            {selectedIntroPage === 'thorga-intro' && (
+                                <div className="max-w-2xl space-y-4">
+                                    <p className="leading-relaxed text-ink-muted">{hometownText.body || 'Thorga is a place-based identity connecting families and traditions through shared belonging.'}</p>
+                                    <p className="leading-relaxed text-ink-muted">{rulesText.body || 'The association strengthens ties among members through mutual support and good governance.'}</p>
+                                </div>
+                            )}
 
-                                {selectedIntroPage === 'current-members' && <PersonGrid people={currentMembers} language={language} emptyMsg="No current members found." />}
-                                {selectedIntroPage === 'current-advisors' && <PersonGrid people={currentAdvisors} language={language} emptyMsg="No current advisors found." />}
-                                {selectedIntroPage === 'past-members' && <PersonGrid people={pastMembers} language={language} emptyMsg="No past members found." />}
-                                {selectedIntroPage === 'past-advisors' && <PersonGrid people={pastAdvisors} language={language} emptyMsg="No past advisors found." />}
-                            </div>
+                            {selectedIntroPage === 'current-members' && <PersonGrid people={currentMembers} language={language} emptyMsg={emptyMemberMsg} />}
+                            {selectedIntroPage === 'current-advisors' && <PersonGrid people={currentAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
+                            {selectedIntroPage === 'past-members' && <PersonGrid people={pastMembers} language={language} emptyMsg={emptyMemberMsg} />}
+                            {selectedIntroPage === 'past-advisors' && <PersonGrid people={pastAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
                         </div>
                     )}
 
                     {selectedMainPage === 'activities' && (
-                        <div className="rounded-lg border border-sky-200 bg-white p-6 shadow-sm">
-                            <div className="mb-5 flex items-center gap-3 border-b border-sky-100 pb-4">
-                                <div className="h-6 w-1 rounded-full bg-sky-400" />
-                                <h2 className="text-xl font-bold text-black">{language === 'ne' ? 'हालका गतिविधिहरू' : 'Recent Activities'}</h2>
-                            </div>
-                            <div className="space-y-3">
-                                {(content.worksDone ?? []).map((item) => {
-                                    const localized = getLocalizedContent(language, item)
-                                    return (
-                                        <article key={item.id} className="rounded-md border border-sky-200 bg-white p-4 shadow-sm transition-all hover:border-sky-300">
-                                            <h3 className="mb-1 text-sm font-semibold text-black">{localized.title || item.title}</h3>
-                                            <p className="text-sm leading-relaxed text-black">{localized.body || item.body}</p>
-                                        </article>
-                                    )
-                                })}
-                            </div>
+                        <div>
+                            <SectionHeading label={language === 'ne' ? 'हालका गतिविधिहरू' : 'Recent Activities'} />
+                            {(content.worksDone ?? []).length > 0 ? (
+                                <div className="divide-y divide-line border-t border-line">
+                                    {(content.worksDone ?? []).map((item) => {
+                                        const localized = getLocalizedContent(language, item)
+                                        return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
+                                    })}
+                                </div>
+                            ) : <EmptyState message={noItemsMsg} />}
                         </div>
                     )}
 
                     {selectedMainPage === 'publications' && (
-                        <div className="rounded-lg border border-sky-200 bg-white p-6 shadow-sm">
-                            <div className="mb-5 flex items-center gap-3 border-b border-sky-100 pb-4">
-                                <div className="h-6 w-1 rounded-full bg-sky-400" />
-                                <h2 className="text-xl font-bold text-black">{pubActiveLabel}</h2>
-                            </div>
-                            <div className="space-y-3">
-                                {(content.publication ?? []).map((item) => {
-                                    const localized = getLocalizedContent(language, item)
-                                    return (
-                                        <article key={item.id} className="rounded-md border border-sky-200 bg-white p-4 shadow-sm transition-all hover:border-sky-300">
-                                            <h3 className="mb-1 text-sm font-semibold text-black">{localized.title || item.title}</h3>
-                                            <p className="text-sm leading-relaxed text-black">{localized.body || item.body}</p>
-                                        </article>
-                                    )
-                                })}
-                            </div>
+                        <div>
+                            <SectionHeading label={pubActiveLabel} />
+                            {(content.publication ?? []).length > 0 ? (
+                                <div className="divide-y divide-line border-t border-line">
+                                    {(content.publication ?? []).map((item) => {
+                                        const localized = getLocalizedContent(language, item)
+                                        return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
+                                    })}
+                                </div>
+                            ) : <EmptyState message={noItemsMsg} />}
                         </div>
                     )}
 
                     {selectedMainPage === 'notices' && (
-                        <div className="rounded-lg border border-sky-200 bg-white p-6 shadow-sm">
-                            <div className="mb-5 flex items-center gap-3 border-b border-sky-100 pb-4">
-                                <div className="h-6 w-1 rounded-full bg-sky-400" />
-                                <h2 className="text-xl font-bold text-black">{language === 'ne' ? 'सूचना' : 'Notices'}</h2>
-                            </div>
-                            <div className="space-y-3">
-                                {(content.others ?? []).map((item) => {
-                                    const localized = getLocalizedContent(language, item)
-                                    return (
-                                        <article key={item.id} className="rounded-md border border-sky-200 bg-white p-4 shadow-sm transition-all hover:border-sky-300">
-                                            <h3 className="mb-1 text-sm font-semibold text-black">{localized.title || item.title}</h3>
-                                            <p className="text-sm leading-relaxed text-black">{localized.body || item.body}</p>
-                                        </article>
-                                    )
-                                })}
-                            </div>
+                        <div>
+                            <SectionHeading label={language === 'ne' ? 'सूचना' : 'Notices'} />
+                            {(content.others ?? []).length > 0 ? (
+                                <div className="divide-y divide-line border-t border-line">
+                                    {(content.others ?? []).map((item) => {
+                                        const localized = getLocalizedContent(language, item)
+                                        return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
+                                    })}
+                                </div>
+                            ) : <EmptyState message={noItemsMsg} />}
                         </div>
                     )}
 
                     {selectedMainPage === 'gallery' && (
-                        <div className="rounded-lg border border-sky-200 bg-white p-6 shadow-sm">
-                            <div className="mb-5 flex items-center gap-3 border-b border-sky-100 pb-4">
-                                <div className="h-6 w-1 rounded-full bg-sky-400" />
-                                <h2 className="text-xl font-bold text-black">{language === 'ne' ? 'फोटो ग्यालेरी' : 'Gallery'}</h2>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                                {images.map((image) => {
-                                    const localized = getLocalizedImage(language, image)
-                                    return (
-                                        <figure key={image.id} className="group overflow-hidden rounded-md border border-sky-200">
-                                            <img src={image.imageUrl} alt={localized.title} className="h-44 w-full object-cover transition-transform group-hover:scale-105" />
-                                            <figcaption className="bg-sky-50 px-3 py-2 text-xs font-medium text-black">{localized.title}</figcaption>
-                                        </figure>
-                                    )
-                                })}
-                            </div>
+                        <div>
+                            <SectionHeading label={language === 'ne' ? 'फोटो ग्यालेरी' : 'Gallery'} />
+                            {images.length > 0 ? (
+                                <div className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3">
+                                    {images.map((image) => {
+                                        const localized = getLocalizedImage(language, image)
+                                        return (
+                                            <figure key={image.id} className="group bg-paper">
+                                                <div className="overflow-hidden">
+                                                    <img
+                                                        src={image.imageUrl}
+                                                        alt={localized.title}
+                                                        className="h-44 w-full object-cover grayscale transition-all duration-500 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
+                                                    />
+                                                </div>
+                                                <figcaption className="border-t border-line px-3 py-2 text-xs font-medium text-ink-muted">{localized.title}</figcaption>
+                                            </figure>
+                                        )
+                                    })}
+                                </div>
+                            ) : (
+                                <div className="flex flex-col items-center gap-2 border border-dashed border-line py-14 text-ink-faint">
+                                    <ImageOff className="h-6 w-6" />
+                                    <p className="text-sm">{noItemsMsg}</p>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
 
                 {/* Sidebar */}
-                <aside className="flex flex-col gap-5">
+                <aside className="flex flex-col gap-10">
                     {/* Notice card */}
-                    <div className="overflow-hidden rounded-lg border border-sky-200 bg-white shadow-sm">
-                        <div className="bg-sky-200 px-5 py-3">
-                            <h3 className="text-sm font-semibold text-black">📢 {language === 'ne' ? 'सूचना' : 'Notice'}</h3>
+                    <div className="border border-ink bg-ink p-5 text-paper shadow-[6px_6px_0_0_var(--color-brand)]">
+                        <div className="mb-3 flex items-center gap-2">
+                            <Megaphone className="h-4 w-4 text-brand" />
+                            <h3 className="text-xs font-semibold uppercase tracking-[0.15em]">{language === 'ne' ? 'सूचना' : 'Notice'}</h3>
                         </div>
-                        <div className="p-5">
-                            <p className="mb-4 text-sm leading-relaxed text-black">
-                                {language === 'ne'
-                                    ? 'वार्षिक साधारण सभा र नयाँ सदस्यता खुल्ला गरिएको छ।'
-                                    : 'Annual General Meeting and new membership are now open.'}
-                            </p>
-                            <button className="w-full rounded-md bg-sky-300 px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-sky-400">
-                                {language === 'ne' ? 'थप पढ्नुहोस्' : 'Learn More'}
-                            </button>
-                        </div>
+                        <p className="mb-4 text-sm leading-relaxed text-paper/80">
+                            {language === 'ne'
+                                ? 'वार्षिक साधारण सभा र नयाँ सदस्यता खुल्ला गरिएको छ।'
+                                : 'Annual General Meeting and new membership are now open.'}
+                        </p>
+                        <button className="flex items-center gap-1.5 text-sm font-semibold text-brand transition-opacity hover:opacity-80">
+                            {language === 'ne' ? 'थप पढ्नुहोस्' : 'Learn More'}
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                        </button>
                     </div>
 
                     {/* Quick links */}
-                    <div className="rounded-lg border border-sky-200 bg-white p-5 shadow-sm">
-                        <h3 className="mb-3 border-b border-sky-100 pb-3 text-sm font-semibold text-black">{language === 'ne' ? 'द्रुत लिङ्क' : 'Quick Links'}</h3>
-                        <ul className="space-y-0">
+                    <div>
+                        <h3 className="mb-3 border-b border-line pb-3 text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'द्रुत लिङ्क' : 'Quick Links'}</h3>
+                        <ul className="divide-y divide-line">
                             {[
                                 language === 'ne' ? 'सदस्यता फारम' : 'Membership Form',
                                 language === 'ne' ? 'संस्थाको विधान' : 'Organization Rules',
                                 language === 'ne' ? 'आर्थिक प्रतिवेदन' : 'Financial Report',
                                 language === 'ne' ? 'हाम्रो बारेमा' : 'About Us',
                             ].map((label) => (
-                                <li key={label} className="border-b border-sky-50 last:border-0">
-                                    <button className="group flex w-full items-center gap-2 py-2.5 text-left text-sm text-black transition-colors hover:bg-sky-50 rounded-md px-2 -mx-2">
-                                        <span className="text-xs text-black transition-transform group-hover:translate-x-0.5">→</span> {label}
+                                <li key={label}>
+                                    <button className="group flex w-full items-center justify-between py-2.5 text-left text-sm text-ink-muted transition-colors hover:text-brand">
+                                        {label}
+                                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" />
                                     </button>
                                 </li>
                             ))}
@@ -244,15 +267,16 @@ export const MainContent = (props: MainContentProps) => {
                     </div>
 
                     {/* Map */}
-                    <div className="overflow-hidden rounded-lg border border-sky-200 bg-white shadow-sm">
-                        <div className="flex items-center gap-2 bg-sky-100 px-5 py-3">
-                            <h3 className="text-sm font-semibold text-black">📍 {language === 'ne' ? 'स्थान' : 'Location'}</h3>
+                    <div>
+                        <div className="mb-3 flex items-center gap-2 border-b border-line pb-3">
+                            <MapPin className="h-4 w-4 text-brand" />
+                            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'स्थान' : 'Location'}</h3>
                         </div>
                         <iframe
                             title="Thorga map"
                             src="https://www.google.com/maps?q=Kathmandu&z=12&output=embed"
                             loading="lazy"
-                            className="h-44 w-full border-0"
+                            className="h-44 w-full border border-line grayscale-[0.3]"
                         />
                     </div>
                 </aside>

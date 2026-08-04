@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { AlertTriangle, Loader2, X } from 'lucide-react'
 import './index.css'
 import type { Language, MainPage, IntroductionPage, PublicationPage, SiteContent, PersonProfile, SiteImage } from './types'
 import { Header } from './components/Header'
@@ -7,8 +8,8 @@ import { MainContent } from './components/MainContent'
 import { Footer } from './components/Footer'
 
 function App() {
-    const [, setSiteLoading] = useState(true)
-    const [, setSiteMessage] = useState('')
+    const [siteLoading, setSiteLoading] = useState(true)
+    const [siteMessage, setSiteMessage] = useState('')
     const [language, setLanguage] = useState<Language>('ne')
     const [content, setContent] = useState<Record<string, SiteContent[]>>({})
     const [people, setPeople] = useState<Record<string, PersonProfile[]>>({})
@@ -100,7 +101,7 @@ function App() {
     }, [])
 
     return (
-        <div className={`min-h-screen bg-sky-50 text-black font-sans antialiased ${language === 'ne' ? 'font-nepali' : ''}`}>
+        <div className={`flex min-h-screen flex-col bg-paper text-ink font-sans antialiased ${language === 'ne' ? 'font-nepali' : ''}`}>
             <Header language={language} setLanguage={setLanguage} />
 
             <Navigation
@@ -113,15 +114,38 @@ function App() {
                 openPublicationPage={openPublicationPage}
             />
 
-            <MainContent
-                language={language}
-                selectedMainPage={selectedMainPage}
-                selectedIntroPage={selectedIntroPage}
-                selectedPublicationPage={selectedPublicationPage}
-                content={content}
-                people={people}
-                images={images}
-            />
+            {siteMessage && (
+                <div className="border-b border-line bg-[var(--color-warning-muted)] px-6 py-3">
+                    <div className="mx-auto flex max-w-7xl items-start gap-3 text-sm text-[var(--color-on-warning)]">
+                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                        <p className="flex-1 leading-relaxed">{siteMessage}</p>
+                        <button
+                            onClick={() => setSiteMessage('')}
+                            aria-label={language === 'ne' ? 'बन्द गर्नुहोस्' : 'Dismiss'}
+                            className="shrink-0 p-1 text-[var(--color-on-warning)] opacity-70 transition-opacity hover:opacity-100"
+                        >
+                            <X className="h-4 w-4" />
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {siteLoading ? (
+                <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 py-24 text-ink-faint">
+                    <Loader2 className="h-8 w-8 animate-spin text-brand" />
+                    <p className="text-sm">{language === 'ne' ? 'सामग्री लोड हुँदैछ...' : 'Loading content...'}</p>
+                </div>
+            ) : (
+                <MainContent
+                    language={language}
+                    selectedMainPage={selectedMainPage}
+                    selectedIntroPage={selectedIntroPage}
+                    selectedPublicationPage={selectedPublicationPage}
+                    content={content}
+                    people={people}
+                    images={images}
+                />
+            )}
 
             <Footer language={language} />
         </div>

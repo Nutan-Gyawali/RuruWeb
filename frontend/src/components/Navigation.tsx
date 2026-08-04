@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import type { Language, MainPage, IntroductionPage, PublicationPage } from '../types'
 import { getLocalizedMenuLabel } from '../utils'
 
@@ -31,68 +33,186 @@ type NavigationProps = {
 export const Navigation = (props: NavigationProps) => {
     const { language, selectedMainPage, selectedIntroPage, selectedPublicationPage, openSimplePage, openIntroductionPage, openPublicationPage } = props
 
-    const navBtnBase = 'relative px-4 py-3 text-sm font-medium transition-colors'
-    const navBtnActive = 'text-black after:absolute after:inset-x-4 after:bottom-0 after:h-0.5 after:rounded-full after:bg-black'
-    const navBtnInactive = 'text-black hover:text-black hover:bg-sky-100 rounded-md'
+    const [mobileOpen, setMobileOpen] = useState(false)
+    const [mobileSection, setMobileSection] = useState<'introduction' | 'publications' | null>(null)
+
+    const navBtnBase = 'relative flex items-center gap-1 px-4 py-4 text-xs font-semibold uppercase tracking-[0.1em] transition-colors border-b-2 -mb-px'
+    const navBtnActive = 'text-ink border-brand'
+    const navBtnInactive = 'text-ink-muted border-transparent hover:text-ink hover:border-line-strong'
+
+    const closeMobile = () => {
+        setMobileOpen(false)
+        setMobileSection(null)
+    }
 
     return (
-        <nav className="sticky top-0 z-40 border-b border-sky-200 bg-white/95 backdrop-blur-lg">
-            <div className="mx-auto flex max-w-7xl flex-wrap items-center px-6">
-                {/* Introduction dropdown */}
-                <div className="group relative">
-                    <button className={`${navBtnBase} ${selectedMainPage === 'introduction' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('introduction')}>
-                        {language === 'ne' ? 'परिचय' : 'Introduction'} ▾
-                    </button>
-                    <div className="pointer-events-none absolute left-0 top-full z-50 min-w-52 rounded-md border border-sky-200 bg-white p-1.5 opacity-0 shadow-lg transition-all group-hover:pointer-events-auto group-hover:opacity-100">
-                        {introMenuItems.map((item) => (
-                            <button
-                                key={item.id}
-                                onClick={() => openIntroductionPage(item.id)}
-                                className={`block w-full rounded-md px-3 py-2 text-left text-sm transition-colors text-black ${
-                                    selectedMainPage === 'introduction' && selectedIntroPage === item.id
-                                        ? 'bg-sky-200 font-medium'
-                                        : 'hover:bg-sky-100'
-                                }`}
-                            >
-                                {getLocalizedMenuLabel(language, item.labelEn, item.labelNe)}
-                            </button>
-                        ))}
+        <nav className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-lg">
+            <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+                {/* Desktop nav */}
+                <div className="hidden md:flex md:flex-wrap md:items-center">
+                    {/* Introduction dropdown */}
+                    <div className="group relative">
+                        <button className={`${navBtnBase} ${selectedMainPage === 'introduction' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('introduction')}>
+                            {language === 'ne' ? 'परिचय' : 'Introduction'}
+                            <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                        </button>
+                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100">
+                            {introMenuItems.map((item) => (
+                                <button
+                                    key={item.id}
+                                    onClick={() => openIntroductionPage(item.id)}
+                                    className={`block w-full px-3 py-2 text-left text-sm transition-colors ${
+                                        selectedMainPage === 'introduction' && selectedIntroPage === item.id
+                                            ? 'bg-brand-muted font-medium text-brand'
+                                            : 'text-ink-muted hover:bg-paper-muted hover:text-ink'
+                                    }`}
+                                >
+                                    {getLocalizedMenuLabel(language, item.labelEn, item.labelNe)}
+                                </button>
+                            ))}
+                        </div>
                     </div>
+
+                    <button className={`${navBtnBase} ${selectedMainPage === 'activities' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('activities')}>
+                        {language === 'ne' ? 'गतिविधिहरू' : 'Activities'}
+                    </button>
+
+                    {/* Publications dropdown */}
+                    <div className="group relative">
+                        <button className={`${navBtnBase} ${selectedMainPage === 'publications' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('publications')}>
+                            {language === 'ne' ? 'प्रकाशन' : 'Publications'}
+                            <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                        </button>
+                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100">
+                            {publicationMenuItems.map((item) => (
+                                <button
+                                    key={item.id}
+                                    onClick={() => openPublicationPage(item.id)}
+                                    className={`block w-full px-3 py-2 text-left text-sm transition-colors ${
+                                        selectedMainPage === 'publications' && selectedPublicationPage === item.id
+                                            ? 'bg-brand-muted font-medium text-brand'
+                                            : 'text-ink-muted hover:bg-paper-muted hover:text-ink'
+                                    }`}
+                                >
+                                    {getLocalizedMenuLabel(language, item.labelEn, item.labelNe)}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <button className={`${navBtnBase} ${selectedMainPage === 'notices' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('notices')}>
+                        {language === 'ne' ? 'सूचना' : 'Notices'}
+                    </button>
+                    <button className={`${navBtnBase} ${selectedMainPage === 'gallery' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('gallery')}>
+                        {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
+                    </button>
                 </div>
 
-                <button className={`${navBtnBase} ${selectedMainPage === 'activities' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('activities')}>
-                    {language === 'ne' ? 'गतिविधिहरू' : 'Activities'}
-                </button>
-
-                {/* Publications dropdown */}
-                <div className="group relative">
-                    <button className={`${navBtnBase} ${selectedMainPage === 'publications' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('publications')}>
-                        {language === 'ne' ? 'प्रकाशन' : 'Publications'} ▾
-                    </button>
-                    <div className="pointer-events-none absolute left-0 top-full z-50 min-w-52 rounded-md border border-sky-200 bg-white p-1.5 opacity-0 shadow-lg transition-all group-hover:pointer-events-auto group-hover:opacity-100">
-                        {publicationMenuItems.map((item) => (
-                            <button
-                                key={item.id}
-                                onClick={() => openPublicationPage(item.id)}
-                                className={`block w-full rounded-md px-3 py-2 text-left text-sm transition-colors text-black ${
-                                    selectedMainPage === 'publications' && selectedPublicationPage === item.id
-                                        ? 'bg-sky-200 font-medium'
-                                        : 'hover:bg-sky-100'
-                                }`}
-                            >
-                                {getLocalizedMenuLabel(language, item.labelEn, item.labelNe)}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                <button className={`${navBtnBase} ${selectedMainPage === 'notices' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('notices')}>
-                    {language === 'ne' ? 'सूचना' : 'Notices'}
-                </button>
-                <button className={`${navBtnBase} ${selectedMainPage === 'gallery' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('gallery')}>
-                    {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
+                {/* Mobile toggle */}
+                <button
+                    onClick={() => setMobileOpen((open) => !open)}
+                    aria-label={language === 'ne' ? 'मेनु खोल्नुहोस्' : 'Toggle menu'}
+                    aria-expanded={mobileOpen}
+                    className="flex items-center gap-2 py-4 text-xs font-semibold uppercase tracking-[0.1em] text-ink md:hidden"
+                >
+                    {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                    {language === 'ne' ? 'मेनु' : 'Menu'}
                 </button>
             </div>
+
+            {/* Mobile panel */}
+            {mobileOpen && (
+                <div className="border-t border-line bg-paper px-4 py-3 md:hidden">
+                    <div className="flex flex-col gap-1">
+                        {/* Introduction accordion */}
+                        <button
+                            onClick={() => setMobileSection((s) => (s === 'introduction' ? null : 'introduction'))}
+                            className={`flex items-center justify-between px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'introduction' ? 'text-brand' : 'text-ink'}`}
+                        >
+                            {language === 'ne' ? 'परिचय' : 'Introduction'}
+                            <ChevronDown className={`h-4 w-4 transition-transform ${mobileSection === 'introduction' ? 'rotate-180' : ''}`} />
+                        </button>
+                        {mobileSection === 'introduction' && (
+                            <div className="mb-1 flex flex-col gap-0.5 pl-3">
+                                {introMenuItems.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => {
+                                            openIntroductionPage(item.id)
+                                            closeMobile()
+                                        }}
+                                        className={`px-3 py-2 text-left text-sm ${
+                                            selectedMainPage === 'introduction' && selectedIntroPage === item.id
+                                                ? 'bg-brand-muted font-medium text-brand'
+                                                : 'text-ink-muted hover:bg-paper-muted hover:text-ink'
+                                        }`}
+                                    >
+                                        {getLocalizedMenuLabel(language, item.labelEn, item.labelNe)}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+
+                        <button
+                            onClick={() => {
+                                openSimplePage('activities')
+                                closeMobile()
+                            }}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'activities' ? 'text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                        >
+                            {language === 'ne' ? 'गतिविधिहरू' : 'Activities'}
+                        </button>
+
+                        {/* Publications accordion */}
+                        <button
+                            onClick={() => setMobileSection((s) => (s === 'publications' ? null : 'publications'))}
+                            className={`flex items-center justify-between px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'publications' ? 'text-brand' : 'text-ink'}`}
+                        >
+                            {language === 'ne' ? 'प्रकाशन' : 'Publications'}
+                            <ChevronDown className={`h-4 w-4 transition-transform ${mobileSection === 'publications' ? 'rotate-180' : ''}`} />
+                        </button>
+                        {mobileSection === 'publications' && (
+                            <div className="mb-1 flex flex-col gap-0.5 pl-3">
+                                {publicationMenuItems.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => {
+                                            openPublicationPage(item.id)
+                                            closeMobile()
+                                        }}
+                                        className={`px-3 py-2 text-left text-sm ${
+                                            selectedMainPage === 'publications' && selectedPublicationPage === item.id
+                                                ? 'bg-brand-muted font-medium text-brand'
+                                                : 'text-ink-muted hover:bg-paper-muted hover:text-ink'
+                                        }`}
+                                    >
+                                        {getLocalizedMenuLabel(language, item.labelEn, item.labelNe)}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+
+                        <button
+                            onClick={() => {
+                                openSimplePage('notices')
+                                closeMobile()
+                            }}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'notices' ? 'text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                        >
+                            {language === 'ne' ? 'सूचना' : 'Notices'}
+                        </button>
+                        <button
+                            onClick={() => {
+                                openSimplePage('gallery')
+                                closeMobile()
+                            }}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'gallery' ? 'text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                        >
+                            {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
+                        </button>
+                    </div>
+                </div>
+            )}
         </nav>
     )
 }

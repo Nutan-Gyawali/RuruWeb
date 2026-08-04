@@ -1,13 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap');
-@import "@astryxdesign/core/reset.css";
-@import "@astryxdesign/core/astryx.css";
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap');
+@import "@astryxdesign/core/reset.css" layer(base);
+@import "@astryxdesign/core/astryx.css" layer(components);
+@import "./themes/matcha/matcha.css" layer(components);
 @import "tailwindcss";
 
-@theme {
-    --font-sans: 'Figtree', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/*
+ * Aliases onto the "matcha" theme's tokens (src/themes/matcha, retinted to
+ * emerald — see matchaTheme.ts), scoped via [data-astryx-theme="matcha"] on
+ * <html> (see index.html). `inline` keeps these as live var() references
+ * rather than baking in a value, so light/dark (light-dark()) still
+ * resolves correctly at the point of use.
+ */
+@theme inline {
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-display: 'DM Serif Display', Georgia, 'Times New Roman', Times, serif;
     --font-nepali: 'Noto Sans Devanagari', sans-serif;
+
+    --color-ink: var(--color-text-primary);
+    --color-ink-muted: var(--color-text-secondary);
+    --color-ink-faint: var(--color-text-disabled);
+    --color-paper: var(--color-background-surface);
+    --color-paper-muted: var(--color-background-muted);
+    --color-card: var(--color-background-card);
+    --color-line: var(--color-border);
+    --color-line-strong: var(--color-border-emphasized);
+    --color-brand: var(--color-accent);
+    --color-brand-muted: var(--color-accent-muted);
+    --color-on-brand: var(--color-on-accent);
+    --color-warn: var(--color-warning);
+    --color-warn-muted: var(--color-warning-muted);
+    --color-danger: var(--color-error);
 }
 
 .font-nepali {
     font-family: var(--font-nepali);
+}
+
+::selection {
+    background: var(--color-brand-muted);
+    color: var(--color-ink);
+}
+
+.bg-grain {
+    background-image: radial-gradient(color-mix(in oklab, var(--color-ink) 14%, transparent) 1px, transparent 1px);
+    background-size: 22px 22px;
 }

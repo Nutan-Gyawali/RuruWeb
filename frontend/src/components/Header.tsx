@@ -1,3 +1,4 @@
+import { Mail, Phone, Globe } from 'lucide-react'
 import type { Language } from '../types'
 
 export const Header = ({ language, setLanguage }: { language: Language; setLanguage: (l: Language) => void }) => {
@@ -8,26 +9,38 @@ export const Header = ({ language, setLanguage }: { language: Language; setLangu
     return (
         <header>
             {/* Top bar */}
-            <div className="flex items-center justify-between bg-sky-200 px-6 py-2 text-xs text-black">
-                <span>✉ info@thorga.com · ☎ +977-1-4000000</span>
-                <button
-                    onClick={() => setLanguage(language === 'en' ? 'ne' : 'en')}
-                    className="rounded-md border border-sky-400 bg-sky-300 px-3 py-1 text-xs font-medium text-black transition-colors hover:bg-sky-400 hover:text-black"
-                >
-                    {language === 'en' ? 'नेपाली' : 'English'}
-                </button>
+            <div className="bg-ink text-paper">
+                <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs">
+                    <div className="flex items-center gap-5 opacity-80">
+                        <a href="mailto:info@thorga.com" className="flex items-center gap-1.5 transition-opacity hover:opacity-100">
+                            <Mail className="h-3.5 w-3.5" /> info@thorga.com
+                        </a>
+                        <a href="tel:+97714000000" className="hidden items-center gap-1.5 transition-opacity hover:opacity-100 sm:flex">
+                            <Phone className="h-3.5 w-3.5" /> +977-1-4000000
+                        </a>
+                    </div>
+                    <button
+                        onClick={() => setLanguage(language === 'en' ? 'ne' : 'en')}
+                        className="flex items-center gap-1.5 border border-white/20 px-3 py-1 text-xs font-medium transition-colors hover:border-brand hover:text-brand"
+                    >
+                        <Globe className="h-3.5 w-3.5" />
+                        {language === 'en' ? 'नेपाली' : 'English'}
+                    </button>
+                </div>
             </div>
 
             {/* Main header */}
-            <div className="flex items-center gap-4 border-b border-sky-200 bg-white px-6 py-5">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-sky-300 text-xl font-extrabold text-black shadow-sm">
-                    T
-                </div>
-                <div>
-                    <h1 className="text-2xl font-extrabold tracking-tight text-black">{brandTitle}</h1>
-                    <div className="mt-0.5 flex items-center gap-3">
-                        <span className="text-xs font-semibold uppercase tracking-widest text-black">{brandTag}</span>
-                        <span className="text-xs text-black">{brandAltTitle}</span>
+            <div className="border-b border-line bg-paper">
+                <div className="mx-auto flex max-w-7xl items-center gap-4 px-6 py-6">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center bg-brand text-2xl font-semibold text-on-brand">
+                        थो
+                    </div>
+                    <div className="min-w-0">
+                        <h1 className="truncate font-display text-[1.7rem] font-semibold tracking-tight text-ink">{brandTitle}</h1>
+                        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">{brandTag}</span>
+                            <span className="text-xs text-ink-faint">{brandAltTitle}</span>
+                        </div>
                     </div>
                 </div>
             </div>
