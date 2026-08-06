@@ -1,6 +1,6 @@
-import { ArrowUpRight, ImageOff, Megaphone, MapPin, User } from 'lucide-react'
+import { ArrowUpRight, FileText, ImageOff, Info, Megaphone, MapPin, ScrollText, User, Wallet } from 'lucide-react'
 import type { Language, MainPage, IntroductionPage, PublicationPage, SiteContent, PersonProfile, SiteImage } from '../types'
-import { getLocalizedContent, getLocalizedPerson, getLocalizedImage } from '../utils'
+import { getLocalizedContent, getLocalizedPerson, getLocalizedImage, getInitials } from '../utils'
 import { HeroSection } from './HeroSection'
 import { StatsStrip } from './StatsStrip'
 import { ValuePropsSection } from './ValuePropsSection'
@@ -37,6 +37,13 @@ const publicationMenuItems = [
     { id: 'others', labelEn: 'Others', labelNe: 'अन्य' },
 ]
 
+const quickLinks = [
+    { icon: FileText, labelEn: 'Membership Form', labelNe: 'सदस्यता फारम' },
+    { icon: ScrollText, labelEn: 'Organization Rules', labelNe: 'संस्थाको विधान' },
+    { icon: Wallet, labelEn: 'Financial Report', labelNe: 'आर्थिक प्रतिवेदन' },
+    { icon: Info, labelEn: 'About Us', labelNe: 'हाम्रो बारेमा' },
+]
+
 const SectionHeading = ({ label }: { label: string }) => (
     <div className="mb-6 border-b border-line pb-4">
         <div className="mb-2 h-[3px] w-9 bg-brand" />
@@ -49,19 +56,26 @@ const EmptyState = ({ message }: { message: string }) => (
 )
 
 const PersonGrid = ({ people: personList, language, emptyMsg }: { people: PersonProfile[]; language: Language; emptyMsg: string }) => (
-    <div className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {personList.length > 0 ? personList.map((person) => {
             const localized = getLocalizedPerson(language, person)
+            const initials = getInitials(localized.name)
             return (
-                <div key={person.id} className="group flex flex-col items-center bg-paper p-6 text-center transition-colors hover:bg-paper-muted">
-                    <div className="mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-paper-muted text-ink-faint ring-1 ring-line">
-                        {person.imageUrl ? <img src={person.imageUrl} alt={localized.name} className="h-full w-full object-cover" /> : <User className="h-7 w-7" />}
+                <div key={person.id} className="tactile group flex flex-col items-center border border-line bg-paper p-6 text-center">
+                    <div className="mb-3 flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-muted text-sm font-semibold text-brand ring-4 ring-paper transition-shadow group-hover:ring-brand-muted">
+                        {person.imageUrl ? (
+                            <img src={person.imageUrl} alt={localized.name} className="h-full w-full object-cover" />
+                        ) : initials ? (
+                            <span>{initials}</span>
+                        ) : (
+                            <User className="h-6 w-6" />
+                        )}
                     </div>
                     <strong className="text-sm font-semibold text-ink">{localized.name}</strong>
-                    <span className="mt-0.5 text-xs text-ink-muted">{localized.position}</span>
+                    <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand">{localized.position}</span>
                 </div>
             )
-        }) : <div className="col-span-full bg-paper"><EmptyState message={emptyMsg} /></div>}
+        }) : <div className="col-span-full"><EmptyState message={emptyMsg} /></div>}
     </div>
 )
 
@@ -263,19 +277,20 @@ export const MainContent = (props: MainContentProps) => {
                         <div>
                             <h3 className="mb-3 border-b border-line pb-3 text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'द्रुत लिङ्क' : 'Quick Links'}</h3>
                             <ul className="divide-y divide-line">
-                                {[
-                                    language === 'ne' ? 'सदस्यता फारम' : 'Membership Form',
-                                    language === 'ne' ? 'संस्थाको विधान' : 'Organization Rules',
-                                    language === 'ne' ? 'आर्थिक प्रतिवेदन' : 'Financial Report',
-                                    language === 'ne' ? 'हाम्रो बारेमा' : 'About Us',
-                                ].map((label) => (
-                                    <li key={label}>
-                                        <button className="group flex w-full items-center justify-between py-2.5 text-left text-sm text-ink-muted transition-colors hover:text-brand">
-                                            {label}
-                                            <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" />
-                                        </button>
-                                    </li>
-                                ))}
+                                {quickLinks.map((link) => {
+                                    const Icon = link.icon
+                                    return (
+                                        <li key={link.labelEn}>
+                                            <button className="group -mx-2 flex w-full items-center gap-3 px-2 py-2.5 text-left text-sm text-ink-muted transition-colors hover:bg-paper-muted hover:text-ink">
+                                                <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-brand-muted text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand">
+                                                    <Icon className="h-4 w-4" />
+                                                </span>
+                                                <span className="flex-1">{language === 'ne' ? link.labelNe : link.labelEn}</span>
+                                                <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-ink-faint transition-all group-hover:translate-x-0.5 group-hover:text-brand" />
+                                            </button>
+                                        </li>
+                                    )
+                                })}
                             </ul>
                         </div>
 

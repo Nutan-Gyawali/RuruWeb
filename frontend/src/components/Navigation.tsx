@@ -37,8 +37,8 @@ export const Navigation = (props: NavigationProps) => {
     const [mobileSection, setMobileSection] = useState<'introduction' | 'publications' | null>(null)
 
     const navBtnBase = 'relative flex items-center gap-1 px-4 py-4 text-xs font-semibold uppercase tracking-[0.1em] transition-colors border-b-2 -mb-px'
-    const navBtnActive = 'text-ink border-brand'
-    const navBtnInactive = 'text-ink-muted border-transparent hover:text-ink hover:border-line-strong'
+    const navBtnActive = 'text-ink border-brand bg-brand-muted'
+    const navBtnInactive = 'text-ink-muted border-transparent hover:text-ink hover:border-line-strong hover:bg-paper-muted'
 
     const closeMobile = () => {
         setMobileOpen(false)
@@ -46,7 +46,7 @@ export const Navigation = (props: NavigationProps) => {
     }
 
     return (
-        <nav className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-lg">
+        <nav className="sticky top-0 z-40 border-b border-line bg-paper/95 shadow-sm backdrop-blur-lg">
             <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
                 {/* Desktop nav */}
                 <div className="hidden md:flex md:flex-wrap md:items-center">
@@ -58,9 +58,9 @@ export const Navigation = (props: NavigationProps) => {
                             aria-haspopup="true"
                         >
                             {language === 'ne' ? 'परिचय' : 'Introduction'}
-                            <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                            <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
                         </button>
-                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 -translate-y-1 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
                             {introMenuItems.map((item) => (
                                 <button
                                     key={item.id}
@@ -89,9 +89,9 @@ export const Navigation = (props: NavigationProps) => {
                             aria-haspopup="true"
                         >
                             {language === 'ne' ? 'प्रकाशन' : 'Publications'}
-                            <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                            <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
                         </button>
-                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                        <div className="pointer-events-none absolute left-0 top-full z-50 min-w-56 -translate-y-1 border border-line bg-paper p-1.5 opacity-0 shadow-[6px_6px_0_0_var(--color-ink)] transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
                             {publicationMenuItems.map((item) => (
                                 <button
                                     key={item.id}
@@ -130,18 +130,18 @@ export const Navigation = (props: NavigationProps) => {
 
             {/* Mobile panel */}
             {mobileOpen && (
-                <div className="border-t border-line bg-paper px-4 py-3 md:hidden">
+                <div className="animate-nav-in border-t border-line bg-paper px-4 py-3 md:hidden">
                     <div className="flex flex-col gap-1">
                         {/* Introduction accordion */}
                         <button
                             onClick={() => setMobileSection((s) => (s === 'introduction' ? null : 'introduction'))}
-                            className={`flex items-center justify-between px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'introduction' ? 'text-brand' : 'text-ink'}`}
+                            className={`flex items-center justify-between px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'introduction' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
                         >
                             {language === 'ne' ? 'परिचय' : 'Introduction'}
                             <ChevronDown className={`h-4 w-4 transition-transform ${mobileSection === 'introduction' ? 'rotate-180' : ''}`} />
                         </button>
                         {mobileSection === 'introduction' && (
-                            <div className="mb-1 flex flex-col gap-0.5 pl-3">
+                            <div className="animate-nav-in mb-1 flex flex-col gap-0.5 pl-3">
                                 {introMenuItems.map((item) => (
                                     <button
                                         key={item.id}
@@ -149,7 +149,7 @@ export const Navigation = (props: NavigationProps) => {
                                             openIntroductionPage(item.id)
                                             closeMobile()
                                         }}
-                                        className={`px-3 py-2 text-left text-sm ${
+                                        className={`px-3 py-2 text-left text-sm transition-colors ${
                                             selectedMainPage === 'introduction' && selectedIntroPage === item.id
                                                 ? 'bg-brand-muted font-medium text-brand'
                                                 : 'text-ink-muted hover:bg-paper-muted hover:text-ink'
@@ -166,7 +166,7 @@ export const Navigation = (props: NavigationProps) => {
                                 openSimplePage('activities')
                                 closeMobile()
                             }}
-                            className={`px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'activities' ? 'text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'activities' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
                         >
                             {language === 'ne' ? 'गतिविधिहरू' : 'Activities'}
                         </button>
@@ -174,13 +174,13 @@ export const Navigation = (props: NavigationProps) => {
                         {/* Publications accordion */}
                         <button
                             onClick={() => setMobileSection((s) => (s === 'publications' ? null : 'publications'))}
-                            className={`flex items-center justify-between px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'publications' ? 'text-brand' : 'text-ink'}`}
+                            className={`flex items-center justify-between px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'publications' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
                         >
                             {language === 'ne' ? 'प्रकाशन' : 'Publications'}
                             <ChevronDown className={`h-4 w-4 transition-transform ${mobileSection === 'publications' ? 'rotate-180' : ''}`} />
                         </button>
                         {mobileSection === 'publications' && (
-                            <div className="mb-1 flex flex-col gap-0.5 pl-3">
+                            <div className="animate-nav-in mb-1 flex flex-col gap-0.5 pl-3">
                                 {publicationMenuItems.map((item) => (
                                     <button
                                         key={item.id}
@@ -188,7 +188,7 @@ export const Navigation = (props: NavigationProps) => {
                                             openPublicationPage(item.id)
                                             closeMobile()
                                         }}
-                                        className={`px-3 py-2 text-left text-sm ${
+                                        className={`px-3 py-2 text-left text-sm transition-colors ${
                                             selectedMainPage === 'publications' && selectedPublicationPage === item.id
                                                 ? 'bg-brand-muted font-medium text-brand'
                                                 : 'text-ink-muted hover:bg-paper-muted hover:text-ink'
@@ -205,7 +205,7 @@ export const Navigation = (props: NavigationProps) => {
                                 openSimplePage('notices')
                                 closeMobile()
                             }}
-                            className={`px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'notices' ? 'text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'notices' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
                         >
                             {language === 'ne' ? 'सूचना' : 'Notices'}
                         </button>
@@ -214,7 +214,7 @@ export const Navigation = (props: NavigationProps) => {
                                 openSimplePage('gallery')
                                 closeMobile()
                             }}
-                            className={`px-3 py-2.5 text-left text-sm font-semibold ${selectedMainPage === 'gallery' ? 'text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'gallery' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
                         >
                             {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
                         </button>

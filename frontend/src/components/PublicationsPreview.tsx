@@ -34,7 +34,7 @@ export const PublicationsPreview = ({ language, publications, onViewAll }: Publi
                     {recentPubs.map((pub) => {
                         const localized = getLocalizedContent(language, pub)
                         return (
-                            <article key={pub.id} className="flex flex-col border border-line bg-paper p-6 transition-shadow hover:shadow-[4px_4px_0_0_var(--color-brand)]">
+                            <article key={pub.id} className="tactile flex flex-col border border-line bg-paper p-6">
                                 <div className="mb-4 inline-flex h-10 w-10 items-center justify-center bg-brand-muted text-brand">
                                     <BookOpen className="h-5 w-5" />
                                 </div>

@@ -50,8 +50,8 @@ export const ValuePropsSection = ({ language, embedded = false }: ValuePropsSect
                 {VALUE_PROPS.map((prop, idx) => {
                     const Icon = prop.icon
                     return (
-                        <div key={idx} className="group flex flex-col gap-3 bg-paper p-6 transition-colors hover:bg-paper-muted">
-                            <div className="flex h-11 w-11 items-center justify-center bg-brand-muted text-brand">
+                        <div key={idx} className="tactile group relative flex flex-col gap-3 bg-paper p-6 hover:bg-paper-muted">
+                            <div className="flex h-11 w-11 items-center justify-center bg-brand-muted text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand">
                                 <Icon className="h-5 w-5" />
                             </div>
                             <h3 className="text-sm font-semibold text-ink">

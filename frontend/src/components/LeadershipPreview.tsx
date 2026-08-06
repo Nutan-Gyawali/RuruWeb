@@ -1,6 +1,6 @@
 import { ArrowUpRight, User } from 'lucide-react'
 import type { Language, PersonProfile } from '../types'
-import { getLocalizedPerson } from '../utils'
+import { getLocalizedPerson, getInitials } from '../utils'
 
 type LeadershipPreviewProps = {
     language: Language
@@ -29,20 +29,23 @@ export const LeadershipPreview = ({ language, members, onViewAll }: LeadershipPr
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {topMembers.map((member) => {
                     const localized = getLocalizedPerson(language, member)
+                    const initials = getInitials(localized.name)
                     return (
-                        <article key={member.id} className="group relative bg-paper p-6 transition-colors hover:bg-paper-muted">
-                            <div className="mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-line text-ink-muted ring-2 ring-paper">
+                        <article key={member.id} className="tactile group flex flex-col items-center border border-line bg-paper p-6 text-center">
+                            <div className="mb-4 flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-muted text-lg font-semibold text-brand ring-4 ring-paper transition-shadow group-hover:ring-brand-muted">
                                 {member.imageUrl ? (
                                     <img src={member.imageUrl} alt={localized.name} className="h-full w-full object-cover" />
+                                ) : initials ? (
+                                    <span>{initials}</span>
                                 ) : (
-                                    <User className="h-6 w-6" />
+                                    <User className="h-7 w-7" />
                                 )}
                             </div>
-                            <h3 className="font-semibold text-ink">{localized.name}</h3>
-                            <p className="mt-1 text-sm text-ink-muted">{localized.position}</p>
+                            <h3 className="font-display text-base font-semibold text-ink">{localized.name}</h3>
+                            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.1em] text-brand">{localized.position}</p>
                         </article>
                     )
                 })}

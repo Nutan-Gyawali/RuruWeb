@@ -18,7 +18,7 @@ export const CtaBanner = ({ language }: { language: Language }) => {
                         ? 'हाम्रो संस्कृति, स्थानीय कार्यक्रमहरू र सामुदायिक सहयोगमा सहभागी हुन हामीसँग जोडिनुहोस्।'
                         : 'Connect with our community, participate in local events, and support one another.'}
                 </p>
-                <button className="mx-auto mt-7 flex items-center gap-2 border border-paper/40 bg-paper/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-paper backdrop-blur-sm transition-colors hover:border-brand-on-ink hover:text-brand-on-ink">
+                <button className="mx-auto mt-7 flex items-center gap-2 border border-paper/40 bg-paper/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-paper backdrop-blur-sm transition-all hover:border-brand-on-ink hover:text-brand-on-ink active:scale-[0.97]">
                     {isNe ? 'सदस्य बन्नुहोस्' : 'Become a Member'}
                     <ArrowUpRight className="h-3.5 w-3.5" />
                 </button>
