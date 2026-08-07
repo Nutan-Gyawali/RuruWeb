@@ -11,14 +11,11 @@ type ActivityPreviewProps = {
 }
 
 const PreviewHeading = ({ label, onViewAll, viewAllLabel }: { label: string; onViewAll: () => void; viewAllLabel: string }) => (
-    <div className="mb-6 flex items-end justify-between border-b border-line pb-4">
-        <div>
-            <div className="mb-2 h-[3px] w-9 bg-brand" />
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">{label}</h2>
-        </div>
+    <div className="mb-6 flex items-end justify-between">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">{label}</h2>
         <button
             onClick={onViewAll}
-            className="group flex shrink-0 items-center gap-1 pb-1 text-xs font-semibold uppercase tracking-[0.1em] text-brand transition-colors hover:text-ink"
+            className="group flex shrink-0 items-center gap-1 rounded-full py-1.5 pl-3.5 pr-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-brand transition-colors hover:bg-brand-muted"
         >
             {viewAllLabel}
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -44,13 +41,13 @@ export const ActivityPreview = ({ language, activities, images, onViewActivities
                             onViewAll={onViewActivities}
                             viewAllLabel={language === 'ne' ? 'सबै हेर्नुहोस्' : 'View All'}
                         />
-                        <div className="divide-y divide-line border-t border-line">
+                        <div className="flex flex-col gap-2">
                             {recentActivities.map((item) => {
                                 const localized = getLocalizedContent(language, item)
                                 return (
-                                    <article key={item.id} className="group py-5">
-                                        <h3 className="mb-1.5 flex items-baseline gap-2 text-sm font-semibold text-ink">
-                                            <span className="text-brand transition-transform group-hover:translate-x-0.5">—</span>
+                                    <article key={item.id} className="group rounded-[var(--radius-container)] bg-card p-5 transition-colors">
+                                        <h3 className="mb-1.5 flex items-center gap-2.5 text-sm font-semibold text-ink">
+                                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
                                             {localized.title || item.title}
                                         </h3>
                                         <p className="line-clamp-2 pl-4 text-sm leading-relaxed text-ink-muted">{localized.body || item.body}</p>
@@ -68,15 +65,15 @@ export const ActivityPreview = ({ language, activities, images, onViewActivities
                             onViewAll={onViewGallery}
                             viewAllLabel={language === 'ne' ? 'सबै हेर्नुहोस्' : 'View All'}
                         />
-                        <div className="grid grid-cols-2 gap-px border border-line bg-line">
+                        <div className="grid grid-cols-2 gap-3">
                             {recentImages.map((image) => {
                                 const localized = getLocalizedImage(language, image)
                                 return (
-                                    <figure key={image.id} className="group overflow-hidden bg-paper">
+                                    <figure key={image.id} className="tactile overflow-hidden rounded-[var(--radius-container)]">
                                         <img
                                             src={image.imageUrl}
                                             alt={localized.title}
-                                            className="h-28 w-full object-cover grayscale transition-all duration-500 ease-out group-hover:scale-[1.04] group-hover:grayscale-0 sm:h-32"
+                                            className="h-28 w-full object-cover saturate-[0.85] transition-transform duration-500 ease-out group-hover:scale-[1.04] sm:h-32"
                                         />
                                     </figure>
                                 )

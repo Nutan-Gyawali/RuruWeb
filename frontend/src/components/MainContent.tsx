@@ -1,4 +1,4 @@
-import { ArrowUpRight, FileText, ImageOff, Info, Megaphone, MapPin, ScrollText, User, Wallet } from 'lucide-react'
+import { ArrowUpRight, FileText, ImageOff, Info, Megaphone, ScrollText, User, Wallet } from 'lucide-react'
 import type { Language, MainPage, IntroductionPage, PublicationPage, SiteContent, PersonProfile, SiteImage } from '../types'
 import { getLocalizedContent, getLocalizedPerson, getLocalizedImage, getInitials } from '../utils'
 import { HeroSection } from './HeroSection'
@@ -45,14 +45,13 @@ const quickLinks = [
 ]
 
 const SectionHeading = ({ label }: { label: string }) => (
-    <div className="mb-6 border-b border-line pb-4">
-        <div className="mb-2 h-[3px] w-9 bg-brand" />
+    <div className="mb-6">
         <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">{label}</h2>
     </div>
 )
 
 const EmptyState = ({ message }: { message: string }) => (
-    <p className="border border-dashed border-line py-10 text-center text-sm text-ink-faint">{message}</p>
+    <p className="rounded-[var(--radius-container)] border border-dashed border-line-strong py-10 text-center text-sm text-ink-faint">{message}</p>
 )
 
 const PersonGrid = ({ people: personList, language, emptyMsg }: { people: PersonProfile[]; language: Language; emptyMsg: string }) => (
@@ -61,7 +60,7 @@ const PersonGrid = ({ people: personList, language, emptyMsg }: { people: Person
             const localized = getLocalizedPerson(language, person)
             const initials = getInitials(localized.name)
             return (
-                <div key={person.id} className="tactile group flex flex-col items-center border border-line bg-paper p-6 text-center">
+                <div key={person.id} className="tactile group flex flex-col items-center rounded-[var(--radius-page)] bg-card p-6 text-center">
                     <div className="mb-3 flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-muted text-sm font-semibold text-brand ring-4 ring-paper transition-shadow group-hover:ring-brand-muted">
                         {person.imageUrl ? (
                             <img src={person.imageUrl} alt={localized.name} className="h-full w-full object-cover" />
@@ -80,9 +79,9 @@ const PersonGrid = ({ people: personList, language, emptyMsg }: { people: Person
 )
 
 const ListArticle = ({ title, body }: { title: string; body: string }) => (
-    <article className="group py-5">
-        <h3 className="mb-1.5 flex items-baseline gap-2 text-sm font-semibold text-ink">
-            <span className="text-brand transition-transform group-hover:translate-x-0.5">—</span>
+    <article className="group rounded-[var(--radius-container)] bg-card p-5">
+        <h3 className="mb-1.5 flex items-center gap-2.5 text-sm font-semibold text-ink">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
             {title}
         </h3>
         <p className="pl-4 text-sm leading-relaxed text-ink-muted">{body}</p>
@@ -151,14 +150,14 @@ export const MainContent = (props: MainContentProps) => {
                                         <p className="mb-8 max-w-2xl text-base leading-relaxed text-ink-muted">
                                             {introText.body || 'Thorga is a community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
                                         </p>
-                                        <dl className="grid gap-8 border-t border-line pt-8 sm:grid-cols-2">
-                                            <div>
-                                                <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'उद्देश्य' : 'Mission'}</dt>
-                                                <dd className="text-sm leading-relaxed text-ink-muted">{aimsText.body || 'Promote social development, cultural preservation, and public coordination.'}</dd>
+                                        <dl className="grid gap-4 sm:grid-cols-2">
+                                            <div className="rounded-[var(--radius-page)] bg-brand-fill p-6 text-on-brand-fill">
+                                                <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] opacity-80">{language === 'ne' ? 'उद्देश्य' : 'Mission'}</dt>
+                                                <dd className="text-sm leading-relaxed opacity-95">{aimsText.body || 'Promote social development, cultural preservation, and public coordination.'}</dd>
                                             </div>
-                                            <div>
-                                                <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand">{language === 'ne' ? 'समुदाय' : 'Community'}</dt>
-                                                <dd className="text-sm leading-relaxed text-ink-muted">{hometownText.body || 'A shared village and community connection that supports people from Thorga in Kathmandu.'}</dd>
+                                            <div className="rounded-[var(--radius-page)] bg-sage p-6 text-on-sage">
+                                                <dt className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] opacity-80">{language === 'ne' ? 'समुदाय' : 'Community'}</dt>
+                                                <dd className="text-sm leading-relaxed opacity-95">{hometownText.body || 'A shared village and community connection that supports people from Thorga in Kathmandu.'}</dd>
                                             </div>
                                         </dl>
                                         <div className="mt-10">
@@ -185,7 +184,7 @@ export const MainContent = (props: MainContentProps) => {
                             <div>
                                 <SectionHeading label={language === 'ne' ? 'हालका गतिविधिहरू' : 'Recent Activities'} />
                                 {(content.worksDone ?? []).length > 0 ? (
-                                    <div className="divide-y divide-line border-t border-line">
+                                    <div className="flex flex-col gap-2">
                                         {(content.worksDone ?? []).map((item) => {
                                             const localized = getLocalizedContent(language, item)
                                             return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
@@ -199,7 +198,7 @@ export const MainContent = (props: MainContentProps) => {
                             <div>
                                 <SectionHeading label={pubActiveLabel} />
                                 {(content.publication ?? []).length > 0 ? (
-                                    <div className="divide-y divide-line border-t border-line">
+                                    <div className="flex flex-col gap-2">
                                         {(content.publication ?? []).map((item) => {
                                             const localized = getLocalizedContent(language, item)
                                             return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
@@ -213,7 +212,7 @@ export const MainContent = (props: MainContentProps) => {
                             <div>
                                 <SectionHeading label={language === 'ne' ? 'सूचना' : 'Notices'} />
                                 {(content.others ?? []).length > 0 ? (
-                                    <div className="divide-y divide-line border-t border-line">
+                                    <div className="flex flex-col gap-2">
                                         {(content.others ?? []).map((item) => {
                                             const localized = getLocalizedContent(language, item)
                                             return <ListArticle key={item.id} title={localized.title || item.title} body={localized.body || item.body} />
@@ -227,25 +226,25 @@ export const MainContent = (props: MainContentProps) => {
                             <div>
                                 <SectionHeading label={language === 'ne' ? 'फोटो ग्यालेरी' : 'Gallery'} />
                                 {images.length > 0 ? (
-                                    <div className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3">
+                                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                                         {images.map((image) => {
                                             const localized = getLocalizedImage(language, image)
                                             return (
-                                                <figure key={image.id} className="group bg-paper">
+                                                <figure key={image.id} className="tactile group overflow-hidden rounded-[var(--radius-container)] bg-card">
                                                     <div className="overflow-hidden">
                                                         <img
                                                             src={image.imageUrl}
                                                             alt={localized.title}
-                                                            className="h-44 w-full object-cover grayscale transition-all duration-500 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
+                                                            className="h-44 w-full object-cover saturate-[0.85] transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                                                         />
                                                     </div>
-                                                    <figcaption className="border-t border-line px-3 py-2 text-xs font-medium text-ink-muted">{localized.title}</figcaption>
+                                                    <figcaption className="px-3.5 py-2.5 text-xs font-medium text-ink-muted">{localized.title}</figcaption>
                                                 </figure>
                                             )
                                         })}
                                     </div>
                                 ) : (
-                                    <div className="flex flex-col items-center gap-2 border border-dashed border-line py-14 text-ink-faint">
+                                    <div className="flex flex-col items-center gap-2 rounded-[var(--radius-container)] border border-dashed border-line-strong py-14 text-ink-faint">
                                         <ImageOff className="h-6 w-6" />
                                         <p className="text-sm">{noItemsMsg}</p>
                                     </div>
@@ -254,35 +253,37 @@ export const MainContent = (props: MainContentProps) => {
                         )}
                     </div>
 
-                    {/* Sidebar */}
-                    <aside className="flex flex-col gap-10">
-                        {/* Notice card */}
-                        <div className="border border-ink bg-ink p-5 text-paper shadow-[6px_6px_0_0_var(--color-brand)]">
+                    {/* Sidebar — one cohesive panel so it reads as a single design
+                        object instead of loose blocks trailing off next to the
+                        (often taller) main column. */}
+                    <aside className="flex flex-col gap-7 self-start rounded-[var(--radius-page)] bg-card p-6 lg:sticky lg:top-24">
+                        {/* Notice */}
+                        <div className="rounded-[var(--radius-container)] bg-brand-fill p-5 text-on-brand-fill">
                             <div className="mb-3 flex items-center gap-2">
-                                <Megaphone className="h-4 w-4 text-brand-on-ink" />
-                                <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-paper">{language === 'ne' ? 'सूचना' : 'Notice'}</h3>
+                                <Megaphone className="h-4 w-4" />
+                                <h3 className="text-xs font-semibold uppercase tracking-[0.15em]">{language === 'ne' ? 'सूचना' : 'Notice'}</h3>
                             </div>
-                            <p className="mb-4 text-sm leading-relaxed text-paper/80">
+                            <p className="mb-4 text-sm leading-relaxed opacity-95">
                                 {language === 'ne'
                                     ? 'वार्षिक साधारण सभा र नयाँ सदस्यता खुल्ला गरिएको छ।'
                                     : 'Annual General Meeting and new membership are now open.'}
                             </p>
-                            <button className="flex items-center gap-1.5 text-sm font-semibold text-brand-on-ink transition-opacity hover:opacity-80">
+                            <button className="flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-80">
                                 {language === 'ne' ? 'थप पढ्नुहोस्' : 'Learn More'}
                                 <ArrowUpRight className="h-3.5 w-3.5" />
                             </button>
                         </div>
 
                         {/* Quick links */}
-                        <div>
-                            <h3 className="mb-3 border-b border-line pb-3 text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'द्रुत लिङ्क' : 'Quick Links'}</h3>
-                            <ul className="divide-y divide-line">
+                        <div className="border-t border-line pt-6">
+                            <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'द्रुत लिङ्क' : 'Quick Links'}</h3>
+                            <ul className="flex flex-col gap-1">
                                 {quickLinks.map((link) => {
                                     const Icon = link.icon
                                     return (
                                         <li key={link.labelEn}>
-                                            <button className="group -mx-2 flex w-full items-center gap-3 px-2 py-2.5 text-left text-sm text-ink-muted transition-colors hover:bg-paper-muted hover:text-ink">
-                                                <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-brand-muted text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand">
+                                            <button className="group flex w-full items-center gap-3 rounded-full py-2 pl-2 pr-3 text-left text-sm text-ink-muted transition-colors hover:bg-paper-muted hover:text-ink">
+                                                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand">
                                                     <Icon className="h-4 w-4" />
                                                 </span>
                                                 <span className="flex-1">{language === 'ne' ? link.labelNe : link.labelEn}</span>
@@ -292,20 +293,6 @@ export const MainContent = (props: MainContentProps) => {
                                     )
                                 })}
                             </ul>
-                        </div>
-
-                        {/* Map */}
-                        <div>
-                            <div className="mb-3 flex items-center gap-2 border-b border-line pb-3">
-                                <MapPin className="h-4 w-4 text-brand" />
-                                <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{language === 'ne' ? 'स्थान' : 'Location'}</h3>
-                            </div>
-                            <iframe
-                                title="Thorga map"
-                                src="https://www.google.com/maps?q=Thorga,Gulmi,Nepal&z=13&output=embed"
-                                loading="lazy"
-                                className="h-44 w-full border border-line grayscale-[0.3]"
-                            />
                         </div>
                     </aside>
                 </div>

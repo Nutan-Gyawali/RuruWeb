@@ -37,24 +37,32 @@ type ValuePropsSectionProps = {
     embedded?: boolean
 }
 
+// Mostly green, with terracotta making one appearance — keeps the grid
+// reading as "green-first" rather than a strict 50/50 split.
+const ICON_TINTS = [
+    'bg-brand-tint text-brand group-hover:bg-brand group-hover:text-on-brand',
+    'bg-brand-tint text-brand group-hover:bg-brand group-hover:text-on-brand',
+    'bg-sage-tint text-sage-ink group-hover:bg-sage group-hover:text-on-sage',
+    'bg-brand-tint text-brand group-hover:bg-brand group-hover:text-on-brand',
+] as const
+
 export const ValuePropsSection = ({ language, embedded = false }: ValuePropsSectionProps) => {
     const content = (
         <>
-            <div className="mb-6 border-b border-line pb-4">
-                <div className="mb-2 h-[3px] w-9 bg-brand" />
-                <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
+            <div className="mb-6">
+                <span className="inline-block rounded-full bg-brand-tint px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">
                     {language === 'ne' ? 'हाम्रा कार्यहरू' : 'What We Do'}
-                </h2>
+                </span>
             </div>
-            <div className="grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {VALUE_PROPS.map((prop, idx) => {
                     const Icon = prop.icon
                     return (
-                        <div key={idx} className="tactile group relative flex flex-col gap-3 bg-paper p-6 hover:bg-paper-muted">
-                            <div className="flex h-11 w-11 items-center justify-center bg-brand-muted text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand">
+                        <div key={idx} className="tactile group flex flex-col gap-3 rounded-[var(--radius-container)] bg-card p-6">
+                            <div className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors ${ICON_TINTS[idx % ICON_TINTS.length]}`}>
                                 <Icon className="h-5 w-5" />
                             </div>
-                            <h3 className="text-sm font-semibold text-ink">
+                            <h3 className="font-display text-base font-semibold text-ink">
                                 {language === 'ne' ? prop.titleNe : prop.titleEn}
                             </h3>
                             <p className="text-sm leading-relaxed text-ink-muted">

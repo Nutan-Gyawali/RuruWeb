@@ -13,16 +13,13 @@ export const LeadershipPreview = ({ language, members, onViewAll }: LeadershipPr
 
     return (
         <section className="mx-auto w-full max-w-7xl px-6 py-14">
-            <div className="mb-8 flex items-end justify-between border-b border-line pb-4">
-                <div>
-                    <div className="mb-2 h-[3px] w-9 bg-brand" />
-                    <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
-                        {language === 'ne' ? 'हाम्रो नेतृत्व' : 'Our Leadership'}
-                    </h2>
-                </div>
+            <div className="mb-8 flex items-end justify-between">
+                <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
+                    {language === 'ne' ? 'हाम्रो नेतृत्व' : 'Our Leadership'}
+                </h2>
                 <button
                     onClick={onViewAll}
-                    className="group flex shrink-0 items-center gap-1 pb-1 text-xs font-semibold uppercase tracking-[0.1em] text-brand transition-colors hover:text-ink"
+                    className="group flex shrink-0 items-center gap-1 rounded-full py-1.5 pl-3.5 pr-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-brand transition-colors hover:bg-brand-muted"
                 >
                     {language === 'ne' ? 'सबै हेर्नुहोस्' : 'View All'}
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -34,7 +31,7 @@ export const LeadershipPreview = ({ language, members, onViewAll }: LeadershipPr
                     const localized = getLocalizedPerson(language, member)
                     const initials = getInitials(localized.name)
                     return (
-                        <article key={member.id} className="tactile group flex flex-col items-center border border-line bg-paper p-6 text-center">
+                        <article key={member.id} className="tactile group flex flex-col items-center rounded-[var(--radius-page)] bg-card p-6 text-center">
                             <div className="mb-4 flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-muted text-lg font-semibold text-brand ring-4 ring-paper transition-shadow group-hover:ring-brand-muted">
                                 {member.imageUrl ? (
                                     <img src={member.imageUrl} alt={localized.name} className="h-full w-full object-cover" />

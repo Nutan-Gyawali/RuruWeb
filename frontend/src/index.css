@@ -1,20 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mukta:wght@400;500;600;700;800&display=swap');
 @import "@astryxdesign/core/reset.css" layer(base);
 @import "@astryxdesign/core/astryx.css" layer(components);
-@import "./themes/matcha/matcha.css" layer(components);
+@import "./themes/garden/garden.css" layer(components);
 @import "tailwindcss";
 
 /*
- * Aliases onto the "matcha" theme's tokens (src/themes/matcha, retinted to
- * emerald — see matchaTheme.ts), scoped via [data-astryx-theme="matcha"] on
- * <html> (see index.html). `inline` keeps these as live var() references
- * rather than baking in a value, so light/dark (light-dark()) still
- * resolves correctly at the point of use.
+ * Aliases onto the "garden" theme's tokens (src/themes/garden — Cream
+ * Garden: cream ground, monochrome green identity, no orange — see
+ * gardenTheme.ts), scoped via [data-astryx-theme="garden"] on <html> (see
+ * index.html). `inline` keeps these as live var() references rather than
+ * baking in a value, so light/dark (light-dark()) still resolves correctly
+ * at the point of use.
+ *
+ * Baloo 2 (headings) and Mukta (body) both carry real Devanagari coverage,
+ * so both languages render on-theme without a separate Nepali fallback
+ * family — --font-nepali is kept only so existing `.font-nepali` usages
+ * don't need to change.
  */
 @theme inline {
-    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-display: 'DM Serif Display', Georgia, 'Times New Roman', Times, serif;
-    --font-nepali: 'Noto Sans Devanagari', sans-serif;
+    --font-sans: 'Mukta', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-display: 'Baloo 2', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-nepali: 'Mukta', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
     --color-ink: var(--color-text-primary);
     --color-ink-muted: var(--color-text-secondary);
@@ -24,12 +30,34 @@
     --color-card: var(--color-background-card);
     --color-line: var(--color-border);
     --color-line-strong: var(--color-border-emphasized);
+    /* --color-brand — the moderate, readable-as-text green. Use for text,
+       links, icon glyphs, borders. For big filled surfaces (buttons,
+       panels), use --color-brand-fill / --color-on-brand-fill instead —
+       see the gardenTheme.ts header comment for why these are split. */
     --color-brand: var(--color-accent);
     --color-brand-muted: var(--color-accent-muted);
     --color-on-brand: var(--color-on-accent);
+    --color-brand-fill: var(--color-accent-fill);
+    --color-on-brand-fill: var(--color-on-accent-fill);
     --color-warn: var(--color-warning);
     --color-warn-muted: var(--color-warning-muted);
     --color-danger: var(--color-error);
+
+    /* Second voice — deep forest green (named "sage" from the very first
+       draft, before the primary/secondary swap and the orange-removal
+       pass — now literally accurate again, since the hue landed back on
+       green). A genuine second accent (tags, the Community panel, icon
+       variety), not a status color. Dark enough to carry light text
+       directly, so it doesn't need its own -fill split. */
+    --color-sage: var(--color-accent-secondary);
+    --color-sage-muted: var(--color-accent-secondary-muted);
+    --color-on-sage: var(--color-on-accent-secondary);
+    --color-sage-ink: var(--color-text-accent-secondary);
+    --color-sage-tint: var(--color-background-accent-secondary);
+
+    /* Solid pastel green — parity with --color-sage-tint above, for the
+       main (green) accent. */
+    --color-brand-tint: var(--color-background-accent);
 }
 
 .font-nepali {
@@ -69,15 +97,15 @@ button:not(:disabled),
     }
 }
 
-/* Shared tactile hover treatment for preview/grid cards — lift + the
-   brand-offset "hard shadow" already used ad hoc on the CTA banner and
-   publication cards, now applied consistently everywhere a card sits. */
+/* Shared tactile hover treatment for preview/grid cards — a soft lift into
+   a diffuse ink-tinted shadow (var(--shadow-high) from the theme), matching
+   Cream Garden's soft-card language rather than a hard offset edge. */
 .tactile {
     transition: transform 200ms ease-out, box-shadow 200ms ease-out, background-color 200ms ease-out;
 }
 .tactile:hover {
-    transform: translateY(-3px);
-    box-shadow: 4px 4px 0 0 var(--color-brand);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-high);
 }
 
 @keyframes hero-rise {
@@ -108,26 +136,42 @@ button:not(:disabled),
     animation: nav-rise 200ms ease-out both;
 }
 
-.bg-grain {
-    background-image: radial-gradient(color-mix(in oklab, var(--color-ink) 14%, transparent) 1px, transparent 1px);
-    background-size: 22px 22px;
-}
-
 /*
- * text-brand at full saturation reads at ~2.6:1 against bg-ink (dark
- * surfaces like the header bar, footer, sidebar notice card) — well under
- * WCAG AA. This is the theme's own dark-mode accent value (matchaTheme.ts),
- * reused here for any brand-colored text/icon placed on a dark surface.
+ * text-brand at full saturation reads at ~2.9:1 against bg-ink (dark
+ * surfaces like the footer) — well under WCAG AA. This is the theme's own
+ * dark-mode accent value (gardenTheme.ts), reused here for any
+ * brand-colored text/icon placed on a dark surface.
  */
 .text-brand-on-ink {
-    color: #34d399;
+    color: #9ed46c;
 }
 .border-brand-on-ink {
-    border-color: #34d399;
+    border-color: #9ed46c;
 }
 .hover\:text-brand-on-ink:hover {
-    color: #34d399;
+    color: #9ed46c;
 }
 .hover\:border-brand-on-ink:hover {
-    border-color: #34d399;
+    border-color: #9ed46c;
+}
+
+/* Second-voice (forest green) counterpart of the above, on dark ink. */
+.text-sage-on-ink {
+    color: #8fc25a;
+}
+
+/* Soft decorative blobs — over-rounded color fields drifting slowly behind
+   hero/CTA content, the signature Cream Garden decoration. Sized and
+   positioned per use via inline style/utility classes; this only supplies
+   the shape and motion. */
+@keyframes blob-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-4%, 3%) scale(1.06); }
+}
+.blob {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(0.5px);
+    animation: blob-drift 18s ease-in-out infinite;
+    pointer-events: none;
 }
