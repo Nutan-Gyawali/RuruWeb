@@ -61,18 +61,27 @@ const PersonGrid = ({ people: personList, language, emptyMsg }: { people: Person
             const localized = getLocalizedPerson(language, person)
             const initials = getInitials(localized.name)
             return (
-                <div key={person.id} className="tactile group flex flex-col items-center border border-line bg-paper p-6 text-center">
-                    <div className="mb-3 flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-muted text-sm font-semibold text-brand ring-4 ring-paper transition-shadow group-hover:ring-brand-muted">
+                <div key={person.id} className="tactile group flex flex-col items-center border border-line bg-paper p-5 text-center">
+                    <div className="mb-4 aspect-square w-full overflow-hidden border border-line bg-brand-muted text-brand">
                         {person.imageUrl ? (
-                            <img src={person.imageUrl} alt={localized.name} className="h-full w-full object-cover" />
+                            <img src={person.imageUrl} alt={localized.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                         ) : initials ? (
-                            <span>{initials}</span>
+                            <div className="flex h-full w-full items-center justify-center">
+                                <span className="text-4xl font-semibold opacity-50">{initials}</span>
+                            </div>
                         ) : (
-                            <User className="h-6 w-6" />
+                            <div className="flex h-full w-full items-center justify-center">
+                                <User className="h-12 w-12 opacity-50" />
+                            </div>
                         )}
                     </div>
-                    <strong className="text-sm font-semibold text-ink">{localized.name}</strong>
-                    <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand">{localized.position}</span>
+                    
+                    <strong className="text-base font-semibold text-ink transition-colors group-hover:text-brand">{localized.name}</strong>
+                    {localized.position && (
+                        <span className="mt-1.5 inline-block border border-brand bg-brand-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-brand">
+                            {localized.position}
+                        </span>
+                    )}
                 </div>
             )
         }) : <div className="col-span-full"><EmptyState message={emptyMsg} /></div>}

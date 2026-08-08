@@ -59,7 +59,7 @@ export const MemberManagement = () => {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-ink">Foundation Members</h2>
-                <button onClick={handleOpenForm} className="flex items-center gap-2 rounded bg-brand px-4 py-2 text-sm font-medium text-brand-on hover:bg-brand-muted transition-colors">
+                <button onClick={handleOpenForm} className="flex items-center gap-2 bg-brand px-4 py-2 text-sm font-medium text-on-brand tactile hover:opacity-90 transition-colors">
                     <Plus className="h-4 w-4" /> Add Member
                 </button>
             </div>
@@ -67,7 +67,7 @@ export const MemberManagement = () => {
             {loading ? (
                 <div className="flex justify-center p-8"><Loader2 className="h-8 w-8 animate-spin text-brand" /></div>
             ) : (
-                <div className="overflow-hidden rounded-lg border border-line bg-paper shadow-sm">
+                <div className="overflow-hidden border border-line bg-paper">
                     <table className="w-full text-left text-sm">
                         <thead className="bg-paper-muted border-b border-line">
                             <tr>
@@ -85,7 +85,7 @@ export const MemberManagement = () => {
                                     <td className="px-4 py-3 text-ink-faint">{item.email}</td>
                                     <td className="px-4 py-3 text-ink-faint">{item.phone}</td>
                                     <td className="px-4 py-3 text-ink-faint">
-                                        <span className="inline-block rounded-full bg-[var(--color-brand-muted)] px-2 py-0.5 text-xs text-brand">{item.membershipType}</span>
+                                        <span className="inline-block bg-brand-muted px-2 py-0.5 text-xs text-brand">{item.membershipType}</span>
                                     </td>
                                     <td className="px-4 py-3 text-ink-faint">{new Date(item.createdAt).toLocaleDateString()}</td>
                                 </tr>
@@ -98,7 +98,7 @@ export const MemberManagement = () => {
 
             {isFormOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 p-4">
-                    <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-lg bg-paper shadow-lg">
+                    <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-paper">
                         <div className="flex items-center justify-between border-b border-line p-4 sticky top-0 bg-paper">
                             <h3 className="text-lg font-semibold text-ink">Add Member</h3>
                             <button onClick={handleCloseForm} className="p-1 text-ink-faint hover:text-ink"><X className="h-5 w-5" /></button>
@@ -106,19 +106,19 @@ export const MemberManagement = () => {
                         <form onSubmit={handleSubmit} className="p-4 space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Full Name</label>
-                                <input required type="text" value={formData.fullName || ''} onChange={e => setFormData({ ...formData, fullName: e.target.value })} className="w-full rounded border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                <input required type="text" value={formData.fullName || ''} onChange={e => setFormData({ ...formData, fullName: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Email</label>
-                                <input required type="email" value={formData.email || ''} onChange={e => setFormData({ ...formData, email: e.target.value })} className="w-full rounded border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                <input required type="email" value={formData.email || ''} onChange={e => setFormData({ ...formData, email: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Phone</label>
-                                <input type="text" value={formData.phone || ''} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="w-full rounded border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                <input type="text" value={formData.phone || ''} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Membership Type</label>
-                                <select required value={formData.membershipType || ''} onChange={e => setFormData({ ...formData, membershipType: e.target.value })} className="w-full rounded border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none">
+                                <select required value={formData.membershipType || ''} onChange={e => setFormData({ ...formData, membershipType: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none">
                                     <option value="General">General</option>
                                     <option value="Lifetime">Lifetime</option>
                                     <option value="Honorary">Honorary</option>
@@ -126,8 +126,8 @@ export const MemberManagement = () => {
                             </div>
 
                             <div className="flex justify-end gap-3 pt-4 border-t border-line">
-                                <button type="button" onClick={handleCloseForm} className="px-4 py-2 text-sm font-medium text-ink hover:bg-paper-muted rounded transition-colors">Cancel</button>
-                                <button type="submit" className="px-4 py-2 text-sm font-medium bg-brand text-brand-on hover:bg-brand-muted rounded transition-colors">Save</button>
+                                <button type="button" onClick={handleCloseForm} className="px-4 py-2 text-sm font-medium text-ink hover:bg-paper-muted transition-colors">Cancel</button>
+                                <button type="submit" className="px-4 py-2 text-sm font-medium bg-brand text-on-brand tactile hover:opacity-90 transition-colors">Save</button>
                             </div>
                         </form>
                     </div>

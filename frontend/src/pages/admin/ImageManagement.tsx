@@ -73,7 +73,7 @@ export const ImageManagement = () => {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-ink">Image Management</h2>
-                <button onClick={() => handleOpenForm()} className="flex items-center gap-2 rounded bg-brand px-4 py-2 text-sm font-medium text-brand-on hover:bg-brand-muted transition-colors">
+                <button onClick={() => handleOpenForm()} className="flex items-center gap-2 bg-brand px-4 py-2 text-sm font-medium text-on-brand tactile hover:opacity-90 transition-colors">
                     <Plus className="h-4 w-4" /> Add Image
                 </button>
             </div>
@@ -81,7 +81,7 @@ export const ImageManagement = () => {
             {loading ? (
                 <div className="flex justify-center p-8"><Loader2 className="h-8 w-8 animate-spin text-brand" /></div>
             ) : (
-                <div className="overflow-hidden rounded-lg border border-line bg-paper shadow-sm">
+                <div className="overflow-hidden border border-line bg-paper">
                     <table className="w-full text-left text-sm">
                         <thead className="bg-paper-muted border-b border-line">
                             <tr>
@@ -95,15 +95,15 @@ export const ImageManagement = () => {
                             {items.map(item => (
                                 <tr key={item.id} className="hover:bg-paper-muted/50 transition-colors">
                                     <td className="px-4 py-3">
-                                        <div className="h-12 w-16 overflow-hidden rounded border border-line bg-line">
+                                        <div className="h-12 w-16 overflow-hidden border border-line bg-line">
                                             {item.imageUrl && <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />}
                                         </div>
                                     </td>
                                     <td className="px-4 py-3 text-ink">{item.title}</td>
                                     <td className="px-4 py-3 text-ink-faint">{item.category}</td>
                                     <td className="px-4 py-3 text-right">
-                                        <button onClick={() => handleOpenForm(item)} className="p-1.5 text-brand hover:bg-[var(--color-brand-muted)] rounded mr-2 inline-block"><Edit2 className="h-4 w-4" /></button>
-                                        <button onClick={() => handleDelete(item.id)} className="p-1.5 text-[var(--color-on-warning)] hover:bg-[var(--color-warning-muted)] rounded inline-block"><Trash2 className="h-4 w-4" /></button>
+                                        <button onClick={() => handleOpenForm(item)} className="p-1.5 text-brand hover:bg-brand-muted mr-2 inline-block"><Edit2 className="h-4 w-4" /></button>
+                                        <button onClick={() => handleDelete(item.id)} className="p-1.5 text-danger hover:bg-warn-muted inline-block"><Trash2 className="h-4 w-4" /></button>
                                     </td>
                                 </tr>
                             ))}
@@ -115,7 +115,7 @@ export const ImageManagement = () => {
 
             {isFormOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 p-4">
-                    <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-lg bg-paper shadow-lg">
+                    <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-paper">
                         <div className="flex items-center justify-between border-b border-line p-4 sticky top-0 bg-paper">
                             <h3 className="text-lg font-semibold text-ink">{editingId ? 'Edit Image' : 'Add Image'}</h3>
                             <button onClick={handleCloseForm} className="p-1 text-ink-faint hover:text-ink"><X className="h-5 w-5" /></button>
@@ -123,25 +123,25 @@ export const ImageManagement = () => {
                         <form onSubmit={handleSubmit} className="p-4 space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Category</label>
-                                <input required type="text" value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full rounded border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                <input required type="text" value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Title (EN)</label>
-                                <input required type="text" value={formData.titleEn || formData.title || ''} onChange={e => setFormData({ ...formData, titleEn: e.target.value, title: e.target.value })} className="w-full rounded border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                <input required type="text" value={formData.titleEn || formData.title || ''} onChange={e => setFormData({ ...formData, titleEn: e.target.value, title: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Image URL</label>
-                                <input required type="url" value={formData.imageUrl || ''} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} className="w-full rounded border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" placeholder="https://..." />
+                                <input required type="url" value={formData.imageUrl || ''} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" placeholder="https://..." />
                             </div>
                             {formData.imageUrl && (
-                                <div className="mt-2 h-32 rounded border border-line overflow-hidden bg-line">
+                                <div className="mt-2 h-32 border border-line overflow-hidden bg-line">
                                     <img src={formData.imageUrl} className="w-full h-full object-cover" alt="Preview" />
                                 </div>
                             )}
 
                             <div className="flex justify-end gap-3 pt-4 border-t border-line">
-                                <button type="button" onClick={handleCloseForm} className="px-4 py-2 text-sm font-medium text-ink hover:bg-paper-muted rounded transition-colors">Cancel</button>
-                                <button type="submit" className="px-4 py-2 text-sm font-medium bg-brand text-brand-on hover:bg-brand-muted rounded transition-colors">Save</button>
+                                <button type="button" onClick={handleCloseForm} className="px-4 py-2 text-sm font-medium text-ink hover:bg-paper-muted transition-colors">Cancel</button>
+                                <button type="submit" className="px-4 py-2 text-sm font-medium bg-brand text-on-brand tactile hover:opacity-90 transition-colors">Save</button>
                             </div>
                         </form>
                     </div>

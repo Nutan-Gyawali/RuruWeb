@@ -70,7 +70,7 @@ export const RoleManagement = () => {
                 <h2 className="text-2xl font-bold text-ink mb-6">Roles & Users Management</h2>
                 <div className="grid gap-6 md:grid-cols-2">
                     {/* Roles Panel */}
-                    <div className="rounded-lg border border-line bg-paper shadow-sm">
+                    <div className="rounded-lg border border-line bg-paper">
                         <div className="flex items-center gap-2 border-b border-line p-4 bg-paper-muted">
                             <Shield className="h-5 w-5 text-brand" />
                             <h3 className="font-semibold text-ink">System Roles</h3>
@@ -78,7 +78,7 @@ export const RoleManagement = () => {
                         <div className="p-4">
                             <ul className="space-y-2 mb-4">
                                 {roles.map(r => (
-                                    <li key={r.id} className="flex items-center justify-between rounded bg-paper-muted px-3 py-2 text-sm text-ink font-medium">
+                                    <li key={r.id} className="flex items-center justify-between bg-paper-muted px-3 py-2 text-sm text-ink font-medium">
                                         {r.name}
                                     </li>
                                 ))}
@@ -89,9 +89,9 @@ export const RoleManagement = () => {
                                     placeholder="New role name..."
                                     value={newRoleName}
                                     onChange={e => setNewRoleName(e.target.value)}
-                                    className="flex-1 rounded border border-line px-3 py-2 text-sm bg-transparent text-ink focus:border-brand focus:outline-none"
+                                    className="flex-1 border border-line px-3 py-2 text-sm bg-transparent text-ink focus:border-brand focus:outline-none"
                                 />
-                                <button type="submit" className="rounded bg-brand px-3 py-2 text-sm font-medium text-brand-on hover:bg-brand-muted transition-colors">
+                                <button type="submit" className="rounded bg-brand px-3 py-2 text-sm font-medium text-on-brand tactile hover:opacity-90 transition-colors">
                                     Create
                                 </button>
                             </form>
@@ -99,7 +99,7 @@ export const RoleManagement = () => {
                     </div>
 
                     {/* Users Panel */}
-                    <div className="rounded-lg border border-line bg-paper shadow-sm">
+                    <div className="rounded-lg border border-line bg-paper">
                         <div className="flex items-center gap-2 border-b border-line p-4 bg-paper-muted">
                             <Users className="h-5 w-5 text-brand" />
                             <h3 className="font-semibold text-ink">Assign Role to User</h3>
@@ -112,7 +112,7 @@ export const RoleManagement = () => {
                                         required
                                         value={assignEmail}
                                         onChange={e => setAssignEmail(e.target.value)}
-                                        className="w-full rounded border border-line px-3 py-2 text-sm bg-transparent text-ink focus:border-brand focus:outline-none"
+                                        className="w-full border border-line px-3 py-2 text-sm bg-transparent text-ink focus:border-brand focus:outline-none"
                                     >
                                         <option value="">Select a user...</option>
                                         {users.map(u => (
@@ -126,7 +126,7 @@ export const RoleManagement = () => {
                                         required
                                         value={assignRoleName}
                                         onChange={e => setAssignRoleName(e.target.value)}
-                                        className="w-full rounded border border-line px-3 py-2 text-sm bg-transparent text-ink focus:border-brand focus:outline-none"
+                                        className="w-full border border-line px-3 py-2 text-sm bg-transparent text-ink focus:border-brand focus:outline-none"
                                     >
                                         <option value="">Select a role...</option>
                                         {roles.map(r => (
@@ -134,7 +134,7 @@ export const RoleManagement = () => {
                                         ))}
                                     </select>
                                 </div>
-                                <button type="submit" className="w-full rounded bg-brand px-4 py-2 text-sm font-medium text-brand-on hover:bg-brand-muted transition-colors">
+                                <button type="submit" className="w-full bg-brand px-4 py-2 text-sm font-medium text-on-brand tactile hover:opacity-90 transition-colors">
                                     Assign Role
                                 </button>
                             </form>
@@ -143,7 +143,7 @@ export const RoleManagement = () => {
                 </div>
             </div>
             
-            <div className="rounded-lg border border-line bg-paper shadow-sm">
+            <div className="rounded-lg border border-line bg-paper">
                 <div className="flex items-center gap-2 border-b border-line p-4 bg-paper-muted">
                     <h3 className="font-semibold text-ink">Registered Users</h3>
                 </div>

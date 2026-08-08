@@ -25,9 +25,9 @@ export const AdminSidebar = () => {
                             to={item.path}
                             end={item.exact}
                             className={({ isActive }) =>
-                                `flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                                `flex items-center gap-3-md px-3 py-2 text-sm font-medium transition-colors ${
                                     isActive
-                                        ? 'bg-[var(--color-brand-muted)] text-brand'
+                                        ? 'bg-brand-muted text-brand'
                                         : 'text-ink-faint hover:bg-paper-muted hover:text-ink'
                                 }`
                             }

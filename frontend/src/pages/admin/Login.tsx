@@ -37,14 +37,14 @@ export const Login = () => {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-paper-muted px-4">
-            <div className="w-full max-w-md rounded-lg border border-line bg-paper p-8 shadow-sm">
+            <div className="w-full max-w-md border border-line bg-paper p-8">
                 <div className="mb-8 text-center">
                     <h1 className="text-2xl font-bold text-ink">Admin Login</h1>
                     <p className="mt-2 text-sm text-ink-faint">Sign in to access the admin dashboard</p>
                 </div>
 
                 {error && (
-                    <div className="mb-6 rounded bg-[var(--color-warning-muted)] p-3 text-sm text-[var(--color-on-warning)]">
+                    <div className="mb-6 bg-warn-muted p-3 text-sm text-danger">
                         {error}
                     </div>
                 )}
@@ -57,7 +57,7 @@ export const Login = () => {
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full rounded border border-line bg-transparent px-3 py-2 text-ink focus:border-brand focus:outline-none"
+                            className="w-full border border-line bg-transparent px-3 py-2 text-ink focus:border-brand focus:outline-none"
                             placeholder="admin@example.com"
                         />
                     </div>
@@ -68,14 +68,14 @@ export const Login = () => {
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full rounded border border-line bg-transparent px-3 py-2 text-ink focus:border-brand focus:outline-none"
+                            className="w-full border border-line bg-transparent px-3 py-2 text-ink focus:border-brand focus:outline-none"
                             placeholder="••••••••"
                         />
                     </div>
                     <button
                         type="submit"
                         disabled={loading}
-                        className="mt-2 flex w-full items-center justify-center gap-2 rounded bg-brand px-4 py-2 font-medium text-brand-on hover:bg-brand-muted disabled:opacity-70 transition-colors"
+                        className="mt-2 flex w-full items-center justify-center gap-2 bg-brand px-4 py-2 font-medium text-on-brand tactile hover:opacity-90 disabled:opacity-70 transition-colors"
                     >
                         {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                         {loading ? 'Signing in...' : 'Sign In'}

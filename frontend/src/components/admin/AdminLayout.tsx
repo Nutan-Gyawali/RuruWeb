@@ -16,7 +16,7 @@ export const AdminLayout = () => {
         <div className="flex min-h-screen bg-paper-muted">
             <AdminSidebar />
             <div className="flex flex-1 flex-col overflow-hidden">
-                <header className="flex h-16 items-center justify-between border-b border-line bg-paper px-6 shadow-sm">
+                <header className="flex h-16 items-center justify-between border-b border-line bg-paper px-6">
                     <h1 className="text-lg font-medium text-ink">Admin Dashboard</h1>
                     <button
                         onClick={handleLogout}

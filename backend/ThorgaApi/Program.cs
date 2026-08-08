@@ -77,7 +77,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("frontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -98,7 +98,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("frontend");
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Commented out to allow local network testing over HTTP
 app.UseAuthentication();
 app.UseAuthorization();
 
