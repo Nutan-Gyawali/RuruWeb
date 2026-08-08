@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "D:\\RuruWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,20 +35,12 @@
       "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\migrations\\20260705074502_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|d:\\ruruweb\\backend\\thorgaapi\\controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9405178B-160A-4067-91D7-9834D0859B7C}|backend\\ThorgaApi\\ThorgaApi.csproj|solutionrelative:backend\\thorgaapi\\controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -59,6 +63,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "JwtTokenService.cs",
+              "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Services\\JwtTokenService.cs",
+              "RelativeDocumentMoniker": "backend\\ThorgaApi\\Services\\JwtTokenService.cs",
+              "ToolTip": "D:\\RuruWeb\\backend\\ThorgaApi\\Services\\JwtTokenService.cs",
+              "RelativeToolTip": "backend\\ThorgaApi\\Services\\JwtTokenService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-08T06:13:10.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "20260705074502_InitialCreate.cs",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Migrations\\20260705074502_InitialCreate.cs",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\Migrations\\20260705074502_InitialCreate.cs",
@@ -71,20 +88,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Program.cs",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\Program.cs",
               "ToolTip": "D:\\RuruWeb\\backend\\ThorgaApi\\Program.cs",
               "RelativeToolTip": "backend\\ThorgaApi\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFoAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAowHIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-05T07:12:40.813Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "RolesController.cs",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Controllers\\RolesController.cs",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\Controllers\\RolesController.cs",
@@ -97,45 +114,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\Properties\\launchSettings.json",
               "ToolTip": "D:\\RuruWeb\\backend\\ThorgaApi\\Properties\\launchSettings.json",
               "RelativeToolTip": "backend\\ThorgaApi\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-06-28T12:16:30.759Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\Controllers\\AuthController.cs",
               "ToolTip": "D:\\RuruWeb\\backend\\ThorgaApi\\Controllers\\AuthController.cs",
               "RelativeToolTip": "backend\\ThorgaApi\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAgwFUAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAIwGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-28T11:58:30.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "MembersController.cs",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Controllers\\MembersController.cs",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\Controllers\\MembersController.cs",
               "ToolTip": "D:\\RuruWeb\\backend\\ThorgaApi\\Controllers\\MembersController.cs",
               "RelativeToolTip": "backend\\ThorgaApi\\Controllers\\MembersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwBcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-28T11:57:10.033Z"
+              "WhenOpened": "2026-06-28T11:57:10.033Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\appsettings.json",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\appsettings.json",
@@ -148,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "ApplicationDbContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\Migrations\\ApplicationDbContextModelSnapshot.cs",
@@ -161,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\RuruWeb\\backend\\ThorgaApi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "backend\\ThorgaApi\\appsettings.Development.json",

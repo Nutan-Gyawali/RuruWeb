@@ -6,10 +6,13 @@ import { getLocalizedMenuLabel } from '../utils'
 const introMenuItems: { id: IntroductionPage; labelEn: string; labelNe: string }[] = [
     { id: 'company-intro', labelEn: 'Company Intro', labelNe: 'संस्था परिचय' },
     { id: 'thorga-intro', labelEn: "Thorga's Introduction", labelNe: 'थोर्गाको परिचय' },
-    { id: 'current-members', labelEn: 'Current Members', labelNe: 'वर्तमान सदस्य' },
-    { id: 'current-advisors', labelEn: 'Current Advisors', labelNe: 'वर्तमान सल्लाहकार' },
-    { id: 'past-members', labelEn: 'Past Members', labelNe: 'पूर्व सदस्य' },
-    { id: 'past-advisors', labelEn: 'Past Advisors', labelNe: 'पूर्व सल्लाहकार' },
+    { id: 'current-members', labelEn: 'Current Committee Members', labelNe: 'वर्तमान समितिका पदाधिकारीहरु' },
+    { id: 'current-advisors', labelEn: 'Current Advisors', labelNe: 'वर्तमान सल्लाहाकारहरु' },
+    { id: 'past-members', labelEn: 'Past Committee Members', labelNe: 'हालसम्मका पदाधिकारीहरु' },
+    { id: 'past-advisors', labelEn: 'Past Advisors', labelNe: 'हालसम्मका सल्लाहाकारहरु' },
+    { id: 'rules', labelEn: 'Statute of Organization', labelNe: 'संस्थाको विधान' },
+    { id: 'lifetime-members', labelEn: 'Lifetime Members', labelNe: 'आजीवन सदस्यहरु' },
+    { id: 'certificates', labelEn: 'Registration Certificates', labelNe: 'दर्ता प्रमाणपत्रहरु' },
 ]
 
 const publicationMenuItems: { id: PublicationPage; labelEn: string; labelNe: string }[] = [
@@ -36,7 +39,7 @@ export const Navigation = (props: NavigationProps) => {
     const [mobileOpen, setMobileOpen] = useState(false)
     const [mobileSection, setMobileSection] = useState<'introduction' | 'publications' | null>(null)
 
-    const navBtnBase = 'relative flex items-center gap-1 px-4 py-4 text-xs font-semibold uppercase tracking-[0.1em] transition-colors border-b-2 -mb-px'
+    const navBtnBase = 'relative flex items-center gap-1 px-4 py-4 text-[15px] font-semibold uppercase tracking-[0.1em] transition-colors border-b-2 -mb-px'
     const navBtnActive = 'text-ink border-brand bg-brand-muted'
     const navBtnInactive = 'text-ink-muted border-transparent hover:text-ink hover:border-line-strong hover:bg-paper-muted'
 
@@ -113,6 +116,18 @@ export const Navigation = (props: NavigationProps) => {
                     </button>
                     <button className={`${navBtnBase} ${selectedMainPage === 'gallery' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('gallery')}>
                         {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
+                    </button>
+                    <button className={`${navBtnBase} ${selectedMainPage === 'financial' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('financial')}>
+                        {language === 'ne' ? 'वित्तीय' : 'Financial'}
+                    </button>
+                    <button className={`${navBtnBase} ${selectedMainPage === 'organization-page' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('organization-page')}>
+                        {language === 'ne' ? 'थोर्गेली संस्थाको पेज' : "Organization's Page"}
+                    </button>
+                    <button className={`${navBtnBase} ${selectedMainPage === 'related-publications' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('related-publications')}>
+                        {language === 'ne' ? 'थोर्गा सम्बन्धी प्रकाशनहरु' : 'Related Publications'}
+                    </button>
+                    <button className={`${navBtnBase} ${selectedMainPage === 'old-materials' ? navBtnActive : navBtnInactive}`} onClick={() => openSimplePage('old-materials')}>
+                        {language === 'ne' ? 'पुराना सामाग्री' : 'Old Materials'}
                     </button>
                 </div>
 
@@ -217,6 +232,42 @@ export const Navigation = (props: NavigationProps) => {
                             className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'gallery' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
                         >
                             {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
+                        </button>
+                        <button
+                            onClick={() => {
+                                openSimplePage('financial')
+                                closeMobile()
+                            }}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'financial' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                        >
+                            {language === 'ne' ? 'वित्तीय' : 'Financial'}
+                        </button>
+                        <button
+                            onClick={() => {
+                                openSimplePage('organization-page')
+                                closeMobile()
+                            }}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'organization-page' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                        >
+                            {language === 'ne' ? 'थोर्गेली संस्थाको पेज' : "Organization's Page"}
+                        </button>
+                        <button
+                            onClick={() => {
+                                openSimplePage('related-publications')
+                                closeMobile()
+                            }}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'related-publications' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                        >
+                            {language === 'ne' ? 'थोर्गा सम्बन्धी प्रकाशनहरु' : 'Related Publications'}
+                        </button>
+                        <button
+                            onClick={() => {
+                                openSimplePage('old-materials')
+                                closeMobile()
+                            }}
+                            className={`px-3 py-2.5 text-left text-sm font-semibold transition-colors ${selectedMainPage === 'old-materials' ? 'bg-brand-muted text-brand' : 'text-ink hover:bg-paper-muted'}`}
+                        >
+                            {language === 'ne' ? 'पुराना सामाग्री' : 'Old Materials'}
                         </button>
                     </div>
                 </div>

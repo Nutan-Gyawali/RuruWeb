@@ -9,6 +9,22 @@ export const ImageManagement = () => {
     const [isFormOpen, setIsFormOpen] = useState(false)
     const [editingId, setEditingId] = useState<number | null>(null)
     const [formData, setFormData] = useState<Partial<SiteImage>>({})
+    const [uploading, setUploading] = useState(false)
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        setUploading(true)
+        try {
+            const url = await adminApi.uploadImage(file)
+            setFormData(prev => ({ ...prev, imageUrl: url }))
+        } catch (error) {
+            console.error('Upload failed', error)
+            alert('Failed to upload image')
+        } finally {
+            setUploading(false)
+        }
+    }
 
     const loadData = async () => {
         setLoading(true)
@@ -123,7 +139,14 @@ export const ImageManagement = () => {
                         <form onSubmit={handleSubmit} className="p-4 space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Category</label>
-                                <input required type="text" value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                <select required value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none">
+                                    <option value="Gallery">Gallery</option>
+                                    <option value="Certificates">Certificates</option>
+                                    <option value="Past Members">Past Members</option>
+                                    <option value="Past Advisors">Past Advisors</option>
+                                    <option value="Company's Intro">Company's Intro</option>
+                                    <option value="Thorga's Intro">Thorga's Intro</option>
+                                </select>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Title (EN)</label>
@@ -131,7 +154,13 @@ export const ImageManagement = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Image URL</label>
-                                <input required type="url" value={formData.imageUrl || ''} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" placeholder="https://..." />
+                                <div className="flex gap-2">
+                                    <input required type="text" value={formData.imageUrl || ''} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} className="flex-1 border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" placeholder="https://... or /uploads/..." />
+                                    <label className={`flex cursor-pointer items-center justify-center bg-brand px-4 text-sm font-medium text-on-brand transition-colors hover:opacity-90 ${uploading ? 'opacity-50 pointer-events-none' : ''}`}>
+                                        {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Browse'}
+                                        <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} disabled={uploading} />
+                                    </label>
+                                </div>
                             </div>
                             {formData.imageUrl && (
                                 <div className="mt-2 h-32 border border-line overflow-hidden bg-line">

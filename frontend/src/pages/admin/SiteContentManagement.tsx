@@ -32,7 +32,7 @@ export const SiteContentManagement = () => {
             setFormData(item)
         } else {
             setEditingId(null)
-            setFormData({ category: 'Introduction', isActive: true, sortOrder: 0 })
+            setFormData({ category: 'Company\'s Intro', isActive: true, sortOrder: 0 })
         }
         setIsFormOpen(true)
     }
@@ -131,7 +131,15 @@ export const SiteContentManagement = () => {
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-ink mb-1">Category</label>
-                                    <input required type="text" value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                    <select required value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none">
+                                        <option value="Company's Intro">Company's Intro</option>
+                                        <option value="Thorga Introduction">Thorga Introduction</option>
+                                        <option value="Publication">Publication</option>
+                                        <option value="Works Done">Works Done</option>
+                                        <option value="Others">Others</option>
+                                        <option value="Aims">Aims</option>
+                                        <option value="Rules">Rules</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-ink mb-1">Sort Order</label>

@@ -47,6 +47,6 @@ export type SiteImage = {
 }
 
 export type Language = 'en' | 'ne'
-export type MainPage = 'introduction' | 'activities' | 'publications' | 'notices' | 'gallery'
-export type IntroductionPage = 'company-intro' | 'thorga-intro' | 'current-members' | 'current-advisors' | 'past-members' | 'past-advisors'
+export type MainPage = 'introduction' | 'activities' | 'publications' | 'notices' | 'gallery' | 'financial' | 'organization-page' | 'related-publications' | 'old-materials'
+export type IntroductionPage = 'company-intro' | 'thorga-intro' | 'current-members' | 'current-advisors' | 'past-members' | 'past-advisors' | 'rules' | 'lifetime-members' | 'certificates'
 export type PublicationPage = 'calendar' | 'phone-diary' | 'bulletin' | 'memories' | 'others'

@@ -47,27 +47,40 @@ function App() {
     const loadSiteContent = async () => {
         try {
             const [intro, publication, works, others, hometown, aims, rules] = await Promise.all([
-                fetchJson('/api/SiteContent/content?category=Introduction'),
+                fetchJson('/api/SiteContent/content?category=Company%27s%20Intro'),
                 fetchJson('/api/SiteContent/content?category=Publication'),
                 fetchJson('/api/SiteContent/content?category=Works%20Done'),
                 fetchJson('/api/SiteContent/content?category=Others'),
-                fetchJson('/api/SiteContent/content?category=Hometown%20Introduction'),
+                fetchJson('/api/SiteContent/content?category=Thorga%20Introduction'),
                 fetchJson('/api/SiteContent/content?category=Aims'),
                 fetchJson('/api/SiteContent/content?category=Rules'),
             ])
 
-            const [board, currentMembers, pastMembers, advisors, currentAdvisors, pastAdvisors, lifetimeMembers] = await Promise.all([
+            const [board, currentMembers, advisors, currentAdvisors, lifetimeMembers] = await Promise.all([
                 fetchJson('/api/SiteContent/people?category=Board%20of%20Members'),
                 fetchJson('/api/SiteContent/people?category=Current%20Members'),
-                fetchJson('/api/SiteContent/people?category=Past%20Members'),
                 fetchJson('/api/SiteContent/people?category=Advisors'),
                 fetchJson('/api/SiteContent/people?category=Current%20Advisors'),
-                fetchJson('/api/SiteContent/people?category=Past%20Advisors'),
                 fetchJson('/api/SiteContent/people?category=Lifetime%20Members'),
             ])
 
-            const gallery = await fetchJson('/api/SiteContent/images?category=Gallery')
+            const [gallery, certificates, pastMembersImg, pastAdvisorsImg, companyIntroImg, thorgaIntroImg] = await Promise.all([
+                fetchJson('/api/SiteContent/images?category=Gallery'),
+                fetchJson('/api/SiteContent/images?category=Certificates'),
+                fetchJson('/api/SiteContent/images?category=Past%20Members'),
+                fetchJson('/api/SiteContent/images?category=Past%20Advisors'),
+                fetchJson('/api/SiteContent/images?category=Company%27s%20Intro'),
+                fetchJson('/api/SiteContent/images?category=Thorga%27s%20Intro')
+            ])
 
+            const allImages = [
+                ...(gallery as SiteImage[]), 
+                ...(certificates as SiteImage[]), 
+                ...(pastMembersImg as SiteImage[]), 
+                ...(pastAdvisorsImg as SiteImage[]),
+                ...(companyIntroImg as SiteImage[]),
+                ...(thorgaIntroImg as SiteImage[])
+            ]
             setContent({
                 introduction: intro as SiteContent[],
                 publication: publication as SiteContent[],
@@ -81,14 +94,14 @@ function App() {
             setPeople({
                 boardOfMembers: board as PersonProfile[],
                 currentMembers: currentMembers as PersonProfile[],
-                pastMembers: pastMembers as PersonProfile[],
+                pastMembers: [],
                 advisors: advisors as PersonProfile[],
                 currentAdvisors: currentAdvisors as PersonProfile[],
-                pastAdvisors: pastAdvisors as PersonProfile[],
+                pastAdvisors: [],
                 lifetimeMembers: lifetimeMembers as PersonProfile[],
             })
 
-            setImages(gallery as SiteImage[])
+            setImages(allImages)
         } catch {
             setSiteMessage('The site content API is not reachable yet. Please start the backend first.')
         } finally {

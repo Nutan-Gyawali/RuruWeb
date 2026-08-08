@@ -47,5 +47,29 @@ export const adminApi = {
 
     async delete(endpoint: string) {
         return this.fetch(endpoint, { method: 'DELETE' })
+    },
+
+    async uploadImage(file: File) {
+        const formData = new FormData()
+        formData.append('file', file)
+        
+        const token = getAuthToken()
+        const headers: Record<string, string> = {}
+        if (token) headers['Authorization'] = `Bearer ${token}`
+
+        const response = await fetch('/api/Upload', {
+            method: 'POST',
+            headers,
+            body: formData
+        })
+
+        if (response.status === 401) {
+            clearAuthToken()
+            window.location.href = '/admin/login'
+        }
+
+        if (!response.ok) throw new Error('Upload failed')
+        const data = await response.json()
+        return data.url as string
     }
 }

@@ -85,6 +85,12 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+var uploadsDir = Path.Combine(builder.Environment.WebRootPath ?? Path.Combine(builder.Environment.ContentRootPath, "wwwroot"), "uploads");
+if (!Directory.Exists(uploadsDir))
+{
+    Directory.CreateDirectory(uploadsDir);
+}
+
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -99,6 +105,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("frontend");
 // app.UseHttpsRedirection(); // Commented out to allow local network testing over HTTP
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

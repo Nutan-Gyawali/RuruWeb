@@ -9,6 +9,22 @@ export const PeopleManagement = () => {
     const [isFormOpen, setIsFormOpen] = useState(false)
     const [editingId, setEditingId] = useState<number | null>(null)
     const [formData, setFormData] = useState<Partial<PersonProfile>>({})
+    const [uploading, setUploading] = useState(false)
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        setUploading(true)
+        try {
+            const url = await adminApi.uploadImage(file)
+            setFormData(prev => ({ ...prev, imageUrl: url }))
+        } catch (error) {
+            console.error('Upload failed', error)
+            alert('Failed to upload image')
+        } finally {
+            setUploading(false)
+        }
+    }
 
     const loadData = async () => {
         setLoading(true)
@@ -134,7 +150,13 @@ export const PeopleManagement = () => {
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-ink mb-1">Category</label>
-                                    <input required type="text" value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" />
+                                    <select required value={formData.category || ''} onChange={e => setFormData({ ...formData, category: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none">
+                                        <option value="Board of Members">Board of Members</option>
+                                        <option value="Current Members">Current Members</option>
+                                        <option value="Advisors">Advisors</option>
+                                        <option value="Current Advisors">Current Advisors</option>
+                                        <option value="Lifetime Members">Lifetime Members</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-ink mb-1">Position (EN)</label>
@@ -144,7 +166,13 @@ export const PeopleManagement = () => {
 
                             <div>
                                 <label className="block text-sm font-medium text-ink mb-1">Image URL</label>
-                                <input type="url" value={formData.imageUrl || ''} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} className="w-full border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" placeholder="https://..." />
+                                <div className="flex gap-2">
+                                    <input type="text" value={formData.imageUrl || ''} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} className="flex-1 border border-line px-3 py-2 bg-transparent text-ink focus:border-brand focus:outline-none" placeholder="https://... or /uploads/..." />
+                                    <label className={`flex cursor-pointer items-center justify-center bg-brand px-4 text-sm font-medium text-on-brand transition-colors hover:opacity-90 ${uploading ? 'opacity-50 pointer-events-none' : ''}`}>
+                                        {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Browse'}
+                                        <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} disabled={uploading} />
+                                    </label>
+                                </div>
                             </div>
 
                             <div className="flex justify-end gap-3 pt-4 border-t border-line">

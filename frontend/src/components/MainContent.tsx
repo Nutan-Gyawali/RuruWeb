@@ -23,10 +23,13 @@ type MainContentProps = {
 const introMenuItems = [
     { id: 'company-intro', labelEn: 'Company Intro', labelNe: 'संस्था परिचय' },
     { id: 'thorga-intro', labelEn: "Thorga's Introduction", labelNe: 'थोर्गाको परिचय' },
-    { id: 'current-members', labelEn: 'Current Members', labelNe: 'वर्तमान सदस्य' },
-    { id: 'current-advisors', labelEn: 'Current Advisors', labelNe: 'वर्तमान सल्लाहकार' },
-    { id: 'past-members', labelEn: 'Past Members', labelNe: 'पूर्व सदस्य' },
-    { id: 'past-advisors', labelEn: 'Past Advisors', labelNe: 'पूर्व सल्लाहकार' },
+    { id: 'current-members', labelEn: 'Current Committee Members', labelNe: 'वर्तमान समितिका पदाधिकारीहरु' },
+    { id: 'current-advisors', labelEn: 'Current Advisors', labelNe: 'वर्तमान सल्लाहाकारहरु' },
+    { id: 'past-members', labelEn: 'Past Committee Members', labelNe: 'हालसम्मका पदाधिकारीहरु' },
+    { id: 'past-advisors', labelEn: 'Past Advisors', labelNe: 'हालसम्मका सल्लाहाकारहरु' },
+    { id: 'rules', labelEn: 'Statute of Organization', labelNe: 'संस्थाको विधान' },
+    { id: 'lifetime-members', labelEn: 'Lifetime Members', labelNe: 'आजीवन सदस्यहरु' },
+    { id: 'certificates', labelEn: 'Registration Certificates', labelNe: 'दर्ता प्रमाणपत्रहरु' },
 ]
 
 const publicationMenuItems = [
@@ -115,8 +118,14 @@ export const MainContent = (props: MainContentProps) => {
 
     const currentMembers = people.currentMembers ?? []
     const currentAdvisors = people.currentAdvisors ?? []
-    const pastMembers = people.pastMembers ?? []
-    const pastAdvisors = people.pastAdvisors ?? []
+    const lifetimeMembers = people.lifetimeMembers ?? []
+
+    const pastMembersImages = images.filter(img => img.category === 'Past Members')
+    const pastAdvisorsImages = images.filter(img => img.category === 'Past Advisors')
+    const galleryImages = images.filter(img => img.category === 'Gallery')
+    const certificateImages = images.filter(img => img.category === 'Certificates')
+    const companyIntroImages = images.filter(img => img.category === "Company's Intro")
+    const thorgaIntroImages = images.filter(img => img.category === "Thorga's Intro")
 
     const introActiveItem = introMenuItems.find((item) => item.id === selectedIntroPage)
     const introActiveLabel = introActiveItem ? (language === 'ne' ? introActiveItem.labelNe : introActiveItem.labelEn) : ''
@@ -128,7 +137,7 @@ export const MainContent = (props: MainContentProps) => {
         { value: currentMembers.length, labelEn: 'Members', labelNe: 'सदस्यहरू' },
         { value: currentAdvisors.length, labelEn: 'Advisors', labelNe: 'सल्लाहकारहरू' },
         { value: (content.worksDone ?? []).length, labelEn: 'Activities', labelNe: 'गतिविधिहरू' },
-        { value: images.length, labelEn: 'Gallery Photos', labelNe: 'ग्यालेरी तस्बिरहरू' },
+        { value: galleryImages.length, labelEn: 'Gallery Photos', labelNe: 'ग्यालेरी तस्बिरहरू' },
     ]
 
     const noItemsMsg = language === 'ne' ? 'हाल कुनै सामग्री उपलब्ध छैन।' : 'No items available yet.'
@@ -140,7 +149,7 @@ export const MainContent = (props: MainContentProps) => {
             {selectedMainPage === 'introduction' && selectedIntroPage === 'company-intro' && (
                 <HeroSection
                     language={language}
-                    heroImage={images[0]}
+                    heroImage={companyIntroImages[0] || images[0]}
                     eyebrow={language === 'ne' ? 'स्थापित समुदाय, काठमाण्डौं' : 'Est. Community, Kathmandu'}
                     headline={language === 'ne' ? 'थोर्गा काठमाण्डौंमा स्वागत छ' : 'Welcome to Thorga Kathmandu'}
                     body={introText.body || 'A community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
@@ -157,6 +166,11 @@ export const MainContent = (props: MainContentProps) => {
 
                                 {selectedIntroPage === 'company-intro' && (
                                     <>
+                                        {companyIntroImages.length > 0 && (
+                                            <div className="mb-8 overflow-hidden border border-line">
+                                                <img src={companyIntroImages[0].imageUrl} alt="Company Introduction" className="max-h-96 w-full object-cover" />
+                                            </div>
+                                        )}
                                         <p className="mb-8 max-w-2xl text-base leading-relaxed text-ink-muted">
                                             {introText.body || 'Thorga is a community-oriented social and cultural organization bringing people together for learning, heritage, support, and development.'}
                                         </p>
@@ -178,15 +192,89 @@ export const MainContent = (props: MainContentProps) => {
 
                                 {selectedIntroPage === 'thorga-intro' && (
                                     <div className="max-w-2xl space-y-4">
+                                        {thorgaIntroImages.length > 0 && (
+                                            <div className="mb-8 overflow-hidden border border-line">
+                                                <img src={thorgaIntroImages[0].imageUrl} alt="Thorga Introduction" className="max-h-96 w-full object-cover" />
+                                            </div>
+                                        )}
                                         <p className="leading-relaxed text-ink-muted">{hometownText.body || 'Thorga is a place-based identity connecting families and traditions through shared belonging.'}</p>
+                                    </div>
+                                )}
+                                
+                                {selectedIntroPage === 'rules' && (
+                                    <div className="max-w-2xl space-y-4">
                                         <p className="leading-relaxed text-ink-muted">{rulesText.body || 'The association strengthens ties among members through mutual support and good governance.'}</p>
+                                    </div>
+                                )}
+                                
+                                {selectedIntroPage === 'certificates' && (
+                                    <div>
+                                        {certificateImages.length > 0 ? (
+                                            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                                {certificateImages.map((image) => {
+                                                    const localized = getLocalizedImage(language, image)
+                                                    return (
+                                                        <figure key={image.id} className="group overflow-hidden border border-line bg-paper p-2">
+                                                            <img
+                                                                src={image.imageUrl}
+                                                                alt={localized.title}
+                                                                className="h-auto w-full object-contain"
+                                                            />
+                                                            <figcaption className="mt-2 text-center text-sm font-medium text-ink-muted">{localized.title}</figcaption>
+                                                        </figure>
+                                                    )
+                                                })}
+                                            </div>
+                                        ) : (
+                                            <EmptyState message={noItemsMsg} />
+                                        )}
                                     </div>
                                 )}
 
                                 {selectedIntroPage === 'current-members' && <PersonGrid people={currentMembers} language={language} emptyMsg={emptyMemberMsg} />}
                                 {selectedIntroPage === 'current-advisors' && <PersonGrid people={currentAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
-                                {selectedIntroPage === 'past-members' && <PersonGrid people={pastMembers} language={language} emptyMsg={emptyMemberMsg} />}
-                                {selectedIntroPage === 'past-advisors' && <PersonGrid people={pastAdvisors} language={language} emptyMsg={emptyAdvisorMsg} />}
+                                
+                                {selectedIntroPage === 'past-members' && (
+                                    <div>
+                                        {pastMembersImages.length > 0 ? (
+                                            <div className="flex flex-col items-center gap-8">
+                                                {pastMembersImages.map((image) => {
+                                                    const localized = getLocalizedImage(language, image)
+                                                    return (
+                                                        <figure key={image.id} className="w-full max-w-3xl border border-line bg-paper p-2 shadow-sm">
+                                                            <div className="relative aspect-[1/1.414] w-full overflow-hidden bg-paper-muted">
+                                                                <img src={image.imageUrl} alt={localized.title} className="absolute inset-0 h-full w-full object-contain" />
+                                                            </div>
+                                                            {localized.title && <figcaption className="mt-3 text-center text-sm font-semibold text-ink-muted">{localized.title}</figcaption>}
+                                                        </figure>
+                                                    )
+                                                })}
+                                            </div>
+                                        ) : <EmptyState message={noItemsMsg} />}
+                                    </div>
+                                )}
+                                
+                                {selectedIntroPage === 'past-advisors' && (
+                                    <div>
+                                        {pastAdvisorsImages.length > 0 ? (
+                                            <div className="flex flex-col items-center gap-8">
+                                                {pastAdvisorsImages.map((image) => {
+                                                    const localized = getLocalizedImage(language, image)
+                                                    return (
+                                                        <figure key={image.id} className="w-full max-w-3xl border border-line bg-paper p-2 shadow-sm">
+                                                            <div className="relative aspect-[1/1.414] w-full overflow-hidden bg-paper-muted">
+                                                                <img src={image.imageUrl} alt={localized.title} className="absolute inset-0 h-full w-full object-contain" />
+                                                            </div>
+                                                            {localized.title && <figcaption className="mt-3 text-center text-sm font-semibold text-ink-muted">{localized.title}</figcaption>}
+                                                        </figure>
+                                                    )
+                                                })}
+                                            </div>
+                                        ) : <EmptyState message={noItemsMsg} />}
+                                    </div>
+                                )}
+                                
+                                {selectedIntroPage === 'lifetime-members' && <PersonGrid people={lifetimeMembers} language={language} emptyMsg={emptyMemberMsg} />}
                             </div>
                         )}
 
@@ -235,9 +323,9 @@ export const MainContent = (props: MainContentProps) => {
                         {selectedMainPage === 'gallery' && (
                             <div>
                                 <SectionHeading label={language === 'ne' ? 'फोटो ग्यालेरी' : 'Gallery'} />
-                                {images.length > 0 ? (
+                                {galleryImages.length > 0 ? (
                                     <div className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3">
-                                        {images.map((image) => {
+                                        {galleryImages.map((image) => {
                                             const localized = getLocalizedImage(language, image)
                                             return (
                                                 <figure key={image.id} className="group bg-paper">
@@ -259,6 +347,34 @@ export const MainContent = (props: MainContentProps) => {
                                         <p className="text-sm">{noItemsMsg}</p>
                                     </div>
                                 )}
+                            </div>
+                        )}
+
+                        {selectedMainPage === 'financial' && (
+                            <div>
+                                <SectionHeading label={language === 'ne' ? 'वित्तीय' : 'Financial'} />
+                                <EmptyState message={noItemsMsg} />
+                            </div>
+                        )}
+
+                        {selectedMainPage === 'organization-page' && (
+                            <div>
+                                <SectionHeading label={language === 'ne' ? 'थोर्गेली संस्थाको पेज' : "Organization's Page"} />
+                                <EmptyState message={noItemsMsg} />
+                            </div>
+                        )}
+
+                        {selectedMainPage === 'related-publications' && (
+                            <div>
+                                <SectionHeading label={language === 'ne' ? 'थोर्गा सम्बन्धी प्रकाशनहरु' : 'Related Publications'} />
+                                <EmptyState message={noItemsMsg} />
+                            </div>
+                        )}
+
+                        {selectedMainPage === 'old-materials' && (
+                            <div>
+                                <SectionHeading label={language === 'ne' ? 'पुराना सामाग्री' : 'Old Materials'} />
+                                <EmptyState message={noItemsMsg} />
                             </div>
                         )}
                     </div>
