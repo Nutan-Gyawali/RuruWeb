@@ -42,10 +42,11 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Server=localhost\\SQLEXPRESS;Database=ThorgaFoundation;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
+    ?? Environment.GetEnvironmentVariable("DATABASE_URL")
+    ?? "Host=localhost;Database=ThorgaFoundation;Username=postgres;Password=postgres";
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -83,6 +84,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5151";
+builder.WebHost.UseUrls($"http://*:{port}");
+
 var app = builder.Build();
 
 var uploadsDir = Path.Combine(builder.Environment.WebRootPath ?? Path.Combine(builder.Environment.ContentRootPath, "wwwroot"), "uploads");
@@ -111,5 +115,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+
+app.MapFallbackToFile("index.html");
 
 app.Run();
