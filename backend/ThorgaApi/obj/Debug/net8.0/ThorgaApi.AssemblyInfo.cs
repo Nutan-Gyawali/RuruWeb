@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThorgaApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c2e533fe98738fc39eb5b6b201b6be834392796")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+596e62880e21466e29a239cfd1c462855f52758a")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThorgaApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThorgaApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
