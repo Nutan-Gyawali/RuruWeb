@@ -24,7 +24,7 @@ COPY --from=backend-build /app/publish .
 RUN mkdir -p /app/wwwroot/uploads
 
 # Expose standard port (Railway injects PORT env variable)
-EXPOSE 80
+EXPOSE 8080
 
 # Environment variables
 ENV ASPNETCORE_ENVIRONMENT=Production
