@@ -8,7 +8,7 @@ type HeaderProps = {
 }
 
 export const Header = ({ language, setLanguage, onLogoClick }: HeaderProps) => {
-    const brandTitle = language === 'ne' ? 'थोर्गा काठमाण्डौं' : 'Thorga Kathmandu'
+    const brandTitle = language === 'ne' ? 'थोर्गा काठमाण्डौं सम्पर्क तथा विकास मञ्च' : 'Thorga Kathmandu'
     const brandAltTitle = language === 'ne' ? 'Thorga Kathmandu' : 'थोर्गा काठमाण्डौं'
     const brandTag = language === 'ne' ? 'थोर्गा समुदाय' : 'Thorga Community'
     const homeLabel = language === 'ne' ? 'गृहपृष्ठमा जानुहोस्' : 'Go to homepage'
